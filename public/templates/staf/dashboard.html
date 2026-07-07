@@ -1,0 +1,411 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>GastroStaff Portal - Floor Plan Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#e2e8f8",
+                    "error-container": "#ffdad6",
+                    "outline-variant": "#e4beb1",
+                    "error": "#ba1a1a",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "background": "#f9f9ff",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "on-primary-fixed": "#370e00",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "surface-container-highest": "#dce2f3",
+                    "surface": "#f9f9ff",
+                    "on-surface": "#151c27",
+                    "surface-variant": "#dce2f3",
+                    "primary": "#a73a00",
+                    "on-error-container": "#93000a",
+                    "surface-bright": "#f9f9ff",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "surface-container-low": "#f0f3ff",
+                    "primary-fixed-dim": "#ffb59a",
+                    "on-primary-container": "#521800",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "surface-dim": "#d3daea",
+                    "surface-container": "#e7eefe",
+                    "outline": "#8f7065",
+                    "on-surface-variant": "#5b4137",
+                    "inverse-primary": "#ffb59a",
+                    "tertiary-fixed": "#e2e2e2",
+                    "primary-container": "#ff5c00",
+                    "tertiary-container": "#929393",
+                    "tertiary": "#5d5f5f",
+                    "on-primary": "#ffffff",
+                    "secondary-container": "#e5e2e1",
+                    "inverse-on-surface": "#ebf1ff",
+                    "on-tertiary-container": "#2a2c2c",
+                    "secondary-fixed": "#e5e2e1",
+                    "primary-fixed": "#ffdbce",
+                    "on-secondary-container": "#656464",
+                    "secondary": "#5f5e5e",
+                    "on-primary-fixed-variant": "#802a00",
+                    "on-secondary-fixed-variant": "#474646",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "inverse-surface": "#2a313d",
+                    "on-error": "#ffffff",
+                    "surface-tint": "#a73a00",
+                    "on-background": "#151c27"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-sm": "0.5rem",
+                    "stack-md": "1rem",
+                    "stack-lg": "2rem",
+                    "container-margin": "1.25rem",
+                    "gutter": "1rem"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Lexend"],
+                    "body-md": ["Lexend"],
+                    "price-display": ["Lexend"],
+                    "label-md": ["Lexend"],
+                    "headline-lg": ["Lexend"],
+                    "body-sm": ["Lexend"],
+                    "headline-lg-mobile": ["Lexend"]
+            },
+            "fontSize": {
+                    "headline-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "price-display": ["18px", {"lineHeight": "24px", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Lexend', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .floor-plan-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 1.5rem;
+        }
+        .table-card {
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .table-card:active { transform: scale(0.95); }
+        .scroll-hide::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-background text-on-background overflow-hidden h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-container-margin h-16 bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline shadow-sm">
+<div class="flex items-center gap-stack-md">
+<span class="font-headline-xl text-headline-xl text-primary dark:text-primary-container">GastroStaff Portal</span>
+</div>
+<div class="hidden md:flex items-center bg-secondary-container rounded-full px-4 py-1.5 gap-2 max-w-md w-full mx-8">
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-sm w-full placeholder-on-surface-variant" placeholder="Search tables or staff..." type="text">
+</div>
+<div class="flex items-center gap-stack-md">
+<div class="flex items-center gap-2 mr-4">
+<span class="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></span>
+<span class="font-label-md text-label-md text-on-surface-variant">Lunch Service</span>
+</div>
+<button class="material-symbols-outlined p-2 text-primary dark:text-primary-fixed-dim hover:bg-secondary-container transition-colors rounded-full" data-icon="notifications">notifications</button>
+<button class="material-symbols-outlined p-2 text-primary dark:text-primary-fixed-dim hover:bg-secondary-container transition-colors rounded-full" data-icon="settings">settings</button>
+<div class="flex items-center gap-3 ml-2 border-l border-outline-variant pl-4">
+<div class="text-right hidden sm:block">
+<p class="font-label-md text-label-md text-on-surface leading-tight">Chef Marco</p>
+<p class="text-[10px] uppercase tracking-wider text-on-surface-variant">Head Floor Mgr</p>
+</div>
+<img class="w-10 h-10 rounded-full object-cover ring-2 ring-primary-container shadow-sm" data-alt="A professional headshot of a head floor manager in a clean, high-end restaurant uniform. The lighting is soft and natural, coming from a large window. The background is a blurred, high-contrast modern kitchen with copper accents and warm wood textures, maintaining the modern gastronomy aesthetic of the brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIKmexVK_10lwW0VzHuR3siooZw1VlfL03Nfop2Xznf7PIR-Kw8pybXwFytqUSDpMJ-uJgXlbBMxaETt4nJ_SfiSe45Y9DElR_6Mg-g-_t9A1fQiYnWcxBXsrDBX2o4mLSpdMcbLHl4cnRb_lWumxKScbPdg-mrEyctX_B1JISSnfm1xhfE3QexsuyGp0OLMoDpaumCnuLiYaMpgmt5bhvYje2VJFPztS0jKJwUeUA8RQQdqqcaz-DhCNoH5qumz2rNqk7Sv3XvAI0">
+</div>
+</div>
+</header>
+<!-- Main Layout Container -->
+<div class="flex flex-1 pt-16 overflow-hidden">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-16 h-[calc(100vh-4rem)] flex flex-col p-stack-md z-40 bg-surface-container dark:bg-surface-container-low w-64 shadow-md transition-all">
+<div class="mb-stack-lg px-2">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" data-icon="restaurant">restaurant</span>
+</div>
+<div>
+<p class="font-headline-lg text-headline-lg text-on-surface">Main Kitchen</p>
+<p class="font-label-md text-label-md text-on-surface-variant">Shift: Lunch Service</p>
+</div>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container rounded-xl py-3 font-bold flex items-center justify-center gap-2 shadow-sm active:translate-x-1 duration-200">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                    New Reservation
+                </button>
+</div>
+<div class="flex-1 flex flex-col gap-1 overflow-y-auto scroll-hide">
+<a class="flex items-center gap-4 px-4 py-3 bg-primary-container text-on-primary-container rounded-lg font-bold transition-all active:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="font-label-md text-label-md">Floor Plan</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest dark:hover:bg-surface-container-high rounded-lg transition-all active:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="point_of_sale">point_of_sale</span>
+<span class="font-label-md text-label-md">POS System</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest dark:hover:bg-surface-container-high rounded-lg transition-all active:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="restaurant">restaurant</span>
+<span class="font-label-md text-label-md">Kitchen (KDS)</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest dark:hover:bg-surface-container-high rounded-lg transition-all active:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="font-label-md text-label-md">Transactions</span>
+</a>
+</div>
+<div class="mt-auto border-t border-outline-variant pt-stack-md px-2">
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest dark:hover:bg-surface-container-high rounded-lg transition-all active:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="ml-64 flex-1 flex overflow-hidden">
+<!-- Floor Plan Grid -->
+<section class="flex-1 p-stack-lg overflow-y-auto bg-background relative">
+<div class="max-w-5xl mx-auto">
+<header class="flex justify-between items-end mb-8">
+<div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface">Dining Hall A</h1>
+<p class="text-on-surface-variant font-body-md">24 Active Tables • 4 Sections</p>
+</div>
+<div class="flex gap-4 p-1.5 bg-surface-container rounded-xl">
+<button class="px-4 py-1.5 bg-surface-container-lowest shadow-sm rounded-lg text-label-md text-on-surface font-bold">Grid View</button>
+<button class="px-4 py-1.5 text-label-md text-on-surface-variant hover:text-on-surface font-medium transition-colors">Map View</button>
+</div>
+</header>
+<!-- Status Legend -->
+<div class="flex flex-wrap gap-stack-lg mb-8 bg-surface-container-low p-4 rounded-2xl border border-outline-variant/30">
+<div class="flex items-center gap-2">
+<span class="w-4 h-4 rounded-full bg-green-500"></span>
+<span class="text-label-md text-on-surface-variant">Available (12)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-4 h-4 rounded-full bg-yellow-400"></span>
+<span class="text-label-md text-on-surface-variant">Occupied (4)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-4 h-4 rounded-full bg-red-500"></span>
+<span class="text-label-md text-on-surface-variant">Waiting Food (6)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-4 h-4 rounded-full bg-blue-500"></span>
+<span class="text-label-md text-on-surface-variant">Waiting Payment (2)</span>
+</div>
+</div>
+<!-- Interactive Grid -->
+<div class="floor-plan-grid">
+<!-- Row 1 -->
+<div class="table-card bg-surface-container-lowest border-2 border-green-500/20 rounded-2xl p-4 flex flex-col items-center justify-center gap-2 shadow-sm cursor-pointer hover:shadow-md hover:border-green-500/50">
+<span class="font-headline-lg text-headline-lg text-green-600">01</span>
+<p class="text-label-md text-on-surface-variant">4 Seats</p>
+<div class="px-2 py-0.5 bg-green-100 text-green-800 text-[10px] font-bold rounded uppercase">Available</div>
+</div>
+<div class="table-card bg-surface-container-lowest border-2 border-red-500/20 rounded-2xl p-4 flex flex-col items-center justify-center gap-2 shadow-sm cursor-pointer hover:shadow-md hover:border-red-500/50 ring-4 ring-red-500/10">
+<span class="font-headline-lg text-headline-lg text-red-600">02</span>
+<p class="text-label-md text-on-surface-variant">2 Seats</p>
+<div class="px-2 py-0.5 bg-red-100 text-red-800 text-[10px] font-bold rounded uppercase">Food Prep</div>
+<p class="text-[10px] text-red-500 font-bold mt-1">12:04 min</p>
+</div>
+<div class="table-card bg-surface-container-lowest border-2 border-yellow-400/20 rounded-2xl p-4 flex flex-col items-center justify-center gap-2 shadow-sm cursor-pointer hover:shadow-md hover:border-yellow-400/50">
+<span class="font-headline-lg text-headline-lg text-yellow-600">03</span>
+<p class="text-label-md text-on-surface-variant">6 Seats</p>
+<div class="px-2 py-0.5 bg-yellow-100 text-yellow-800 text-[10px] font-bold rounded uppercase">Ordering</div>
+</div>
+<div class="table-card bg-surface-container-lowest border-2 border-green-500/20 rounded-2xl p-4 flex flex-col items-center justify-center gap-2 shadow-sm cursor-pointer hover:shadow-md hover:border-green-500/50">
+<span class="font-headline-lg text-headline-lg text-green-600">04</span>
+<p class="text-label-md text-on-surface-variant">4 Seats</p>
+<div class="px-2 py-0.5 bg-green-100 text-green-800 text-[10px] font-bold rounded uppercase">Available</div>
+</div>
+<!-- Row 2 -->
+<div class="table-card bg-surface-container-lowest border-2 border-blue-500/20 rounded-2xl p-4 flex flex-col items-center justify-center gap-2 shadow-sm cursor-pointer hover:shadow-md hover:border-blue-500/50">
+<span class="font-headline-lg text-headline-lg text-blue-600">05</span>
+<p class="text-label-md text-on-surface-variant">2 Seats</p>
+<div class="px-2 py-0.5 bg-blue-100 text-blue-800 text-[10px] font-bold rounded uppercase">Payment</div>
+</div>
+<div class="table-card bg-surface-container-lowest border-2 border-red-500/20 rounded-2xl p-4 flex flex-col items-center justify-center gap-2 shadow-sm cursor-pointer hover:shadow-md hover:border-red-500/50">
+<span class="font-headline-lg text-headline-lg text-red-600">06</span>
+<p class="text-label-md text-on-surface-variant">8 Seats</p>
+<div class="px-2 py-0.5 bg-red-100 text-red-800 text-[10px] font-bold rounded uppercase">Food Prep</div>
+</div>
+<div class="table-card bg-surface-container-lowest border-2 border-yellow-400/20 rounded-2xl p-4 flex flex-col items-center justify-center gap-2 shadow-sm cursor-pointer hover:shadow-md hover:border-yellow-400/50">
+<span class="font-headline-lg text-headline-lg text-yellow-600">07</span>
+<p class="text-label-md text-on-surface-variant">4 Seats</p>
+<div class="px-2 py-0.5 bg-yellow-100 text-yellow-800 text-[10px] font-bold rounded uppercase">Ordering</div>
+</div>
+<div class="table-card bg-surface-container-lowest border-2 border-red-500/20 rounded-2xl p-4 flex flex-col items-center justify-center gap-2 shadow-sm cursor-pointer hover:shadow-md hover:border-red-500/50">
+<span class="font-headline-lg text-headline-lg text-red-600">08</span>
+<p class="text-label-md text-on-surface-variant">2 Seats</p>
+<div class="px-2 py-0.5 bg-red-100 text-red-800 text-[10px] font-bold rounded uppercase">Delayed</div>
+</div>
+<!-- Row 3 - Large Table -->
+<div class="table-card col-span-2 bg-surface-container-lowest border-2 border-green-500/20 rounded-2xl p-4 flex flex-row items-center justify-between gap-6 shadow-sm cursor-pointer hover:shadow-md hover:border-green-500/50">
+<div class="flex flex-col items-start">
+<span class="font-headline-lg text-headline-lg text-green-600">Table 09-10 (Joined)</span>
+<p class="text-label-md text-on-surface-variant">12 Seats • Banquet Mode</p>
+</div>
+<div class="px-3 py-1 bg-green-100 text-green-800 text-xs font-bold rounded uppercase">Available</div>
+</div>
+<div class="table-card bg-surface-container-lowest border-2 border-red-500/20 rounded-2xl p-4 flex flex-col items-center justify-center gap-2 shadow-sm cursor-pointer hover:shadow-md hover:border-red-500/50">
+<span class="font-headline-lg text-headline-lg text-red-600">11</span>
+<p class="text-label-md text-on-surface-variant">4 Seats</p>
+<div class="px-2 py-0.5 bg-red-100 text-red-800 text-[10px] font-bold rounded uppercase">Food Prep</div>
+</div>
+<div class="table-card bg-surface-container-lowest border-2 border-yellow-400/20 rounded-2xl p-4 flex flex-col items-center justify-center gap-2 shadow-sm cursor-pointer hover:shadow-md hover:border-yellow-400/50 ring-4 ring-yellow-400/10">
+<span class="font-headline-lg text-headline-lg text-yellow-600">12</span>
+<p class="text-label-md text-on-surface-variant">2 Seats</p>
+<div class="px-2 py-0.5 bg-yellow-100 text-yellow-800 text-[10px] font-bold rounded uppercase">Assistance</div>
+</div>
+</div>
+<!-- Visual Separator with Brand Background -->
+<div class="mt-16 h-64 rounded-3xl overflow-hidden relative border border-outline-variant/30 shadow-xl group">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A cinematic, low-angle shot of a high-end restaurant dining hall. Warm ambient lighting glows from designer pendant lamps. Waiters in dark aprons move gracefully between impeccably set tables with white linens. The color palette is rich with deep ambers, soft creams, and the primary brand orange visible in small details like menu covers. Sophisticated atmosphere, shallow depth of field." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCKxczX77fNKdHGrGUw1Ry-EcdyOZlrDlXaJa1xmuIXKAHIXMHibFnqzhNZh9epD9luhfZ0cclXzfdGBJwp8nzuCi8-4f5ncbYipU070ttIStQx7x9BccIa-V6liM2Ng3Ky8jOoW-oQRhvUjYjghlcrT0zkzdzJOF-tPB7Jo1iBKlFF1MC0Vh183mA2mUuujMQmy_kdyjCSsCDBpXX2Dg5UjWKB2VmxJVuYXy4Ai3FltOxpk6-pY1WxQQ29y096c2BgrvSfVtWLlkA-')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/80 to-transparent flex items-end p-stack-lg">
+<div>
+<h3 class="text-white font-headline-xl text-headline-xl">Service Efficiency Tracker</h3>
+<p class="text-white/80 font-body-md">Real-time optimization of table turnover and kitchen sync.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Active Service Notifications Sidebar -->
+<aside class="w-80 bg-surface-container-high border-l border-outline-variant/50 p-stack-md flex flex-col shadow-inner">
+<div class="flex items-center justify-between mb-6">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Notifications</h2>
+<span class="bg-primary text-white text-[10px] font-bold px-2 py-1 rounded-full">4 NEW</span>
+</div>
+<div class="space-y-4 overflow-y-auto scroll-hide">
+<!-- Notification Card (Urgent) -->
+<div class="bg-white rounded-xl p-4 border-l-4 border-yellow-500 shadow-sm animate-pulse">
+<div class="flex items-start justify-between mb-2">
+<span class="flex items-center gap-2 text-yellow-700 font-bold text-xs uppercase tracking-tight">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">priority_high</span>
+                                Urgent Help
+                            </span>
+<span class="text-[10px] text-on-surface-variant">2m ago</span>
+</div>
+<p class="text-body-sm text-on-surface font-semibold mb-1">Table 12 is calling for assistance</p>
+<p class="text-body-sm text-on-surface-variant">Request: Extra cutlery &amp; Water</p>
+<div class="mt-3 flex gap-2">
+<button class="flex-1 bg-yellow-500 text-white py-1.5 rounded-lg text-xs font-bold hover:bg-yellow-600 transition-colors">Acknowledge</button>
+</div>
+</div>
+<!-- Notification Card (System) -->
+<div class="bg-white rounded-xl p-4 border-l-4 border-blue-500 shadow-sm">
+<div class="flex items-start justify-between mb-2">
+<span class="flex items-center gap-2 text-blue-700 font-bold text-xs uppercase tracking-tight">
+<span class="material-symbols-outlined text-sm">payments</span>
+                                Payment Ready
+                            </span>
+<span class="text-[10px] text-on-surface-variant">5m ago</span>
+</div>
+<p class="text-body-sm text-on-surface font-semibold mb-1">Table 05 requested the check</p>
+<p class="text-body-sm text-on-surface-variant">Order Total: $142.50</p>
+<div class="mt-3 flex gap-2">
+<button class="flex-1 bg-blue-500 text-white py-1.5 rounded-lg text-xs font-bold hover:bg-blue-600 transition-colors">Print Bill</button>
+</div>
+</div>
+<!-- Notification Card (Kitchen) -->
+<div class="bg-white/50 rounded-xl p-4 border-l-4 border-green-500 opacity-80">
+<div class="flex items-start justify-between mb-2">
+<span class="flex items-center gap-2 text-green-700 font-bold text-xs uppercase tracking-tight">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+                                Order Ready
+                            </span>
+<span class="text-[10px] text-on-surface-variant">12m ago</span>
+</div>
+<p class="text-body-sm text-on-surface font-semibold mb-1">Kitchen: Table 06 main course</p>
+<p class="text-body-sm text-on-surface-variant">3x Wagyu Steak, 1x Risotto</p>
+</div>
+<!-- Notification Card (Reservation) -->
+<div class="bg-white rounded-xl p-4 border-l-4 border-primary shadow-sm">
+<div class="flex items-start justify-between mb-2">
+<span class="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-tight">
+<span class="material-symbols-outlined text-sm">event</span>
+                                Arriving Soon
+                            </span>
+<span class="text-[10px] text-on-surface-variant">Now</span>
+</div>
+<p class="text-body-sm text-on-surface font-semibold mb-1">Reservation for Mr. Henderson</p>
+<p class="text-body-sm text-on-surface-variant">6 Guests • Preferred: Window Table</p>
+<div class="mt-3 flex gap-2">
+<button class="flex-1 bg-primary text-white py-1.5 rounded-lg text-xs font-bold hover:bg-primary/90 transition-colors">Assign Table</button>
+</div>
+</div>
+</div>
+<!-- Footer Stats -->
+<div class="mt-auto pt-6 space-y-4">
+<div class="bg-primary/5 rounded-2xl p-4 border border-primary/10">
+<div class="flex justify-between items-center mb-2">
+<span class="text-on-surface-variant text-xs font-bold uppercase">Average Service Time</span>
+<span class="text-primary font-bold text-sm">24m</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[75%]"></div>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex-1 bg-white rounded-2xl p-4 text-center shadow-sm">
+<p class="text-[10px] text-on-surface-variant font-bold uppercase mb-1">Orders</p>
+<p class="text-headline-lg text-on-surface">42</p>
+</div>
+<div class="flex-1 bg-white rounded-2xl p-4 text-center shadow-sm">
+<p class="text-[10px] text-on-surface-variant font-bold uppercase mb-1">Rev</p>
+<p class="text-headline-lg text-primary">$3.2k</p>
+</div>
+</div>
+</div>
+</aside>
+</main>
+</div>
+<!-- Floating Action Button for Mobile Context -->
+<button class="md:hidden fixed bottom-8 right-8 w-14 h-14 bg-primary shadow-2xl rounded-full flex items-center justify-center text-white z-50 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-3xl" data-icon="add">add</span>
+</button>
+<script>
+        // Simple Interaction logic for table selection
+        document.querySelectorAll('.table-card').forEach(card => {
+            card.addEventListener('click', () => {
+                // Reset others
+                document.querySelectorAll('.table-card').forEach(c => {
+                    c.classList.remove('ring-4', 'ring-primary/20');
+                });
+                // Focus current
+                card.classList.add('ring-4', 'ring-primary/20');
+                console.log('Selected table:', card.querySelector('.font-headline-lg').innerText);
+            });
+        });
+
+        // Simulating incoming help request
+        setTimeout(() => {
+            const table12 = Array.from(document.querySelectorAll('.table-card')).find(c => c.innerText.includes('12'));
+            if(table12) {
+                table12.classList.add('ring-yellow-400/30', 'animate-pulse');
+            }
+        }, 5000);
+    </script>
+</body></html>

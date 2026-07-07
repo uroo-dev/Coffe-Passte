@@ -1,0 +1,485 @@
+<!DOCTYPE html><html class="light" lang="id"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Manajemen Transaksi - GastroStaff Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#e2e2e2",
+                    "surface-container-highest": "#dce2f3",
+                    "on-error-container": "#93000a",
+                    "on-secondary-container": "#656464",
+                    "on-tertiary-container": "#2a2c2c",
+                    "on-primary-fixed-variant": "#802a00",
+                    "primary": "#a73a00",
+                    "on-primary-fixed": "#370e00",
+                    "on-tertiary": "#ffffff",
+                    "surface-bright": "#f9f9ff",
+                    "background": "#f9f9ff",
+                    "surface-dim": "#d3daea",
+                    "surface-container-high": "#e2e8f8",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "surface-tint": "#a73a00",
+                    "on-background": "#151c27",
+                    "on-secondary-fixed-variant": "#474646",
+                    "tertiary-container": "#929393",
+                    "surface-container": "#e7eefe",
+                    "tertiary": "#5d5f5f",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-secondary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "error": "#ba1a1a",
+                    "primary-fixed": "#ffdbce",
+                    "secondary-container": "#e5e2e1",
+                    "outline-variant": "#e4beb1",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "outline": "#8f7065",
+                    "inverse-surface": "#2a313d",
+                    "primary-container": "#ff5c00",
+                    "error-container": "#ffdad6",
+                    "inverse-on-surface": "#ebf1ff",
+                    "on-surface": "#151c27",
+                    "primary-fixed-dim": "#ffb59a",
+                    "on-surface-variant": "#5b4137",
+                    "on-primary-container": "#521800",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "inverse-primary": "#ffb59a",
+                    "surface-container-low": "#f0f3ff",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary": "#5f5e5e",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "surface-variant": "#dce2f3",
+                    "on-primary": "#ffffff",
+                    "surface": "#f9f9ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-lg": "2rem",
+                    "gutter": "1rem",
+                    "stack-sm": "0.5rem",
+                    "container-margin": "1.25rem",
+                    "stack-md": "1rem"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Lexend"],
+                    "label-md": ["Lexend"],
+                    "headline-lg": ["Lexend"],
+                    "headline-lg-mobile": ["Lexend"],
+                    "body-md": ["Lexend"],
+                    "price-display": ["Lexend"],
+                    "body-sm": ["Lexend"]
+            },
+            "fontSize": {
+                    "headline-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "price-display": ["18px", {"lineHeight": "24px", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Lexend', sans-serif; background-color: #f9f9ff; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+        .active-row { background-color: #f0f3ff; }
+        .glass-panel { backdrop-filter: blur(8px); background: rgba(255, 255, 255, 0.8); }
+        .transition-drawer { transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    </style>
+</head>
+<body class="text-on-surface">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-container-margin h-16 bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline shadow-sm">
+<div class="flex items-center gap-4">
+<span class="font-headline-xl text-headline-xl text-primary dark:text-primary-container">GastroStaff Portal</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex items-center bg-surface-container rounded-full px-4 py-1.5 gap-2 border border-outline-variant">
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-sm w-64" placeholder="Cari transaksi..." type="text">
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button class="hover:bg-secondary-container p-2 rounded-full transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="hover:bg-secondary-container p-2 rounded-full transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<button class="hover:bg-secondary-container p-2 rounded-full transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-primary overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a restaurant manager in a modern black chef uniform, captured in a brightly lit, high-end restaurant kitchen background with soft bokeh. The lighting is clean and cinematic, emphasizing a professional light-mode aesthetic with warm orange accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCrY5Ikl-xZ5zeCqFsp0gET8BxWZZgICMOoRpFvsWWKYWHKTzG1DS3csRhcfGelxQ2ftcktyiH-AOTZVrIRR6TAyZWcxNE8SgaJTgMxX6J7dacMpT5kmYr-QmAccR3fLZOPoTVMnlnO4hjUoAd1zUOfTulTR6dsmzdL8kERA00J0aS1sf8OM96qf6eWWQhXI4izg7vrvHNrCBWXJHA12cTgIgYwegUOyu5Nm4Jgoj5clElRssfVQHUHd6hjjd5WOdfPeP8ngNn-SXv">
+</div>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-4rem)] flex flex-col p-stack-md z-40 bg-surface-container dark:bg-surface-container-low shadow-md w-64">
+<div class="flex flex-col gap-1 mb-8 p-2">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined">restaurant</span>
+</div>
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface leading-tight">Main Kitchen</h2>
+<p class="text-label-md text-on-surface-variant">Shift: Lunch Service</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-2">
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg font-medium" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-label-md">Floor Plan</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg font-medium" href="#">
+<span class="material-symbols-outlined">point_of_sale</span>
+<span class="font-label-md">POS System</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg font-medium" href="#">
+<span class="material-symbols-outlined">restaurant</span>
+<span class="font-label-md">Kitchen (KDS)</span>
+</a>
+<a class="flex items-center gap-3 p-3 bg-primary-container text-on-primary-container rounded-lg font-bold shadow-sm" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-md">Transactions</span>
+</a>
+</nav>
+<div class="mt-auto flex flex-col gap-2 border-t border-outline-variant pt-4">
+<button class="bg-primary hover:bg-on-primary-fixed-variant text-white py-3 px-4 rounded-xl flex items-center justify-center gap-2 font-bold transition-all active:scale-95">
+<span class="material-symbols-outlined">add</span>
+<span>New Reservation</span>
+</button>
+<button class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg font-medium">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md">Logout</span>
+</button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 pt-16 min-h-screen p-container-margin">
+<div class="max-w-7xl mx-auto space-y-stack-lg">
+<!-- Header & Summary Cards -->
+<div class="flex flex-col gap-stack-md">
+<div class="flex justify-between items-end">
+<div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface">Riwayat Transaksi</h1>
+<p class="text-on-surface-variant text-body-md">Kelola dan tinjau semua aktivitas pembayaran hari ini.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2 border border-outline text-on-surface rounded-lg font-medium hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[20px]">download</span>
+<span>Export CSV</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg font-bold hover:brightness-110 transition-all">
+<span class="material-symbols-outlined text-[20px]">print</span>
+<span>Print Report</span>
+</button>
+</div>
+</div>
+<!-- Bento Grid Summary -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-stack-md">
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant font-label-md">Total Transaksi Hari Ini</span>
+<span class="material-symbols-outlined text-primary">analytics</span>
+</div>
+<span class="text-headline-xl font-headline-xl text-on-surface">142</span>
+<div class="flex items-center gap-1 text-green-600 font-label-md">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>12% vs Kemarin</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant font-label-md">Total Pendapatan (Rp)</span>
+<span class="material-symbols-outlined text-primary">payments</span>
+</div>
+<span class="text-headline-xl font-headline-xl text-on-surface">Rp 12.850.000</span>
+<div class="flex items-center gap-1 text-green-600 font-label-md">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>8.4% vs Kemarin</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant font-label-md">Metode Terpopuler</span>
+<span class="material-symbols-outlined text-primary">star</span>
+</div>
+<span class="text-headline-xl font-headline-xl text-on-surface">QRIS</span>
+<div class="flex items-center gap-1 text-on-surface-variant font-label-md">
+<span>Digunakan oleh 65% pelanggan</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Filters & Search -->
+<div class="bg-surface-container-low p-4 rounded-xl border border-outline-variant flex flex-wrap items-center gap-4">
+<div class="flex-1 min-w-[300px] relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2.5 bg-surface rounded-lg border border-outline-variant focus:ring-2 focus:ring-primary focus:border-primary transition-all" placeholder="Cari berdasarkan Order ID atau Nomor Meja..." type="text">
+</div>
+<div class="flex items-center gap-3">
+<div class="flex flex-col gap-1">
+<label class="text-[10px] uppercase font-bold text-on-surface-variant px-1">Status</label>
+<select class="bg-surface border border-outline-variant rounded-lg px-3 py-2 text-body-sm focus:ring-primary focus:border-primary">
+<option>Semua Status</option>
+<option>Completed</option>
+<option>Voided</option>
+<option>Refunded</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-[10px] uppercase font-bold text-on-surface-variant px-1">Metode</label>
+<select class="bg-surface border border-outline-variant rounded-lg px-3 py-2 text-body-sm focus:ring-primary focus:border-primary">
+<option>Semua Metode</option>
+<option>Cash</option>
+<option>QRIS</option>
+<option>Card</option>
+</select>
+</div>
+<button class="mt-4 flex items-center gap-2 p-2.5 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+</div>
+<!-- Transaction Table -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden shadow-md">
+<table class="w-full text-left">
+<thead class="bg-surface-container text-on-surface font-label-md">
+<tr>
+<th class="px-6 py-4">Order ID</th>
+<th class="px-6 py-4">Time</th>
+<th class="px-6 py-4">Table</th>
+<th class="px-6 py-4">Server</th>
+<th class="px-6 py-4">Method</th>
+<th class="px-6 py-4">Total Amount</th>
+<th class="px-6 py-4">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low cursor-pointer transition-colors group" onclick="toggleDetail('TX-99218')">
+<td class="px-6 py-4 font-bold text-primary">#TX-99218</td>
+<td class="px-6 py-4 text-body-sm">12:45 PM</td>
+<td class="px-6 py-4 text-body-sm">Table 08</td>
+<td class="px-6 py-4 text-body-sm">Budi Santoso</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">qr_code_2</span>
+<span class="text-body-sm">QRIS</span>
+</div>
+</td>
+<td class="px-6 py-4 font-price-display">Rp 450.000</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full bg-green-100 text-green-800 text-[12px] font-bold">Completed</span>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low cursor-pointer transition-colors group" onclick="toggleDetail('TX-99217')">
+<td class="px-6 py-4 font-bold text-primary">#TX-99217</td>
+<td class="px-6 py-4 text-body-sm">12:38 PM</td>
+<td class="px-6 py-4 text-body-sm">Mezzanine 02</td>
+<td class="px-6 py-4 text-body-sm">Siti Aminah</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">payments</span>
+<span class="text-body-sm">Cash</span>
+</div>
+</td>
+<td class="px-6 py-4 font-price-display">Rp 1.280.000</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full bg-green-100 text-green-800 text-[12px] font-bold">Completed</span>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low cursor-pointer transition-colors group" onclick="toggleDetail('TX-99216')">
+<td class="px-6 py-4 font-bold text-primary">#TX-99216</td>
+<td class="px-6 py-4 text-body-sm">12:15 PM</td>
+<td class="px-6 py-4 text-body-sm">Table 12</td>
+<td class="px-6 py-4 text-body-sm">Budi Santoso</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">credit_card</span>
+<span class="text-body-sm">Card</span>
+</div>
+</td>
+<td class="px-6 py-4 font-price-display">Rp 842.000</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full bg-red-100 text-red-800 text-[12px] font-bold">Voided</span>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low cursor-pointer transition-colors group" onclick="toggleDetail('TX-99215')">
+<td class="px-6 py-4 font-bold text-primary">#TX-99215</td>
+<td class="px-6 py-4 text-body-sm">11:55 AM</td>
+<td class="px-6 py-4 text-body-sm">VIP Room</td>
+<td class="px-6 py-4 text-body-sm">Rian Pratama</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">qr_code_2</span>
+<span class="text-body-sm">QRIS</span>
+</div>
+</td>
+<td class="px-6 py-4 font-price-display">Rp 2.450.000</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full bg-orange-100 text-orange-800 text-[12px] font-bold">Refunded</span>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="px-6 py-4 bg-surface-container-lowest border-t border-outline-variant flex items-center justify-between">
+<span class="text-body-sm text-on-surface-variant">Showing 1-10 of 142 transactions</span>
+<div class="flex gap-2">
+<button class="p-2 border border-outline-variant rounded-lg hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="px-3 py-1 bg-primary text-white rounded-lg">1</button>
+<button class="px-3 py-1 hover:bg-surface-container-high rounded-lg">2</button>
+<button class="px-3 py-1 hover:bg-surface-container-high rounded-lg">3</button>
+<button class="p-2 border border-outline-variant rounded-lg hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Detail Transaksi Slide-over Modal -->
+<div class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[60] hidden opacity-0 transition-opacity duration-300" id="detail-overlay" onclick="toggleDetail()"></div>
+<div class="fixed top-0 right-0 h-full w-[450px] bg-white z-[70] translate-x-full transition-drawer shadow-2xl p-0 flex flex-col" id="detail-drawer">
+<div class="p-6 border-b border-outline-variant flex items-center justify-between">
+<div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Detail Transaksi</h3>
+<p class="text-primary font-bold" id="detail-order-id">#TX-99218</p>
+</div>
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-colors" onclick="toggleDetail()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto p-6 space-y-6">
+<!-- Receipt Simulation Card -->
+<div class="bg-surface-container-low p-6 rounded-xl border border-dashed border-outline relative">
+<!-- Receipt top -->
+<div class="text-center mb-6">
+<p class="font-bold text-headline-lg-mobile uppercase">GastroStaff Portal</p>
+<p class="text-body-sm text-on-surface-variant">Modern Gastronomy District, Suite 101</p>
+<div class="mt-2 text-xs text-on-surface-variant border-y border-outline-variant py-2 flex justify-between">
+<span>Date: 25 Oct 2023</span>
+<span>Server: Budi S.</span>
+</div>
+</div>
+<!-- Items List -->
+<div class="space-y-4">
+<div class="flex justify-between text-body-sm">
+<div class="flex-1">
+<p class="font-bold">2x Wagyu Steak Tartare</p>
+<p class="text-xs text-on-surface-variant">Medium Rare, No Onion</p>
+</div>
+<span class="font-price-display">Rp 320.000</span>
+</div>
+<div class="flex justify-between text-body-sm">
+<div class="flex-1">
+<p class="font-bold">1x Truffle Mushroom Risotto</p>
+</div>
+<span class="font-price-display">Rp 85.000</span>
+</div>
+<div class="flex justify-between text-body-sm">
+<div class="flex-1">
+<p class="font-bold">3x Signature Lychee Tea</p>
+</div>
+<span class="font-price-display">Rp 45.000</span>
+</div>
+</div>
+<!-- Breakdown -->
+<div class="mt-8 pt-4 border-t border-outline-variant space-y-2">
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Subtotal</span>
+<span>Rp 450.000</span>
+</div>
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Service Charge (5%)</span>
+<span>Rp 22.500</span>
+</div>
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">PB1 (10%)</span>
+<span>Rp 47.250</span>
+</div>
+<div class="flex justify-between font-headline-lg-mobile text-primary mt-4">
+<span>TOTAL</span>
+<span>Rp 519.750</span>
+</div>
+</div>
+<!-- Footer info -->
+<div class="mt-8 text-center text-xs text-on-surface-variant">
+<p>Metode: QRIS (DANA)</p>
+<p>Status: PAID - SUCCESSFUL</p>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="grid grid-cols-2 gap-4">
+<button class="flex flex-col items-center gap-2 p-4 bg-surface-container-high rounded-xl border border-outline-variant hover:border-primary transition-all">
+<span class="material-symbols-outlined text-primary">print</span>
+<span class="text-body-sm font-bold">Print Receipt</span>
+</button>
+<button class="flex flex-col items-center gap-2 p-4 bg-surface-container-high rounded-xl border border-outline-variant hover:border-primary transition-all">
+<span class="material-symbols-outlined text-primary">mail</span>
+<span class="text-body-sm font-bold">Email Receipt</span>
+</button>
+<button class="flex flex-col items-center gap-2 p-4 bg-surface-container-high rounded-xl border border-outline-variant hover:border-red-500 text-red-600 transition-all col-span-2">
+<span class="material-symbols-outlined">history</span>
+<span class="text-body-sm font-bold">Refund Transaction</span>
+</button>
+</div>
+</div>
+<div class="p-6 bg-surface-container">
+<button class="w-full py-3 bg-primary text-white font-bold rounded-xl active:scale-95 transition-transform shadow-md" onclick="toggleDetail()">
+                Tutup Detail
+            </button>
+</div>
+</div>
+<script>
+        function toggleDetail(orderId) {
+            const overlay = document.getElementById('detail-overlay');
+            const drawer = document.getElementById('detail-drawer');
+            const idLabel = document.getElementById('detail-order-id');
+
+            if (orderId) {
+                idLabel.textContent = orderId;
+                overlay.classList.remove('hidden');
+                setTimeout(() => {
+                    overlay.classList.add('opacity-100');
+                    drawer.classList.remove('translate-x-full');
+                }, 10);
+            } else {
+                overlay.classList.remove('opacity-100');
+                drawer.classList.add('translate-x-full');
+                setTimeout(() => {
+                    overlay.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        // Add micro-interactions to table rows
+        document.querySelectorAll('tbody tr').forEach(row => {
+            row.addEventListener('mousedown', () => row.classList.add('active:scale-[0.98]', 'duration-100'));
+            row.addEventListener('mouseup', () => row.classList.remove('active:scale-[0.98]'));
+        });
+    </script>
+</body></html>

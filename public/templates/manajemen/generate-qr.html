@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Savor Flow Admin - Table Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface": "#151c27",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "outline-variant": "#e4beb1",
+                    "inverse-primary": "#ffb59a",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "secondary-fixed": "#e5e2e1",
+                    "secondary-container": "#e5e2e1",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "surface-variant": "#dce2f3",
+                    "on-surface-variant": "#5b4137",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#a73a00",
+                    "surface-dim": "#d3daea",
+                    "surface-bright": "#f9f9ff",
+                    "outline": "#8f7065",
+                    "background": "#f9f9ff",
+                    "on-tertiary": "#ffffff",
+                    "surface-container": "#e7eefe",
+                    "surface": "#f9f9ff",
+                    "error": "#ba1a1a",
+                    "tertiary": "#5d5f5f",
+                    "surface-container-highest": "#dce2f3",
+                    "primary-container": "#ff5c00",
+                    "on-secondary-fixed-variant": "#474646",
+                    "inverse-on-surface": "#ebf1ff",
+                    "on-tertiary-container": "#2a2c2c",
+                    "surface-container-high": "#e2e8f8",
+                    "on-primary-fixed": "#370e00",
+                    "on-error": "#ffffff",
+                    "primary-fixed": "#ffdbce",
+                    "tertiary-fixed": "#e2e2e2",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "primary-fixed-dim": "#ffb59a",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-container": "#521800",
+                    "tertiary-container": "#929393",
+                    "inverse-surface": "#2a313d",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#151c27",
+                    "primary": "#a73a00",
+                    "surface-container-low": "#f0f3ff",
+                    "on-secondary-container": "#656464",
+                    "secondary": "#5f5e5e",
+                    "on-primary-fixed-variant": "#802a00"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-sm": "0.5rem",
+                    "container-margin": "1.25rem",
+                    "gutter": "1rem",
+                    "stack-lg": "2rem",
+                    "stack-md": "1rem"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Lexend"],
+                    "body-md": ["Lexend"],
+                    "price-display": ["Lexend"],
+                    "label-md": ["Lexend"],
+                    "headline-xl": ["Lexend"],
+                    "headline-lg": ["Lexend"],
+                    "body-sm": ["Lexend"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "price-display": ["18px", {"lineHeight": "24px", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                    "headline-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Lexend', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .qr-canvas {
+            background-image: radial-gradient(#ff5c00 1px, transparent 1px);
+            background-size: 12px 12px;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- Sidebar (Shared Component) -->
+<aside class="fixed left-0 top-0 h-full border-r border-outline-variant dark:border-on-tertiary-fixed-variant bg-surface-container-lowest dark:bg-on-surface w-72 flex flex-col z-50">
+<div class="p-6">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary dark:text-primary-fixed">Savor Flow</h1>
+<p class="text-label-md font-label-md text-secondary opacity-70">Restaurant Master Portal</p>
+</div>
+<nav class="flex-1 flex flex-col gap-1 mt-4">
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container-low rounded-lg mx-2 transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container rounded-lg mx-2 transition-colors shadow-sm" href="#">
+<span class="material-symbols-outlined">table_restaurant</span>
+<span class="font-label-md text-label-md">Table Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container-low rounded-lg mx-2 transition-colors" href="#">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="font-label-md text-label-md">Menu Catalog</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container-low rounded-lg mx-2 transition-colors" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-md text-label-md">Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container-low rounded-lg mx-2 transition-colors" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-md text-label-md">Financial Reports</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container-low rounded-lg mx-2 transition-colors mt-auto mb-4" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</nav>
+</aside>
+<!-- Top Navigation (Shared Component) -->
+<header class="sticky top-0 z-40 flex justify-between items-center px-container-margin ml-72 w-[calc(100%-18rem)] border-b border-outline-variant bg-surface dark:bg-background h-20">
+<div class="flex items-center gap-4">
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface dark:text-on-background">Floor Plan</h2>
+<div class="flex bg-surface-container-low rounded-full px-4 py-2 items-center gap-2 border border-outline-variant">
+<span class="material-symbols-outlined text-secondary text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-sm font-body-sm w-48" placeholder="Search tables..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button class="hover:text-primary transition-colors"><span class="material-symbols-outlined">notifications</span></button>
+<button class="hover:text-primary transition-colors"><span class="material-symbols-outlined">help_outline</span></button>
+</div>
+<div class="h-8 w-[1px] bg-outline-variant"></div>
+<div class="flex items-center gap-3">
+<div class="text-right hidden xl:block">
+<p class="text-label-md font-label-md leading-none">Admin Profile</p>
+<p class="text-body-sm text-secondary text-[10px]">Super Admin</p>
+</div>
+<div class="h-10 w-10 rounded-full bg-primary-fixed overflow-hidden border border-primary/20">
+<img class="h-full w-full object-cover" data-alt="A professional headshot of a restaurant administrator in a clean modern minimalist studio setting, soft cinematic lighting, neutral gray background, wearing a crisp black blazer, representing high-end hospitality management with a confident smile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuATGyEBMgiSP_BmmiE5eh_4Q4nxrTQHnSDvDK4_OYFUs5qYjDut8nmAEvKhaYuoAbq553mNo4OLpKEnmcLw2uWTQjlTTAHqB9YentRpNjt3w7NHAMBYPH0X5417CuMeN5UVwzkIXOWp4RpiDYcGdocFah83UQ-66_BKLb_bBm_9Z9tzI4xTecMezGxzD6T9hKNOARbr-rpHU8wepRw5SKgr2xZBRgXLmm1prC9kjH_mfQX-rUIUXC66QAMqMMdcFyWkNC8mvLU67uuB"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="ml-72 p-container-margin min-h-screen">
+<!-- Header Controls -->
+<section class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+<div>
+<h3 class="font-headline-xl text-headline-xl text-on-surface">Dining Area Management</h3>
+<p class="text-body-md text-secondary">Organize tables and generate menu QR codes for frictionless ordering.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-5 py-2.5 bg-surface-container-high text-on-surface rounded-xl font-label-md text-label-md flex items-center gap-2 hover:bg-surface-container-highest transition-all border border-outline-variant">
+<span class="material-symbols-outlined text-sm">settings_input_component</span>
+                    Section: Main Floor
+                </button>
+<button class="px-5 py-2.5 bg-primary-container text-on-primary-container rounded-xl font-label-md text-label-md flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all shadow-md shadow-primary-container/20" onclick="addTable()">
+<span class="material-symbols-outlined">add</span>
+                    Add New Table
+                </button>
+</div>
+</section>
+<!-- Stats Overview -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-8">
+<div class="p-6 bg-surface-container-lowest rounded-2xl border border-outline-variant flex flex-col gap-2">
+<span class="text-secondary font-label-md text-body-sm">Total Tables</span>
+<div class="flex items-end justify-between">
+<span class="font-headline-xl text-headline-xl" id="total-count">24</span>
+<span class="material-symbols-outlined text-primary text-3xl">table_restaurant</span>
+</div>
+</div>
+<div class="p-6 bg-surface-container-lowest rounded-2xl border border-outline-variant flex flex-col gap-2">
+<span class="text-secondary font-label-md text-body-sm">Active (Occupied)</span>
+<div class="flex items-end justify-between">
+<span class="font-headline-xl text-headline-xl text-primary" id="active-count">18</span>
+<span class="material-symbols-outlined text-primary text-3xl">group</span>
+</div>
+</div>
+<div class="p-6 bg-surface-container-lowest rounded-2xl border border-outline-variant flex flex-col gap-2">
+<span class="text-secondary font-label-md text-body-sm">Available</span>
+<div class="flex items-end justify-between">
+<span class="font-headline-xl text-headline-xl text-green-600" id="empty-count">6</span>
+<span class="material-symbols-outlined text-green-600 text-3xl">check_circle</span>
+</div>
+</div>
+<div class="p-6 bg-surface-container-lowest rounded-2xl border border-outline-variant flex flex-col gap-2">
+<span class="text-secondary font-label-md text-body-sm">QR Scan Rate</span>
+<div class="flex items-end justify-between">
+<span class="font-headline-xl text-headline-xl">82%</span>
+<span class="material-symbols-outlined text-secondary text-3xl">qr_code_2</span>
+</div>
+</div>
+</div>
+<!-- Table Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="table-grid">
+<!-- Table Item Template -->
+<script>
+                const tables = [
+                    { id: 1, status: 'Active', capacity: 4 },
+                    { id: 2, status: 'Active', capacity: 2 },
+                    { id: 3, status: 'Empty', capacity: 6 },
+                    { id: 4, status: 'Active', capacity: 4 },
+                    { id: 5, status: 'Empty', capacity: 2 },
+                    { id: 6, status: 'Active', capacity: 8 },
+                    { id: 7, status: 'Active', capacity: 4 },
+                    { id: 8, status: 'Active', capacity: 4 },
+                ];
+
+                function renderTables() {
+                    const grid = document.getElementById('table-grid');
+                    grid.innerHTML = tables.map(table => `
+                        <div class="group bg-surface-container-lowest rounded-2xl border border-outline-variant overflow-hidden hover:shadow-xl hover:shadow-on-surface/5 transition-all duration-300 relative">
+                            <div class="p-6">
+                                <div class="flex justify-between items-start mb-6">
+                                    <div class="flex flex-col">
+                                        <span class="text-label-md text-secondary opacity-60">TABLE</span>
+                                        <span class="text-headline-xl font-bold leading-tight">${table.id.toString().padStart(2, '0')}</span>
+                                    </div>
+                                    <div class="flex flex-col items-end">
+                                        <span class="px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase ${table.status === 'Active' ? 'bg-primary-fixed text-on-primary-fixed-variant' : 'bg-green-100 text-green-800'}">
+                                            ${table.status}
+                                        </span>
+                                        <span class="text-body-sm text-secondary mt-2 flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-sm">person</span>
+                                            Cap: ${table.capacity}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-col gap-3">
+                                    <button onclick="openQRModal(${table.id})" class="w-full py-3 bg-on-surface text-white rounded-xl font-label-md flex items-center justify-center gap-2 hover:bg-primary transition-colors">
+                                        <span class="material-symbols-outlined text-lg">qr_code_2</span>
+                                        Generate QR
+                                    </button>
+                                    <div class="flex gap-2">
+                                        <button class="flex-1 py-2 bg-surface-container-low text-on-surface rounded-lg text-body-sm font-medium hover:bg-surface-container-high transition-colors">Edit</button>
+                                        <button onclick="removeTable(${table.id})" class="p-2 text-error hover:bg-error-container/20 rounded-lg transition-colors">
+                                            <span class="material-symbols-outlined">delete</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Background Accent -->
+                            <div class="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
+                                <span class="material-symbols-outlined text-8xl">restaurant</span>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+
+                function addTable() {
+                    const newId = tables.length > 0 ? Math.max(...tables.map(t => t.id)) + 1 : 1;
+                    tables.push({ id: newId, status: 'Empty', capacity: 4 });
+                    renderTables();
+                    updateCounts();
+                }
+
+                function removeTable(id) {
+                    const index = tables.findIndex(t => t.id === id);
+                    if (index > -1) {
+                        tables.splice(index, 1);
+                        renderTables();
+                        updateCounts();
+                    }
+                }
+
+                function updateCounts() {
+                    document.getElementById('total-count').textContent = tables.length;
+                    document.getElementById('active-count').textContent = tables.filter(t => t.status === 'Active').length;
+                    document.getElementById('empty-count').textContent = tables.filter(t => t.status === 'Empty').length;
+                }
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    renderTables();
+                    updateCounts();
+                });
+            </script>
+</div>
+</main>
+<!-- QR Generator Modal (Overlay) -->
+<div class="fixed inset-0 z-[60] hidden flex items-center justify-center p-6" id="qr-modal">
+<!-- Backdrop -->
+<div class="absolute inset-0 bg-on-surface/40 backdrop-blur-sm" onclick="closeQRModal()"></div>
+<!-- Modal Content -->
+<div class="relative w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300">
+<div class="p-8">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h4 class="font-headline-lg text-headline-lg text-on-surface">Table <span id="modal-table-id">01</span></h4>
+<p class="text-body-sm text-secondary">Printable QR Code for Ordering</p>
+</div>
+<button class="p-2 hover:bg-surface-container-low rounded-full transition-colors" onclick="closeQRModal()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Printable Area -->
+<div class="bg-white border-2 border-dashed border-outline-variant rounded-2xl p-6 flex flex-col items-center gap-6 qr-canvas" id="printable-qr">
+<div class="w-16 h-16 bg-primary-container rounded-2xl flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-white text-4xl">restaurant</span>
+</div>
+<div class="p-4 bg-white rounded-xl shadow-md border border-outline-variant relative">
+<img class="w-48 h-48" data-alt="A crisp, high-resolution square QR code in black and white, perfectly centered on a white card, with a subtle modern orange brand logo embedded in the center as a watermark, clean professional presentation for a high-end digital restaurant menu." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDi5erMHvjeVr3klN0pMUBoIGh3TospHhM0BUHxgwJ7uyNx3c9oJXMe7CP7-Kgm5ufKvyjCIe4TxdmUXcc5EdVF7ZZiez-XOdEPSRJGLNIjE7pKxzXo8hOB2hI87kHvhTQd9EUWrXeTzDUYMba-ZgaBcuqxQVwfUyCwo1B6GEvTAsMCBvkwmr1yq4Vj7qtTaDe65mKABtXoDlQl4IiwO5nFo1c9ScgGCaUz-hsQhYWLPwjL7mMhbYdGDCOFasF4ww2CjFvGHREaWaai"/>
+</div>
+<div class="text-center">
+<p class="text-headline-lg font-extrabold text-on-surface leading-none tracking-tight">SAVOR FLOW</p>
+<p class="text-label-md text-secondary mt-1">SCAN TO ORDER • TABLE <span class="table-num">01</span></p>
+</div>
+</div>
+<!-- Actions -->
+<div class="mt-8 flex flex-col gap-3">
+<button class="w-full py-4 bg-primary-container text-on-primary-container rounded-2xl font-bold flex items-center justify-center gap-2 hover:opacity-90 shadow-lg shadow-primary-container/30 transition-all active:scale-95" onclick="window.print()">
+<span class="material-symbols-outlined">print</span>
+                        Print QR Code
+                    </button>
+<button class="w-full py-3 bg-surface-container-low text-on-surface rounded-xl font-label-md flex items-center justify-center gap-2 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-lg">download</span>
+                        Download SVG
+                    </button>
+</div>
+</div>
+<div class="bg-surface-container-low px-8 py-4 flex justify-between items-center text-xs text-secondary">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">lock</span> Dynamic Security: Active</span>
+<span>ID: SF-TABLE-2024-X</span>
+</div>
+</div>
+</div>
+<script>
+        function openQRModal(tableId) {
+            const modal = document.getElementById('qr-modal');
+            const idSpan = document.getElementById('modal-table-id');
+            const numSpans = document.querySelectorAll('.table-num');
+
+            idSpan.textContent = tableId.toString().padStart(2, '0');
+            numSpans.forEach(s => s.textContent = tableId.toString().padStart(2, '0'));
+
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeQRModal() {
+            const modal = document.getElementById('qr-modal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Add some micro-interactions
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeQRModal();
+        });
+    </script>
+</body></html>

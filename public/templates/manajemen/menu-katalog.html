@@ -1,0 +1,502 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Savor Flow Admin - Menu Catalog</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e4beb1;
+            border-radius: 10px;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+        .side-panel-open {
+            animation: slideIn 0.3s ease-out forwards;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface": "#151c27",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "outline-variant": "#e4beb1",
+                    "inverse-primary": "#ffb59a",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "secondary-fixed": "#e5e2e1",
+                    "secondary-container": "#e5e2e1",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "surface-variant": "#dce2f3",
+                    "on-surface-variant": "#5b4137",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#a73a00",
+                    "surface-dim": "#d3daea",
+                    "surface-bright": "#f9f9ff",
+                    "outline": "#8f7065",
+                    "background": "#f9f9ff",
+                    "on-tertiary": "#ffffff",
+                    "surface-container": "#e7eefe",
+                    "surface": "#f9f9ff",
+                    "error": "#ba1a1a",
+                    "tertiary": "#5d5f5f",
+                    "surface-container-highest": "#dce2f3",
+                    "primary-container": "#ff5c00",
+                    "on-secondary-fixed-variant": "#474646",
+                    "inverse-on-surface": "#ebf1ff",
+                    "on-tertiary-container": "#2a2c2c",
+                    "surface-container-high": "#e2e8f8",
+                    "on-primary-fixed": "#370e00",
+                    "on-error": "#ffffff",
+                    "primary-fixed": "#ffdbce",
+                    "tertiary-fixed": "#e2e2e2",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "primary-fixed-dim": "#ffb59a",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-container": "#521800",
+                    "tertiary-container": "#929393",
+                    "inverse-surface": "#2a313d",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#151c27",
+                    "primary": "#a73a00",
+                    "surface-container-low": "#f0f3ff",
+                    "on-secondary-container": "#656464",
+                    "secondary": "#5f5e5e",
+                    "on-primary-fixed-variant": "#802a00"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-sm": "0.5rem",
+                    "container-margin": "1.25rem",
+                    "gutter": "1rem",
+                    "stack-lg": "2rem",
+                    "stack-md": "1rem"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Lexend"],
+                    "body-md": ["Lexend"],
+                    "price-display": ["Lexend"],
+                    "label-md": ["Lexend"],
+                    "headline-xl": ["Lexend"],
+                    "headline-lg": ["Lexend"],
+                    "body-sm": ["Lexend"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "price-display": ["18px", {"lineHeight": "24px", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                    "headline-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen">
+<!-- Side Navigation -->
+<nav class="fixed left-0 top-0 h-full border-r border-outline-variant bg-surface-container-lowest dark:bg-on-surface h-screen w-72 flex flex-col shadow-sm z-50">
+<div class="p-6">
+<span class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary dark:text-primary-fixed">Savor Flow</span>
+<p class="text-label-md font-label-md text-secondary opacity-70">Restaurant Master Portal</p>
+</div>
+<div class="flex-1 mt-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container-low rounded-lg mx-2 transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container-low rounded-lg mx-2 transition-colors" href="#">
+<span class="material-symbols-outlined">table_restaurant</span>
+<span class="font-label-md text-label-md">Table Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container rounded-lg mx-2 transition-colors" href="#">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="font-label-md text-label-md">Menu Catalog</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container-low rounded-lg mx-2 transition-colors" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-md text-label-md">Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container-low rounded-lg mx-2 transition-colors" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-md text-label-md">Financial Reports</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container-low rounded-lg mx-2 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</div>
+<div class="p-4 mt-auto border-t border-outline-variant">
+<div class="flex items-center gap-3 p-2">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="A professional high-definition headshot of a restaurant administrator in a clean modern environment, soft studio lighting, focused gaze, minimalist business aesthetic, neutral warm color tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAS87gtDiYJmFWdjPX-9M5ZRCPeqOR5zfrvr_NrMTYfZ3X0yDJhSsJLYZV-XI7paFMiPWXqV-Cm3LZS_ICTv4ZHa1bIJS36FgNH2ixxNrA5nAuA52ArLa_3TY1pyQs7RrC71pAdVVXxIwQtLGriBBIJ6xZz4MEJiFsW0BAd9vdddDlFmRzY8lXSo1AUbn9T2wbSyoDVL3msXGIaJWf91FRB4rlopHrLaaX20H4bz3sBZ-asQpFMQVhNn9bKkeMxmuZlwG84ds3bHPr_">
+<div>
+<p class="font-label-md text-label-md text-on-surface">Admin Master</p>
+<p class="text-xs text-secondary">Super User</p>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="ml-72 min-h-screen pb-20">
+<!-- Top Navbar -->
+<header class="sticky top-0 z-40 flex justify-between items-center px-container-margin h-20 w-full bg-surface border-b border-outline-variant">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary-container focus:border-transparent outline-none transition-all font-body-sm text-body-sm" placeholder="Search menu items, categories..." type="text">
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="relative text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute -top-1 -right-1 w-2 h-2 bg-primary-container rounded-full border-2 border-surface"></span>
+</button>
+<button class="text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="h-8 w-[1px] bg-outline-variant mx-2"></div>
+<button class="flex items-center gap-2 px-4 py-2 rounded-xl bg-surface-container-high hover:bg-surface-container-highest transition-all group">
+<span class="font-label-md text-label-md text-on-surface">Admin Profile</span>
+<span class="material-symbols-outlined text-secondary group-hover:translate-x-1 transition-transform">chevron_right</span>
+</button>
+</div>
+</header>
+<!-- Catalog Header Section -->
+<div class="px-container-margin py-8">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface">Menu Catalog</h1>
+<p class="text-body-md text-secondary mt-1">Manage your restaurant offerings, prices, and availability.</p>
+</div>
+<div class="flex gap-4">
+<button class="flex items-center gap-2 px-6 py-3 rounded-xl border border-outline text-on-surface font-label-md hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined">category</span>
+                        Manage Categories
+                    </button>
+<button class="flex items-center gap-2 px-6 py-3 rounded-xl bg-primary-container text-white font-label-md shadow-lg shadow-primary-container/20 hover:scale-[1.02] active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined">add</span>
+                        Add New Item
+                    </button>
+</div>
+</div>
+<!-- Category Filter Bar -->
+<div class="flex gap-3 mb-8 overflow-x-auto pb-2 custom-scrollbar">
+<button class="px-6 py-2 rounded-full bg-on-surface text-surface font-label-md whitespace-nowrap">All Items (48)</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label-md hover:bg-surface-container-highest transition-colors whitespace-nowrap">Main Course</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label-md hover:bg-surface-container-highest transition-colors whitespace-nowrap">Appetizers</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label-md hover:bg-surface-container-highest transition-colors whitespace-nowrap">Desserts</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label-md hover:bg-surface-container-highest transition-colors whitespace-nowrap">Beverages</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label-md hover:bg-surface-container-highest transition-colors whitespace-nowrap">Specialties</button>
+</div>
+<!-- Menu Table Container -->
+<div class="bg-surface-container-lowest rounded-3xl overflow-hidden shadow-sm border border-outline-variant">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="px-6 py-4 font-label-md text-label-md text-secondary">Product</th>
+<th class="px-6 py-4 font-label-md text-label-md text-secondary">Category</th>
+<th class="px-6 py-4 font-label-md text-label-md text-secondary">Price</th>
+<th class="px-6 py-4 font-label-md text-label-md text-secondary text-center">Status</th>
+<th class="px-6 py-4 font-label-md text-label-md text-secondary text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Item 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-4">
+<img class="w-12 h-12 rounded-xl object-cover" data-alt="A high-end gourmet presentation of a wagyu beef burger on a black ceramic plate, soft natural lighting, warm atmosphere, professional food photography, minimalist luxury restaurant aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCujovsf-6ldQ57Y2ztY7VS2__Pg-MOYzr7Ab0wH6hc6IeGupyVDoHkkY0ZUaxEZXjwqemvJjKs2cTlKq2SG-7zuAQ4nvroQehtyL-kEbLsJ38_gB5puxL18-4T5vPo659Ws3IXbHaalL7XG6Aw7hojo14dZcK_2hhcJHukdiJU-nPb4Rhi8-jml-Zre1rCPmCttLS291tKn1lCDvwpqkTjKiIDq8-YIVQuph5jrr5C7sKIYJiziyEIG7p_g7WjmlI6_PT0GOtiLBPm">
+<div>
+<p class="font-label-md text-label-md text-on-surface">Truffle Wagyu Burger</p>
+<p class="text-xs text-secondary">ID: SVF-001</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-body-sm text-on-surface-variant">Main Course</td>
+<td class="px-6 py-4 font-price-display text-price-display text-primary">$24.00</td>
+<td class="px-6 py-4">
+<div class="flex justify-center">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+<span class="ms-3 text-xs font-label-md text-secondary">Available</span>
+</label>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 hover:bg-surface-container-highest rounded-full transition-colors text-secondary hover:text-primary" onclick="toggleModifierPanel()" title="Edit Modifiers">
+<span class="material-symbols-outlined">tune</span>
+</button>
+<button class="p-2 hover:bg-surface-container-highest rounded-full transition-colors text-secondary hover:text-on-surface" title="Edit Item">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</td>
+</tr>
+<!-- Item 2 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-4">
+<img class="w-12 h-12 rounded-xl object-cover" data-alt="Exquisite plating of grilled Atlantic salmon with lemon butter sauce and asparagus, vibrant colors, bright high-key lighting, clean minimalist table setting, modern gastronomic style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrKAUxXGnfnFndiiY9sXTultnJMSGO0QMKw7rmPzHGqyFaG2LH0ocPQg3aMjTh15QTBCYDrYZLCKfZOhiifYRagi4IBY0kic8emY6Gh2ia62o-vn48JXt718WB5WqqT-x8bPRRGKdFYCXu5nExRFuJtmTOgCzz6N48jKTvhmX65UWv8ZexU71FA7xVqKz9reRK9gzDK8alUe5nOgi-FsgzBvpp-kT3J-I2qNLoP1bTiCBzBcYcIppGbZdH1N_SulEdzinV0LqErUE3">
+<div>
+<p class="font-label-md text-label-md text-on-surface">Atlantic Salmon Zest</p>
+<p class="text-xs text-secondary">ID: SVF-002</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-body-sm text-on-surface-variant">Main Course</td>
+<td class="px-6 py-4 font-price-display text-price-display text-primary">$28.50</td>
+<td class="px-6 py-4">
+<div class="flex justify-center">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+<span class="ms-3 text-xs font-label-md text-secondary">Available</span>
+</label>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 hover:bg-surface-container-highest rounded-full transition-colors text-secondary hover:text-primary" onclick="toggleModifierPanel()" title="Edit Modifiers">
+<span class="material-symbols-outlined">tune</span>
+</button>
+<button class="p-2 hover:bg-surface-container-highest rounded-full transition-colors text-secondary hover:text-on-surface" title="Edit Item">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</td>
+</tr>
+<!-- Item 3 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4 opacity-70">
+<div class="flex items-center gap-4">
+<img class="w-12 h-12 rounded-xl object-cover grayscale" data-alt="A decadent dark chocolate lava cake with a molten center, powdered sugar dusting, berries on the side, dramatic moody lighting, luxury dessert aesthetic, deep rich browns." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZiB2G8_nI3Q358HqNgyCxPOIubljRS5ST8wiHbkEcnKoBPb9O1cbLhV6__cwMJYiMBYFRNqZAgq55oLisTnRdk8yxxtS9LzsgxsdZrkqaYV3mu4HwonM3zK9sTjjopMWOfvrh0_B8uilq68PI_vNtN4EFmURxZ4AFQ5I7WOg1OXQ9VdjmSqO5Vjx87OOSEaPIkmt2LCwsSzUi8W1Ps08_T_fK5sCJdmMDw7V-TxQcewkmnG5FeTTmrRWhgEy_hEj5p5KcV-C-9Jyo">
+<div>
+<p class="font-label-md text-label-md text-on-surface">Lava Fondant</p>
+<p class="text-xs text-secondary">ID: SVF-003</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-body-sm text-on-surface-variant">Desserts</td>
+<td class="px-6 py-4 font-price-display text-price-display text-primary">$12.00</td>
+<td class="px-6 py-4">
+<div class="flex justify-center">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox">
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+<span class="ms-3 text-xs font-label-md text-error">Sold Out</span>
+</label>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 hover:bg-surface-container-highest rounded-full transition-colors text-secondary hover:text-primary" onclick="toggleModifierPanel()" title="Edit Modifiers">
+<span class="material-symbols-outlined">tune</span>
+</button>
+<button class="p-2 hover:bg-surface-container-highest rounded-full transition-colors text-secondary hover:text-on-surface" title="Edit Item">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</td>
+</tr>
+<!-- Item 4 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-4">
+<img class="w-12 h-12 rounded-xl object-cover" data-alt="A refreshing artisanal cocktail with citrus garnishes and ice crystals, served in a crystal glass, bright airy lighting, soft pastel color palette, fresh summer hospitality vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3olUhPFD8GNEwJ_NkI_W3pLdTRH8zW8VDj2R9R3lnwCcASAZv1qcl9VrYeEEeM6PS9mr0swwP_olPR-bVM0d1PnQp7jwePsWRyCjbKvOYl1e5gRrvviVezOHumo6RZPqFl4cIp8wHXU_sqimrGPTkAO1BfTAI19qERZR3xdat5qFZ4fr3MXz4OIkGtwwobnHU6UKgSL91RKUPkoikgXRo7vpuW6xZVfKINZkDR4ArH4mg4rrenfHYUfablF5D6gfc06MuU_o5ORKp">
+<div>
+<p class="font-label-md text-label-md text-on-surface">Citrus Mist Mocktail</p>
+<p class="text-xs text-secondary">ID: SVF-004</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-body-sm text-on-surface-variant">Beverages</td>
+<td class="px-6 py-4 font-price-display text-price-display text-primary">$9.00</td>
+<td class="px-6 py-4">
+<div class="flex justify-center">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+<span class="ms-3 text-xs font-label-md text-secondary">Available</span>
+</label>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 hover:bg-surface-container-highest rounded-full transition-colors text-secondary hover:text-primary" onclick="toggleModifierPanel()" title="Edit Modifiers">
+<span class="material-symbols-outlined">tune</span>
+</button>
+<button class="p-2 hover:bg-surface-container-highest rounded-full transition-colors text-secondary hover:text-on-surface" title="Edit Item">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- Pagination Footer -->
+<div class="px-6 py-4 border-t border-outline-variant flex items-center justify-between bg-surface-container-low">
+<p class="text-body-sm text-secondary">Showing <span class="font-bold text-on-surface">1 - 10</span> of 48 items</p>
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-outline-variant text-secondary hover:bg-surface-container-highest disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg bg-primary-container text-white text-body-sm font-bold">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg text-body-sm text-secondary hover:bg-surface-container-highest">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg text-body-sm text-secondary hover:bg-surface-container-highest">3</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-outline-variant text-secondary hover:bg-surface-container-highest">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Modifiers / Add-ons Side Panel -->
+<div class="fixed inset-0 bg-on-surface/40 backdrop-blur-sm z-[60] hidden opacity-0 transition-opacity duration-300" id="modifier-overlay" onclick="toggleModifierPanel()"></div>
+<aside class="fixed right-0 top-0 h-full w-[450px] bg-surface-container-lowest shadow-2xl z-[70] translate-x-full transition-transform duration-300 flex flex-col" id="modifier-panel">
+<div class="p-6 border-b border-outline-variant flex items-center justify-between">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Manage Modifiers</h2>
+<p class="text-body-sm text-secondary">Item: Truffle Wagyu Burger</p>
+</div>
+<button class="p-2 hover:bg-surface-container-low rounded-full transition-colors" onclick="toggleModifierPanel()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto p-6 space-y-8 custom-scrollbar">
+<!-- Group 1 -->
+<section>
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-label-md text-label-md text-primary uppercase tracking-wider">Choice of Temperature</h3>
+<span class="px-2 py-1 bg-surface-container-high rounded text-[10px] font-bold text-on-surface-variant">REQUIRED</span>
+</div>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-4 rounded-2xl bg-surface-container-low border border-outline-variant">
+<span class="text-body-md">Medium Rare</span>
+<span class="text-body-sm text-secondary">+$0.00</span>
+</div>
+<div class="flex items-center justify-between p-4 rounded-2xl bg-surface-container-low border border-outline-variant">
+<span class="text-body-md">Medium</span>
+<span class="text-body-sm text-secondary">+$0.00</span>
+</div>
+<div class="flex items-center justify-between p-4 rounded-2xl border-2 border-primary-container bg-primary-fixed/30">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-body-md font-bold">Medium Well</span>
+</div>
+<span class="text-body-sm text-secondary">+$0.00</span>
+</div>
+</div>
+<button class="mt-3 text-primary text-body-sm font-label-md flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-sm">add</span> Add Option
+                </button>
+</section>
+<!-- Group 2 -->
+<section>
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-label-md text-label-md text-primary uppercase tracking-wider">Extra Toppings</h3>
+<span class="px-2 py-1 bg-surface-container-high rounded text-[10px] font-bold text-on-surface-variant">OPTIONAL</span>
+</div>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-4 rounded-2xl bg-surface-container-low border border-outline-variant group hover:border-outline">
+<div class="flex items-center gap-3">
+<input class="w-5 h-5 rounded border-outline-variant text-primary-container focus:ring-primary-container" type="checkbox">
+<span class="text-body-md">Double Cheddar</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-body-sm font-bold text-on-surface">+$2.50</span>
+<button class="opacity-0 group-hover:opacity-100 transition-opacity p-1 text-secondary hover:text-error">
+<span class="material-symbols-outlined text-sm">delete</span>
+</button>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 rounded-2xl bg-surface-container-low border border-outline-variant group hover:border-outline">
+<div class="flex items-center gap-3">
+<input checked="" class="w-5 h-5 rounded border-outline-variant text-primary-container focus:ring-primary-container" type="checkbox">
+<span class="text-body-md">Sautéed Mushrooms</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-body-sm font-bold text-on-surface">+$1.75</span>
+<button class="opacity-0 group-hover:opacity-100 transition-opacity p-1 text-secondary hover:text-error">
+<span class="material-symbols-outlined text-sm">delete</span>
+</button>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 rounded-2xl bg-surface-container-low border border-outline-variant group hover:border-outline">
+<div class="flex items-center gap-3">
+<input class="w-5 h-5 rounded border-outline-variant text-primary-container focus:ring-primary-container" type="checkbox">
+<span class="text-body-md">Extra Truffle Oil</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-body-sm font-bold text-on-surface">+$3.00</span>
+<button class="opacity-0 group-hover:opacity-100 transition-opacity p-1 text-secondary hover:text-error">
+<span class="material-symbols-outlined text-sm">delete</span>
+</button>
+</div>
+</div>
+</div>
+<button class="mt-3 text-primary text-body-sm font-label-md flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-sm">add</span> Add Option
+                </button>
+</section>
+</div>
+<div class="p-6 border-t border-outline-variant bg-surface-container-low flex gap-4">
+<button class="flex-1 px-6 py-3 rounded-xl border border-outline text-on-surface font-label-md hover:bg-surface-container-highest transition-all" onclick="toggleModifierPanel()">Cancel</button>
+<button class="flex-1 px-6 py-3 rounded-xl bg-on-surface text-surface font-label-md hover:opacity-90 transition-all">Save Changes</button>
+</div>
+</aside>
+<script>
+        function toggleModifierPanel() {
+            const panel = document.getElementById('modifier-panel');
+            const overlay = document.getElementById('modifier-overlay');
+
+            if (panel.classList.contains('translate-x-full')) {
+                panel.classList.remove('translate-x-full');
+                overlay.classList.remove('hidden');
+                setTimeout(() => {
+                    overlay.classList.add('opacity-100');
+                }, 10);
+            } else {
+                panel.classList.add('translate-x-full');
+                overlay.classList.remove('opacity-100');
+                setTimeout(() => {
+                    overlay.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        // Search highlight interaction
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('ring-2', 'ring-primary-container/20');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('ring-2', 'ring-primary-container/20');
+        });
+    </script>
+</body></html>

@@ -15,49 +15,61 @@ class KitchenController extends Controller
             ->orderBy('created_at', 'asc')
             ->get();
 
-        return response()->json($orders);
+        if (request()->expectsJson()) {
+            return response()->json($orders);
+        }
+
+        return view('staff.kitchen', compact('orders'));
     }
 
     public function startCooking(Order $order)
     {
         if ($order->order_status !== 'pending') {
-            return response()->json([
-                'message' => 'Pesanan tidak dalam status pending',
-            ], 422);
+            if (request()->expectsJson()) {
+                return response()->json(['message' => 'Pesanan tidak dalam status pending'], 422);
+            }
+            return redirect()->back()->with('error', 'Pesanan tidak dalam status pending');
         }
 
         $order->update(['order_status' => 'cooking']);
 
-        return response()->json([
-            'message' => 'Pesanan sedang dimasak',
-            'order' => $order->load('items.menu'),
-        ]);
+        if (request()->expectsJson()) {
+            return response()->json(['message' => 'Pesanan sedang dimasak', 'order' => $order->load('items.menu')]);
+        }
+
+        return redirect()->back()->with('success', 'Pesanan sedang dimasak');
     }
 
     public function finishCooking(Order $order)
     {
         if ($order->order_status !== 'cooking') {
-            return response()->json([
-                'message' => 'Pesanan tidak dalam status cooking',
-            ], 422);
+            if (request()->expectsJson()) {
+                return response()->json(['message' => 'Pesanan tidak dalam status cooking'], 422);
+            }
+            return redirect()->back()->with('error', 'Pesanan tidak dalam status cooking');
         }
 
-        $order->update(['order_status' => 'ready']);
+        $order->update(['order_status' => 'completed']);
 
-        return response()->json([
-            'message' => 'Pesanan siap diantar',
-            'order' => $order->load('items.menu'),
-        ]);
+        if (request()->expectsJson()) {
+            return response()->json(['message' => 'Pesanan selesai', 'order' => $order->load('items.menu')]);
+        }
+
+        return redirect()->back()->with('success', 'Pesanan selesai');
     }
 
     public function history()
     {
         $orders = Order::with(['table', 'items.menu'])
-            ->whereIn('order_status', ['ready', 'completed', 'cancelled'])
+            ->whereIn('order_status', ['completed', 'cancelled'])
             ->orderBy('updated_at', 'desc')
             ->limit(50)
             ->get();
 
-        return response()->json($orders);
+        if (request()->expectsJson()) {
+            return response()->json($orders);
+        }
+
+        return view('staff.kitchen-history', compact('orders'));
     }
 }

@@ -1,0 +1,603 @@
+<!doctype html>
+
+<html class="light" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+            name="viewport"
+        />
+        <title>Billing &amp; Payment | Savor Flow</title>
+        <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+            rel="stylesheet"
+        />
+        <script id="tailwind-config">
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        colors: {
+                            "surface-tint": "#a73a00",
+                            "surface-container-lowest": "#ffffff",
+                            "inverse-primary": "#ffb59a",
+                            "tertiary-fixed": "#e2e2e2",
+                            "inverse-surface": "#2a313d",
+                            "primary-fixed-dim": "#ffb59a",
+                            "surface-variant": "#dce2f3",
+                            "inverse-on-surface": "#ebf1ff",
+                            "on-primary-fixed-variant": "#802a00",
+                            background: "#f9f9ff",
+                            "error-container": "#ffdad6",
+                            "surface-bright": "#f9f9ff",
+                            "on-tertiary-fixed": "#1a1c1c",
+                            surface: "#f9f9ff",
+                            secondary: "#5f5e5e",
+                            "on-secondary-container": "#656464",
+                            "tertiary-fixed-dim": "#c6c6c7",
+                            "on-tertiary-container": "#2a2c2c",
+                            "on-primary": "#ffffff",
+                            "surface-container": "#e7eefe",
+                            error: "#ba1a1a",
+                            outline: "#8f7065",
+                            "secondary-fixed": "#e5e2e1",
+                            "on-secondary": "#ffffff",
+                            tertiary: "#5d5f5f",
+                            "secondary-container": "#e5e2e1",
+                            "on-tertiary-fixed-variant": "#454747",
+                            "outline-variant": "#e4beb1",
+                            "tertiary-container": "#929393",
+                            "on-secondary-fixed": "#1c1b1b",
+                            "primary-fixed": "#ffdbce",
+                            "primary-container": "#ff5c00",
+                            "on-error-container": "#93000a",
+                            "on-background": "#151c27",
+                            primary: "#a73a00",
+                            "on-surface-variant": "#5b4137",
+                            "on-primary-container": "#521800",
+                            "secondary-fixed-dim": "#c8c6c5",
+                            "on-secondary-fixed-variant": "#474646",
+                            "on-surface": "#151c27",
+                            "on-primary-fixed": "#370e00",
+                            "on-error": "#ffffff",
+                            "surface-container-low": "#f0f3ff",
+                            "on-tertiary": "#ffffff",
+                            "surface-dim": "#d3daea",
+                            "surface-container-highest": "#dce2f3",
+                            "surface-container-high": "#e2e8f8",
+                        },
+                        borderRadius: {
+                            DEFAULT: "0.25rem",
+                            lg: "0.5rem",
+                            xl: "0.75rem",
+                            full: "9999px",
+                        },
+                        spacing: {
+                            gutter: "1rem",
+                            "stack-lg": "2rem",
+                            "stack-sm": "0.5rem",
+                            "container-margin": "1.25rem",
+                            "stack-md": "1rem",
+                        },
+                        fontFamily: {
+                            "headline-lg-mobile": ["Lexend"],
+                            "price-display": ["Lexend"],
+                            "headline-xl": ["Lexend"],
+                            "headline-lg": ["Lexend"],
+                            "body-sm": ["Lexend"],
+                            "body-md": ["Lexend"],
+                            "label-md": ["Lexend"],
+                        },
+                        fontSize: {
+                            "headline-lg-mobile": [
+                                "20px",
+                                { lineHeight: "28px", fontWeight: "600" },
+                            ],
+                            "price-display": [
+                                "18px",
+                                { lineHeight: "24px", fontWeight: "700" },
+                            ],
+                            "headline-xl": [
+                                "32px",
+                                {
+                                    lineHeight: "40px",
+                                    letterSpacing: "-0.02em",
+                                    fontWeight: "700",
+                                },
+                            ],
+                            "headline-lg": [
+                                "24px",
+                                {
+                                    lineHeight: "32px",
+                                    letterSpacing: "-0.01em",
+                                    fontWeight: "600",
+                                },
+                            ],
+                            "body-sm": [
+                                "14px",
+                                { lineHeight: "20px", fontWeight: "400" },
+                            ],
+                            "body-md": [
+                                "16px",
+                                { lineHeight: "24px", fontWeight: "400" },
+                            ],
+                            "label-md": [
+                                "14px",
+                                {
+                                    lineHeight: "16px",
+                                    letterSpacing: "0.02em",
+                                    fontWeight: "600",
+                                },
+                            ],
+                        },
+                    },
+                },
+            };
+        </script>
+        <style>
+            body {
+                font-family: "Lexend", sans-serif;
+                -webkit-tap-highlight-color: transparent;
+            }
+            .material-symbols-outlined {
+                font-variation-settings:
+                    "FILL" 0,
+                    "wght" 400,
+                    "GRAD" 0,
+                    "opsz" 24;
+            }
+            .custom-scrollbar::-webkit-scrollbar {
+                display: none;
+            }
+            .shimmer {
+                background: linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.4),
+                    transparent
+                );
+                background-size: 200% 100%;
+                animation: shimmer 2s infinite;
+            }
+            @keyframes shimmer {
+                0% {
+                    background-position: -200% 0;
+                }
+                100% {
+                    background-position: 200% 0;
+                }
+            }
+            .fade-in {
+                animation: fadeIn 0.4s ease-out forwards;
+            }
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        </style>
+        <style>
+            body {
+                min-height: max(884px, 100dvh);
+            }
+        </style>
+    </head>
+    <body class="bg-background text-on-background min-h-screen pb-32">
+        <!-- TopAppBar -->
+        <header
+            class="fixed top-0 w-full z-50 flex items-center justify-between px-container-margin h-16 w-full bg-surface/80 backdrop-blur-md"
+        >
+            <div class="flex items-center gap-4">
+                <button
+                    class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors active:scale-95 duration-150 text-primary"
+                >
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+                <h1
+                    class="font-headline-lg-mobile text-headline-lg-mobile text-primary"
+                >
+                    Billing
+                </h1>
+            </div>
+            <div class="flex items-center gap-2">
+                <div
+                    class="px-3 py-1 bg-primary-fixed text-on-primary-fixed rounded-full text-label-md font-label-md"
+                >
+                    Table 12
+                </div>
+            </div>
+        </header>
+        <main class="pt-20 px-container-margin max-w-lg mx-auto space-y-6">
+            <!-- Order Summary Section -->
+            <section class="fade-in" style="animation-delay: 0.1s">
+                <div class="flex items-center justify-between mb-4">
+                    <h2
+                        class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface"
+                    >
+                        Order Summary
+                    </h2>
+                    <span class="text-body-sm text-secondary">3 Items</span>
+                </div>
+                <div
+                    class="bg-surface-container-lowest rounded-xl p-4 shadow-[0_4px_12px_rgba(0,0,0,0.05)] space-y-4"
+                >
+                    <!-- Item 1 -->
+                    <div class="flex justify-between items-start">
+                        <div class="flex gap-4">
+                            <div
+                                class="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0"
+                            >
+                                <img
+                                    class="w-full h-full object-cover"
+                                    data-alt="A close-up, high-resolution food photography shot of a gourmet truffle wagyu burger with melting cheese and caramelized onions. The lighting is warm and directional, highlighting the textures of the brioche bun and juicy meat. The overall aesthetic is professional and appetizing, using the Savor Flow brand's warm, high-end hospitality feel."
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDX251tqcdBgWTopYxGPyy8N01ncEWOHWDHl8QDK8pgyMFFGOPwLebytBnnaSd-m-amB3sTcmEZYcmJbB64B3ukOLqftF-GPKYaW51y2etfLxK5FnCQkx1S4-s9ltics7T8tKYO9F49dXG8XuPjyW51HEM83ManIaoChMzoTVRAW7jkoD57V9btzw8JUtGqnodyAkEp1CDGtbkHgwlVNXMREfFrgfhb3KkjjrT169CrRf44IQVZkA1X999f6IJucrmj_n5r8yV5CGwq"
+                                />
+                            </div>
+                            <div>
+                                <p
+                                    class="font-label-md text-label-md text-on-surface"
+                                >
+                                    Truffle Wagyu Burger
+                                </p>
+                                <p class="text-body-sm text-secondary">
+                                    x1 • Extra Cheese
+                                </p>
+                            </div>
+                        </div>
+                        <p
+                            class="font-price-display text-price-display text-on-surface"
+                        >
+                            Rp 145k
+                        </p>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="flex justify-between items-start">
+                        <div class="flex gap-4">
+                            <div
+                                class="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0"
+                            >
+                                <img
+                                    class="w-full h-full object-cover"
+                                    data-alt="A refreshing and vibrant craft iced tea with slices of fresh peach and mint leaves in a crystal-clear tall glass. Soft morning sunlight filters through the glass, creating elegant reflections and highlighting the condensation on the outside. The mood is crisp and refreshing, fitting a modern gastronomy brand."
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuD546kyjRJzNZIutjgQPN5-GWTX_UzMuMenlZk2nMkPJ3qt5NJo0gXFttf7aIagYBbDMEj4GYzUofaGIbssEsJJp2Abz8YhwaQRDyze99j-5rFFI2Wabw_yC87lZXtyA3kfSbdZzG5RqImx3xm6fw2G1vYJxv-QMSHMziauxmAL-1UgvE_4B4nYzwakuE0hE92glaCOzhAZsrku1FhJ-SKolqXCsEDQz513kYzE2aLTgkQXEoKIDmt8Bhz7GRozYegV5rnSwWkZMcmK"
+                                />
+                            </div>
+                            <div>
+                                <p
+                                    class="font-label-md text-label-md text-on-surface"
+                                >
+                                    Peach Mint Iced Tea
+                                </p>
+                                <p class="text-body-sm text-secondary">
+                                    x2 • Less Sugar
+                                </p>
+                            </div>
+                        </div>
+                        <p
+                            class="font-price-display text-price-display text-on-surface"
+                        >
+                            Rp 76k
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-outline-variant space-y-2">
+                        <div
+                            class="flex justify-between text-body-sm text-secondary"
+                        >
+                            <span>Subtotal</span>
+                            <span>Rp 221k</span>
+                        </div>
+                        <div
+                            class="flex justify-between text-body-sm text-secondary"
+                        >
+                            <span>Service &amp; Tax (15%)</span>
+                            <span>Rp 33k</span>
+                        </div>
+                        <div class="flex justify-between items-center pt-2">
+                            <span
+                                class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface"
+                                >Total</span
+                            >
+                            <span
+                                class="font-headline-xl text-headline-xl text-primary-container"
+                                >Rp 254k</span
+                            >
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Split Bill Toggle -->
+            <section class="fade-in" style="animation-delay: 0.2s">
+                <div
+                    class="bg-surface-container-low rounded-xl p-4 flex items-center justify-between"
+                >
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 bg-surface-container-highest rounded-full flex items-center justify-center text-primary"
+                        >
+                            <span class="material-symbols-outlined"
+                                >call_split</span
+                            >
+                        </div>
+                        <div>
+                            <p
+                                class="font-label-md text-label-md text-on-surface"
+                            >
+                                Split the Bill?
+                            </p>
+                            <p class="text-body-sm text-secondary">
+                                Share the cost with others
+                            </p>
+                        </div>
+                    </div>
+                    <label
+                        class="relative inline-flex items-center cursor-pointer"
+                    >
+                        <input
+                            class="sr-only peer"
+                            id="splitToggle"
+                            type="checkbox"
+                            value=""
+                        />
+                        <div
+                            class="w-11 h-6 bg-secondary-fixed rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"
+                        ></div>
+                    </label>
+                </div>
+            </section>
+            <!-- Payment Method Section -->
+            <section class="fade-in" style="animation-delay: 0.3s">
+                <h2
+                    class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-4"
+                >
+                    Payment Method
+                </h2>
+                <div class="grid grid-cols-1 gap-3">
+                    <!-- QRIS -->
+                    <button
+                        class="payment-card flex items-center justify-between p-4 bg-surface-container-lowest border-2 border-primary-container rounded-xl transition-all duration-200"
+                        id="pay-qris"
+                        onclick="selectPayment('qris')"
+                    >
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-12 h-12 bg-surface-container-high rounded-lg flex items-center justify-center text-primary"
+                            >
+                                <span
+                                    class="material-symbols-outlined"
+                                    style="
+                                        font-variation-settings: &quot;opsz&quot;
+                                            32;
+                                    "
+                                    >qr_code_2</span
+                                >
+                            </div>
+                            <div class="text-left">
+                                <p
+                                    class="font-label-md text-label-md text-on-surface"
+                                >
+                                    QRIS / E-Wallet
+                                </p>
+                                <p class="text-body-sm text-secondary">
+                                    OVO, GoPay, ShopeePay
+                                </p>
+                            </div>
+                        </div>
+                        <div
+                            class="w-6 h-6 rounded-full border-2 border-primary-container flex items-center justify-center"
+                        >
+                            <div
+                                class="w-3 h-3 bg-primary-container rounded-full"
+                            ></div>
+                        </div>
+                    </button>
+                    <!-- Credit Card -->
+                    <button
+                        class="payment-card flex items-center justify-between p-4 bg-surface-container-lowest border-2 border-transparent rounded-xl transition-all duration-200 hover:bg-surface-container-low"
+                        id="pay-card"
+                        onclick="selectPayment('card')"
+                    >
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-12 h-12 bg-surface-container-high rounded-lg flex items-center justify-center text-secondary"
+                            >
+                                <span class="material-symbols-outlined"
+                                    >credit_card</span
+                                >
+                            </div>
+                            <div class="text-left">
+                                <p
+                                    class="font-label-md text-label-md text-on-surface"
+                                >
+                                    Credit Card
+                                </p>
+                                <p class="text-body-sm text-secondary">
+                                    Visa, Mastercard, JCB
+                                </p>
+                            </div>
+                        </div>
+                        <div
+                            class="w-6 h-6 rounded-full border-2 border-outline-variant"
+                        ></div>
+                    </button>
+                    <!-- Cash -->
+                    <button
+                        class="payment-card flex items-center justify-between p-4 bg-surface-container-lowest border-2 border-transparent rounded-xl transition-all duration-200 hover:bg-surface-container-low"
+                        id="pay-cash"
+                        onclick="selectPayment('cash')"
+                    >
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-12 h-12 bg-surface-container-high rounded-lg flex items-center justify-center text-secondary"
+                            >
+                                <span class="material-symbols-outlined"
+                                    >payments</span
+                                >
+                            </div>
+                            <div class="text-left">
+                                <p
+                                    class="font-label-md text-label-md text-on-surface"
+                                >
+                                    Cash
+                                </p>
+                                <p class="text-body-sm text-secondary">
+                                    Pay at the cashier
+                                </p>
+                            </div>
+                        </div>
+                        <div
+                            class="w-6 h-6 rounded-full border-2 border-outline-variant"
+                        ></div>
+                    </button>
+                </div>
+            </section>
+            <!-- Security Note -->
+            <div
+                class="flex items-center justify-center gap-2 text-secondary pb-8 fade-in"
+                style="animation-delay: 0.4s"
+            >
+                <span class="material-symbols-outlined text-[18px]"
+                    >verified_user</span
+                >
+                <span class="text-body-sm"
+                    >Secure encrypted payment processing</span
+                >
+            </div>
+        </main>
+        <!-- Bottom Action Bar -->
+        <div
+            class="fixed bottom-0 left-0 w-full z-50 bg-surface px-container-margin py-4 pb-safe shadow-[0_-4px_12px_rgba(0,0,0,0.05)] flex flex-col gap-4"
+        >
+            <button
+                class="w-full h-14 bg-primary-container text-white font-headline-lg-mobile text-headline-lg-mobile rounded-xl shadow-lg active:scale-95 transition-transform duration-200 flex items-center justify-center gap-2"
+                id="requestBillBtn"
+            >
+                <span>Request Bill</span>
+                <span class="material-symbols-outlined">chevron_right</span>
+            </button>
+        </div>
+        <!-- BottomNavBar (Hidden on this focused transactional screen but preserved for structure) -->
+        <nav
+            class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe bg-surface dark:bg-on-background hidden"
+        >
+            <div
+                class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim"
+            >
+                <span class="material-symbols-outlined">restaurant_menu</span>
+                <span class="font-label-md text-label-md">Menu</span>
+            </div>
+            <div
+                class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim"
+            >
+                <span class="material-symbols-outlined">receipt_long</span>
+                <span class="font-label-md text-label-md">Orders</span>
+            </div>
+            <div
+                class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim"
+            >
+                <span class="material-symbols-outlined"
+                    >person_raised_hand</span
+                >
+                <span class="font-label-md text-label-md">Call</span>
+            </div>
+            <div
+                class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed font-bold"
+            >
+                <span class="material-symbols-outlined">payments</span>
+                <span class="font-label-md text-label-md">Billing</span>
+            </div>
+        </nav>
+        <script>
+            function selectPayment(type) {
+                // Reset all cards
+                document.querySelectorAll(".payment-card").forEach((card) => {
+                    card.classList.remove(
+                        "border-primary-container",
+                        "bg-surface-container-lowest",
+                    );
+                    card.classList.add("border-transparent");
+
+                    // Reset icons/radio
+                    const iconContainer = card.querySelector(".w-12");
+                    iconContainer.classList.remove("text-primary");
+                    iconContainer.classList.add("text-secondary");
+
+                    const radio = card.querySelector(".w-6");
+                    radio.classList.remove("border-primary-container");
+                    radio.classList.add("border-outline-variant");
+                    radio.innerHTML = "";
+                });
+
+                // Select active
+                const activeCard = document.getElementById("pay-" + type);
+                activeCard.classList.add("border-primary-container");
+                activeCard.classList.remove("border-transparent");
+
+                const iconContainer = activeCard.querySelector(".w-12");
+                iconContainer.classList.remove("text-secondary");
+                iconContainer.classList.add("text-primary");
+
+                const radio = activeCard.querySelector(".w-6");
+                radio.classList.remove("border-outline-variant");
+                radio.classList.add("border-primary-container");
+                radio.innerHTML =
+                    '<div class="w-3 h-3 bg-primary-container rounded-full"></div>';
+
+                // Micro-interaction
+                activeCard.style.transform = "scale(0.98)";
+                setTimeout(() => {
+                    activeCard.style.transform = "scale(1)";
+                }, 100);
+            }
+
+            // Handle the Request Bill Button
+            document
+                .getElementById("requestBillBtn")
+                .addEventListener("click", function () {
+                    this.innerHTML = `
+                <div class="flex items-center gap-3">
+                    <div class="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    <span>Processing...</span>
+                </div>
+            `;
+                    this.classList.add("opacity-90");
+
+                    setTimeout(() => {
+                        this.innerHTML = `
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined">check_circle</span>
+                        <span>Bill Requested</span>
+                    </div>
+                `;
+                        this.classList.replace(
+                            "bg-primary-container",
+                            "bg-green-600",
+                        );
+                    }, 1500);
+                });
+
+            // Split Toggle Interaction
+            document
+                .getElementById("splitToggle")
+                .addEventListener("change", function (e) {
+                    if (e.target.checked) {
+                        // In a real app, this would expand a split-bill configuration section
+                        console.log("Split bill mode active");
+                    }
+                });
+        </script>
+    </body>
+</html>

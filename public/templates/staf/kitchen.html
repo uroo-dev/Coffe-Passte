@@ -1,0 +1,442 @@
+<!DOCTYPE html><html class="light" lang="id"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>GastroStaff KDS | Modern Gastronomy</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#e2e8f8",
+                    "error-container": "#ffdad6",
+                    "outline-variant": "#e4beb1",
+                    "error": "#ba1a1a",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "background": "#f9f9ff",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "on-primary-fixed": "#370e00",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "surface-container-highest": "#dce2f3",
+                    "surface": "#f9f9ff",
+                    "on-surface": "#151c27",
+                    "surface-variant": "#dce2f3",
+                    "primary": "#a73a00",
+                    "on-error-container": "#93000a",
+                    "surface-bright": "#f9f9ff",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "surface-container-low": "#f0f3ff",
+                    "primary-fixed-dim": "#ffb59a",
+                    "on-primary-container": "#521800",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "surface-dim": "#d3daea",
+                    "surface-container": "#e7eefe",
+                    "outline": "#8f7065",
+                    "on-surface-variant": "#5b4137",
+                    "inverse-primary": "#ffb59a",
+                    "tertiary-fixed": "#e2e2e2",
+                    "primary-container": "#ff5c00",
+                    "tertiary-container": "#929393",
+                    "tertiary": "#5d5f5f",
+                    "on-primary": "#ffffff",
+                    "secondary-container": "#e5e2e1",
+                    "inverse-on-surface": "#ebf1ff",
+                    "on-tertiary-container": "#2a2c2c",
+                    "secondary-fixed": "#e5e2e1",
+                    "primary-fixed": "#ffdbce",
+                    "on-secondary-container": "#656464",
+                    "secondary": "#5f5e5e",
+                    "on-primary-fixed-variant": "#802a00",
+                    "on-secondary-fixed-variant": "#474646",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "inverse-surface": "#2a313d",
+                    "on-error": "#ffffff",
+                    "surface-tint": "#a73a00",
+                    "on-background": "#151c27"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-sm": "0.5rem",
+                    "stack-md": "1rem",
+                    "stack-lg": "2rem",
+                    "container-margin": "1.25rem",
+                    "gutter": "1rem"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Lexend"],
+                    "body-md": ["Lexend"],
+                    "price-display": ["Lexend"],
+                    "label-md": ["Lexend"],
+                    "headline-lg": ["Lexend"],
+                    "body-sm": ["Lexend"],
+                    "headline-lg-mobile": ["Lexend"]
+            },
+            "fontSize": {
+                    "headline-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "price-display": ["18px", {"lineHeight": "24px", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .timer-warning {
+            animation: pulse-red 2s infinite;
+        }
+        @keyframes pulse-red {
+            0% { color: inherit; }
+            50% { color: #ba1a1a; }
+            100% { color: inherit; }
+        }
+        .kds-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #dce2f3;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen overflow-hidden">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-container-margin h-16 bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline shadow-sm">
+<div class="flex items-center gap-stack-md">
+<span class="font-headline-xl text-headline-xl text-primary dark:text-primary-container">GastroStaff Portal</span>
+<div class="hidden md:flex ml-stack-lg gap-stack-md">
+<span class="text-on-surface-variant font-medium cursor-pointer hover:bg-secondary-container transition-colors px-3 py-1 rounded-lg">Floor Plan</span>
+<span class="text-on-surface-variant font-medium cursor-pointer hover:bg-secondary-container transition-colors px-3 py-1 rounded-lg">POS System</span>
+<span class="text-primary font-bold border-b-2 border-primary cursor-pointer px-3 py-1">Kitchen (KDS)</span>
+<span class="text-on-surface-variant font-medium cursor-pointer hover:bg-secondary-container transition-colors px-3 py-1 rounded-lg">Transactions</span>
+</div>
+</div>
+<div class="flex items-center gap-stack-md">
+<div class="flex items-center gap-2 mr-stack-md text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</div>
+<img class="w-10 h-10 rounded-full border-2 border-primary object-cover" data-alt="Professional chef headshot in a modern studio setting with warm directional lighting, wearing a clean white double-breasted uniform with subtle orange accents. The background is a blurred high-end kitchen with stainless steel surfaces and warm ambient glows, creating a professional and trustworthy hospitality atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqBRHyxZ37bc0EjRq-rnz6wKH5HCU24AdLJCNB1kFWCKLmeIBvfQEkmcB8yuvkFavuCREmN0zGpGp4NENYTve5hea3Zcv123I9mU2-8S2-ImySRH-x4VzijTVYx-oVZe6LdPt30Uz1wUyxbwztS713wAFi-vuiV-INq-ORIkAb-9afDYQdMWb9TB7UMpeiHWkc22FMR_gsPN4eSITlQU5SWmGFjcQe8LtCRbiTnWLmPZ73xOXwLNSMYvQZAOI_YESs7gaAz8vJnOm0">
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-4rem)] flex flex-col p-stack-md z-40 bg-surface-container dark:bg-surface-container-low shadow-md w-64 hidden lg:flex">
+<div class="mb-stack-lg p-2">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Main Kitchen</h2>
+<p class="text-label-md font-label-md text-on-surface-variant">Shift: Lunch Service</p>
+</div>
+<nav class="flex-1 flex flex-col gap-2">
+<div class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all cursor-pointer rounded-lg">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="font-label-md text-label-md">Floor Plan</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all cursor-pointer rounded-lg">
+<span class="material-symbols-outlined" data-icon="point_of_sale">point_of_sale</span>
+<span class="font-label-md text-label-md">POS System</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container rounded-lg font-bold shadow-sm">
+<span class="material-symbols-outlined" data-icon="restaurant" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+<span class="font-label-md text-label-md">Kitchen (KDS)</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all cursor-pointer rounded-lg">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="font-label-md text-label-md">Transactions</span>
+</div>
+</nav>
+<button class="mb-4 bg-primary text-on-primary font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+            New Reservation
+        </button>
+<div class="pt-4 border-t border-outline-variant">
+<div class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all cursor-pointer rounded-lg">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="lg:ml-64 mt-16 p-stack-lg h-[calc(100vh-4rem)] overflow-y-auto">
+<!-- KDS Header Controls -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-stack-lg gap-4">
+<div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface">Live Orders</h1>
+<p class="text-on-surface-variant">Monitoring 8 active orders across 12 tables</p>
+</div>
+<div class="flex gap-stack-md w-full md:w-auto">
+<div class="flex items-center bg-surface-container-high px-4 py-2 rounded-xl border border-outline-variant">
+<span class="material-symbols-outlined mr-2 text-primary" data-icon="timer">timer</span>
+<span class="font-bold text-primary">Avg Ticket: 14m 20s</span>
+</div>
+<div class="flex items-center bg-surface-container-high px-4 py-2 rounded-xl border border-outline-variant">
+<span class="material-symbols-outlined mr-2 text-on-surface-variant" data-icon="filter_list">filter_list</span>
+<span class="font-label-md">Sort: Oldest First</span>
+</div>
+</div>
+</div>
+<!-- KDS Cards Grid -->
+<div class="kds-grid pb-stack-lg">
+<!-- Card 1 (URGENT) -->
+<div class="bg-surface-container-lowest rounded-xl border-l-8 border-error shadow-md flex flex-col overflow-hidden animate-in fade-in duration-500">
+<div class="p-4 bg-error-container/20 border-b border-outline-variant flex justify-between items-start">
+<div>
+<div class="text-label-md font-bold text-error tracking-wider uppercase mb-1">Critical Time</div>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile font-bold">Table #04</h3>
+</div>
+<div class="text-right">
+<div class="font-price-display text-price-display text-error timer-warning">22:46</div>
+<div class="text-body-sm text-on-surface-variant">8:12 PM</div>
+</div>
+</div>
+<div class="p-4 flex-1 space-y-3">
+<div class="flex items-start gap-3">
+<span class="font-bold text-lg min-w-[20px]">2x</span>
+<div class="flex-1">
+<p class="font-bold text-on-surface">Iga Bakar Madu Spesial</p>
+<p class="text-error font-bold text-sm tracking-wide">PEDAS LEVEL 5</p>
+<p class="text-error font-bold text-sm tracking-wide">NO ONIONS</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="font-bold text-lg min-w-[20px]">1x</span>
+<div class="flex-1">
+<p class="font-bold text-on-surface">Nasi Goreng Wagyu</p>
+<p class="text-on-surface-variant text-sm">Extra kerupuk</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="font-bold text-lg min-w-[20px]">3x</span>
+<div class="flex-1">
+<p class="font-bold text-on-surface">Es Teh Manis Jumbo</p>
+</div>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low grid grid-cols-2 gap-2">
+<button class="bg-secondary-container text-on-secondary-container py-3 rounded-lg font-bold hover:bg-secondary-fixed transition-colors active:scale-95">Mulai Masak</button>
+<button class="bg-primary text-on-primary py-3 rounded-lg font-bold hover:opacity-90 transition-opacity active:scale-95">Selesai Masak</button>
+</div>
+</div>
+<!-- Card 2 (In Progress) -->
+<div class="bg-surface-container-lowest rounded-xl border-l-8 border-primary shadow-md flex flex-col overflow-hidden">
+<div class="p-4 bg-primary-fixed/20 border-b border-outline-variant flex justify-between items-start">
+<div>
+<div class="text-label-md font-bold text-primary tracking-wider uppercase mb-1">Cooking...</div>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile font-bold">Table #12</h3>
+</div>
+<div class="text-right">
+<div class="font-price-display text-price-display text-primary">12:11</div>
+<div class="text-body-sm text-on-surface-variant">8:22 PM</div>
+</div>
+</div>
+<div class="p-4 flex-1 space-y-3">
+<div class="flex items-start gap-3">
+<span class="font-bold text-lg min-w-[20px]">1x</span>
+<div class="flex-1">
+<p class="font-bold text-on-surface">Sop Buntut Borobudur</p>
+<p class="text-error font-bold text-sm tracking-wide">NO CORIANDER</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="font-bold text-lg min-w-[20px]">1x</span>
+<div class="flex-1">
+<p class="font-bold text-on-surface">Sate Ayam Madura (10 pcs)</p>
+<p class="text-on-surface-variant text-sm">Bumbu kacang dipisah</p>
+</div>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low grid grid-cols-2 gap-2">
+<div class="col-span-1 bg-primary/10 text-primary py-3 rounded-lg font-bold flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
+                        Started
+                    </div>
+<button class="bg-primary text-on-primary py-3 rounded-lg font-bold hover:opacity-90 transition-opacity active:scale-95">Selesai Masak</button>
+</div>
+</div>
+<!-- Card 3 (New) -->
+<div class="bg-surface-container-lowest rounded-xl border-l-8 border-outline-variant shadow-md flex flex-col overflow-hidden opacity-90 hover:opacity-100 transition-opacity">
+<div class="p-4 border-b border-outline-variant flex justify-between items-start">
+<div>
+<div class="text-label-md font-bold text-on-surface-variant tracking-wider uppercase mb-1">New Order</div>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile font-bold">Table #08</h3>
+</div>
+<div class="text-right">
+<div class="font-price-display text-price-display text-on-surface">04:33</div>
+<div class="text-body-sm text-on-surface-variant">8:30 PM</div>
+</div>
+</div>
+<div class="p-4 flex-1 space-y-3">
+<div class="flex items-start gap-3">
+<span class="font-bold text-lg min-w-[20px]">4x</span>
+<div class="flex-1">
+<p class="font-bold text-on-surface">Ayam Goreng Kalasan</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="font-bold text-lg min-w-[20px]">1x</span>
+<div class="flex-1">
+<p class="font-bold text-on-surface">Tahu Tempe Mendoan</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="font-bold text-lg min-w-[20px]">1x</span>
+<div class="flex-1">
+<p class="font-bold text-on-surface">Sambal Dadak</p>
+<p class="text-error font-bold text-sm tracking-wide">EXTRA PEDAS</p>
+</div>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low grid grid-cols-2 gap-2">
+<button class="bg-secondary-container text-on-secondary-container py-3 rounded-lg font-bold hover:bg-secondary-fixed transition-colors active:scale-95">Mulai Masak</button>
+<button class="bg-primary text-on-primary py-3 rounded-lg font-bold hover:opacity-90 transition-opacity active:scale-95">Selesai Masak</button>
+</div>
+</div>
+<!-- Card 4 (New) -->
+<div class="bg-surface-container-lowest rounded-xl border-l-8 border-outline-variant shadow-md flex flex-col overflow-hidden opacity-90">
+<div class="p-4 border-b border-outline-variant flex justify-between items-start">
+<div>
+<div class="text-label-md font-bold text-on-surface-variant tracking-wider uppercase mb-1">New Order</div>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile font-bold">Table #02</h3>
+</div>
+<div class="text-right">
+<div class="font-price-display text-price-display text-on-surface">01:16</div>
+<div class="text-body-sm text-on-surface-variant">8:33 PM</div>
+</div>
+</div>
+<div class="p-4 flex-1 space-y-3">
+<div class="flex items-start gap-3">
+<span class="font-bold text-lg min-w-[20px]">2x</span>
+<div class="flex-1">
+<p class="font-bold text-on-surface">Beef Rendang Risotto</p>
+</div>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low grid grid-cols-2 gap-2">
+<button class="bg-secondary-container text-on-secondary-container py-3 rounded-lg font-bold hover:bg-secondary-fixed transition-colors active:scale-95">Mulai Masak</button>
+<button class="bg-primary text-on-primary py-3 rounded-lg font-bold hover:opacity-90 transition-opacity active:scale-95">Selesai Masak</button>
+</div>
+</div>
+<!-- Card 5 (In Progress) -->
+<div class="bg-surface-container-lowest rounded-xl border-l-8 border-primary shadow-md flex flex-col overflow-hidden">
+<div class="p-4 bg-primary-fixed/20 border-b border-outline-variant flex justify-between items-start">
+<div>
+<div class="text-label-md font-bold text-primary tracking-wider uppercase mb-1">Cooking...</div>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile font-bold">Table #15</h3>
+</div>
+<div class="text-right">
+<div class="font-price-display text-price-display text-primary">05:41</div>
+<div class="text-body-sm text-on-surface-variant">8:29 PM</div>
+</div>
+</div>
+<div class="p-4 flex-1 space-y-3">
+<div class="flex items-start gap-3">
+<span class="font-bold text-lg min-w-[20px]">2x</span>
+<div class="flex-1">
+<p class="font-bold text-on-surface">Gado-Gado Premium</p>
+<p class="text-error font-bold text-sm tracking-wide">NO PEANUTS (ALLERGY)</p>
+</div>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low grid grid-cols-2 gap-2">
+<div class="col-span-1 bg-primary/10 text-primary py-3 rounded-lg font-bold flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
+                        Started
+                    </div>
+<button class="bg-primary text-on-primary py-3 rounded-lg font-bold hover:opacity-90 transition-opacity active:scale-95">Selesai Masak</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation for Mobile -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-surface border-t border-outline-variant h-16 flex items-center justify-around px-4 z-50">
+<button class="flex flex-col items-center justify-center text-on-surface-variant gap-1">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="text-[10px] font-bold">Floor</span>
+</button>
+<button class="flex flex-col items-center justify-center text-primary gap-1">
+<span class="material-symbols-outlined" data-icon="restaurant" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+<span class="text-[10px] font-bold">Kitchen</span>
+</button>
+<div class="relative -top-4 bg-primary-container p-3 rounded-full shadow-lg text-on-primary-container active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</div>
+<button class="flex flex-col items-center justify-center text-on-surface-variant gap-1">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="text-[10px] font-bold">Alerts</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant gap-1">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-[10px] font-bold">Tools</span>
+</button>
+</nav>
+<script>
+        // Micro-interaction: Update timers every second
+        function updateTimers() {
+            const timers = document.querySelectorAll('.font-price-display');
+            timers.forEach(timer => {
+                let [min, sec] = timer.innerText.split(':').map(Number);
+                sec++;
+                if (sec >= 60) {
+                    sec = 0;
+                    min++;
+                }
+                timer.innerText = `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+
+                // If over 20 mins, add urgency classes if not already there
+                if (min >= 20) {
+                    timer.classList.add('timer-warning');
+                }
+            });
+        }
+        setInterval(updateTimers, 1000);
+
+        // Micro-interaction: Action button feedback
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (this.innerText.includes('Selesai')) {
+                    const card = this.closest('.bg-surface-container-lowest');
+                    card.style.transform = 'translateY(-20px)';
+                    card.style.opacity = '0';
+                    setTimeout(() => {
+                        card.remove();
+                    }, 300);
+                } else if (this.innerText === 'Mulai Masak') {
+                    const parent = this.parentElement;
+                    this.remove();
+                    const statusDiv = document.createElement('div');
+                    statusDiv.className = 'col-span-1 bg-primary/10 text-primary py-3 rounded-lg font-bold flex items-center justify-center gap-2 animate-in slide-in-from-left-2';
+                    statusDiv.innerHTML = '<span class="material-symbols-outlined text-sm">check_circle</span>Started';
+                    parent.prepend(statusDiv);
+
+                    const card = parent.parentElement;
+                    card.classList.remove('border-outline-variant');
+                    card.classList.add('border-primary');
+                }
+            });
+        });
+    </script>
+</body></html>

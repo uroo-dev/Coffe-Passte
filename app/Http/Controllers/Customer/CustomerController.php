@@ -8,6 +8,7 @@ use App\Models\Menu;
 use App\Models\Modifier;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\ServiceRequest;
 use App\Models\Table;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -82,18 +83,22 @@ class CustomerController extends Controller
         ], 201);
     }
 
-    public function trackOrder(Order $order)
+    public function trackOrder(Request $request, Order $order)
     {
         $order->load('items.menu');
 
-        return response()->json([
-            'order_reference' => $order->order_reference,
-            'order_status' => $order->order_status,
-            'payment_status' => $order->payment_status,
-            'total_amount' => $order->total_amount,
-            'items' => $order->items,
-            'created_at' => $order->created_at,
-        ]);
+        if ($request->expectsJson()) {
+            return response()->json([
+                'order_reference' => $order->order_reference,
+                'order_status' => $order->order_status,
+                'payment_status' => $order->payment_status,
+                'total_amount' => $order->total_amount,
+                'items' => $order->items,
+                'created_at' => $order->created_at,
+            ]);
+        }
+
+        return view('customer.order-tracking', compact('order'));
     }
 
     public function pay(Request $request, Order $order)
@@ -109,10 +114,14 @@ class CustomerController extends Controller
 
         $order->table->update(['status' => 'waiting_payment']);
 
-        return response()->json([
-            'message' => 'Pembayaran berhasil',
-            'order' => $order,
-        ]);
+        if ($request->expectsJson() || $request->ajax()) {
+            return response()->json([
+                'message' => 'Pembayaran berhasil',
+                'order' => $order,
+            ]);
+        }
+
+        return redirect()->route('customer.invoice', $order);
     }
 
     public function callCashier(Request $request, $qrToken)
@@ -121,9 +130,45 @@ class CustomerController extends Controller
 
         $table->update(['status' => 'waiting_payment']);
 
+        if ($request->expectsJson() || $request->ajax()) {
+            return response()->json([
+                'message' => 'Kasir telah dipanggil',
+                'table' => $table,
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Kasir telah dipanggil!');
+    }
+
+    public function callStaff(Request $request, $qrToken)
+    {
+        $table = Table::where('qr_token', $qrToken)->firstOrFail();
+
+        $request->validate([
+            'type' => 'required|string',
+            'label' => 'required|string',
+        ]);
+
+        ServiceRequest::create([
+            'table_id' => $table->id,
+            'type' => $request->type,
+            'label' => $request->label,
+        ]);
+
         return response()->json([
-            'message' => 'Kasir telah dipanggil',
-            'table' => $table,
+            'message' => 'Permintaan terkirim',
+            'request' => [
+                'type' => $request->type,
+                'label' => $request->label,
+            ],
+        ]);
+    }
+
+    public function paymentStatus(Order $order)
+    {
+        return response()->json([
+            'payment_status' => $order->payment_status,
+            'order_status' => $order->order_status,
         ]);
     }
 }

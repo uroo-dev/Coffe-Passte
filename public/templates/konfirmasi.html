@@ -1,0 +1,224 @@
+<!DOCTYPE html><html class="light" lang="id"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-dim": "#d3daea",
+                    "tertiary-container": "#929393",
+                    "primary-fixed-dim": "#ffb59a",
+                    "on-primary-fixed-variant": "#802a00",
+                    "on-secondary-fixed-variant": "#474646",
+                    "tertiary": "#5d5f5f",
+                    "on-secondary": "#ffffff",
+                    "on-surface": "#151c27",
+                    "error": "#ba1a1a",
+                    "surface": "#f9f9ff",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "on-primary-fixed": "#370e00",
+                    "inverse-primary": "#ffb59a",
+                    "on-primary-container": "#521800",
+                    "surface-variant": "#dce2f3",
+                    "primary-fixed": "#ffdbce",
+                    "surface-tint": "#a73a00",
+                    "primary-container": "#ff5c00",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "error-container": "#ffdad6",
+                    "inverse-surface": "#2a313d",
+                    "inverse-on-surface": "#ebf1ff",
+                    "surface-bright": "#f9f9ff",
+                    "secondary-container": "#e5e2e1",
+                    "on-tertiary-container": "#2a2c2c",
+                    "on-secondary-container": "#656464",
+                    "outline-variant": "#e4beb1",
+                    "surface-container-high": "#e2e8f8",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface-variant": "#5b4137",
+                    "on-background": "#151c27",
+                    "outline": "#8f7065",
+                    "on-error-container": "#93000a",
+                    "surface-container-low": "#f0f3ff",
+                    "surface-container-highest": "#dce2f3",
+                    "on-error": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "surface-container": "#e7eefe",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed": "#e2e2e2",
+                    "background": "#f9f9ff",
+                    "secondary-fixed": "#e5e2e1",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "secondary": "#5f5e5e",
+                    "primary": "#a73a00"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-sm": "0.5rem",
+                    "stack-lg": "2rem",
+                    "container-margin": "1.25rem",
+                    "stack-md": "1rem",
+                    "gutter": "1rem"
+            },
+            "fontFamily": {
+                    "body-md": ["Lexend"],
+                    "headline-lg": ["Lexend"],
+                    "headline-lg-mobile": ["Lexend"],
+                    "headline-xl": ["Lexend"],
+                    "body-sm": ["Lexend"],
+                    "price-display": ["Lexend"],
+                    "label-md": ["Lexend"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "price-display": ["18px", {"lineHeight": "24px", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Lexend', sans-serif;
+            background-color: #f9f9ff;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .animate-check {
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+            animation: dash 0.8s ease-out forwards;
+            animation-delay: 0.3s;
+        }
+        @keyframes dash {
+            to { stroke-dashoffset: 0; }
+        }
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .success-glow {
+            filter: drop-shadow(0 0 15px rgba(255, 92, 0, 0.3));
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex flex-col min-h-screen text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex items-center justify-between px-container-margin h-16 w-full bg-surface/80 dark:bg-on-background/80 backdrop-blur-md">
+<div class="flex items-center gap-4">
+<button class="active:scale-95 transition-transform duration-150 text-primary dark:text-primary-fixed">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary dark:text-primary-fixed">Konfirmasi Pembayaran</h1>
+</div>
+<div></div>
+</header>
+<main class="flex-1 pt-24 pb-32 px-container-margin overflow-y-auto">
+<div class="flex flex-col items-center text-center max-w-md mx-auto">
+<!-- Success Animation Container -->
+<div class="relative w-48 h-48 mb-8 flex items-center justify-center">
+<div class="absolute inset-0 bg-primary-fixed/30 rounded-full animate-ping opacity-25"></div>
+<div class="absolute inset-2 bg-primary-fixed/50 rounded-full scale-110"></div>
+<div class="relative bg-primary-container w-32 h-32 rounded-full flex items-center justify-center shadow-lg success-glow">
+<svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" viewBox="0 0 24 24">
+<path class="animate-check" d="M20 6L9 17l-5-5"></path>
+</svg>
+</div>
+</div>
+<div class="fade-in-up" style="animation-delay: 0.1s;">
+<h2 class="font-headline-xl text-headline-xl text-on-surface mb-2">Pesanan Diproses</h2>
+<p class="font-body-md text-body-md text-secondary mb-8">Terima kasih atas pesanan Anda. Kami akan segera menyiapkannya.</p>
+</div>
+<!-- Payment Summary Card -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-6 shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-outline-variant/30 mb-6 fade-in-up" style="animation-delay: 0.2s;">
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<span class="font-body-sm text-body-sm text-secondary">Total Pembayaran</span>
+<span class="font-price-display text-price-display text-primary">Rp 557.750</span>
+</div>
+<div class="border-t border-dashed border-outline-variant"></div>
+<div class="flex justify-between items-center">
+<span class="font-body-sm text-body-sm text-secondary">Metode Pembayaran</span>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="qr_code_2">qr_code_2</span>
+<span class="font-label-md text-label-md text-on-surface">QRIS</span>
+</div>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-sm text-body-sm text-secondary">Status Konfirmasi</span>
+<div class="flex items-center gap-2">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-error opacity-75 scale-110"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-error"></span>
+</span>
+<span class="font-label-md text-label-md text-error">Menunggu Konfirmasi Bank/Sistem</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Helpful Tip Box -->
+<div class="w-full flex gap-4 p-4 bg-surface-container rounded-xl border-l-4 border-primary-container fade-in-up text-left" style="animation-delay: 0.3s;">
+<span class="material-symbols-outlined text-primary-container" data-icon="info">info</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                    Tips: Anda dapat memantau progres koki kami secara langsung melalui halaman <strong>'Live Order'</strong> untuk melihat estimasi waktu penyajian.
+                </p>
+</div>
+</div>
+</main>
+<!-- Fixed Action Footer -->
+<div class="fixed bottom-0 left-0 w-full bg-surface dark:bg-on-background px-container-margin py-6 pb-safe border-t border-outline-variant/10">
+<div class="max-w-md mx-auto">
+<button class="w-full bg-primary-container text-white py-4 rounded-xl font-label-md text-label-md active:scale-95 transition-all duration-200 shadow-md flex items-center justify-center gap-2">
+<span>Lihat Status Pesanan</span>
+<span class="material-symbols-outlined" data-icon="restaurant">restaurant</span>
+</button>
+</div>
+</div>
+<!-- BottomNavBar (Hidden on success screen to prioritize task focus, as per Shell Visibility Rules) -->
+<!-- Exclusion rule applied: "Transactional/Success confirmation screens suppress global nav" -->
+<script>
+        // Simple micro-interaction for the button
+        const mainBtn = document.querySelector('button');
+        mainBtn.addEventListener('click', () => {
+            const ripple = document.createElement('div');
+            ripple.className = 'absolute inset-0 bg-white/20 rounded-xl animate-pulse';
+            mainBtn.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
+        });
+
+        // Simulating a minor status pulse
+        setInterval(() => {
+            const statusDot = document.querySelector('.bg-error');
+            if(statusDot) {
+                statusDot.classList.toggle('scale-110');
+            }
+        }, 1000);
+    </script>
+</body></html>

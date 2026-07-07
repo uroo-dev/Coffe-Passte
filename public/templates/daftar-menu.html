@@ -1,0 +1,589 @@
+<!doctype html>
+<html class="light" lang="id">
+    <head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>Modern Gastronomy - Daftar Menu</title>
+        <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&amp;display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+            rel="stylesheet"
+        />
+        <script id="tailwind-config">
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        colors: {
+                            "surface-container": "#e7eefe",
+                            secondary: "#5f5e5e",
+                            "secondary-fixed-dim": "#c8c6c5",
+                            "on-secondary-fixed": "#1c1b1b",
+                            "error-container": "#ffdad6",
+                            "on-secondary-container": "#656464",
+                            error: "#ba1a1a",
+                            "surface-tint": "#a73a00",
+                            "inverse-surface": "#2a313d",
+                            "primary-fixed-dim": "#ffb59a",
+                            "surface-variant": "#dce2f3",
+                            "on-error": "#ffffff",
+                            "inverse-primary": "#ffb59a",
+                            "primary-container": "#ff5c00",
+                            "on-surface": "#151c27",
+                            surface: "#f9f9ff",
+                            "on-secondary-fixed-variant": "#474646",
+                            "surface-container-lowest": "#ffffff",
+                            "on-primary-fixed": "#370e00",
+                            "on-tertiary-container": "#2a2c2c",
+                            tertiary: "#5d5f5f",
+                            "on-secondary": "#ffffff",
+                            background: "#f9f9ff",
+                            "on-tertiary": "#ffffff",
+                            "tertiary-container": "#929393",
+                            "surface-container-high": "#e2e8f8",
+                            "surface-dim": "#d3daea",
+                            "outline-variant": "#e4beb1",
+                            "on-surface-variant": "#5b4137",
+                            "on-tertiary-fixed-variant": "#454747",
+                            outline: "#8f7065",
+                            "on-error-container": "#93000a",
+                            "on-primary-fixed-variant": "#802a00",
+                            primary: "#a73a00",
+                            "inverse-on-surface": "#ebf1ff",
+                            "secondary-fixed": "#e5e2e1",
+                            "on-primary-container": "#521800",
+                            "surface-container-highest": "#dce2f3",
+                            "surface-container-low": "#f0f3ff",
+                            "secondary-container": "#e5e2e1",
+                            "on-tertiary-fixed": "#1a1c1c",
+                            "primary-fixed": "#ffdbce",
+                            "surface-bright": "#f9f9ff",
+                            "tertiary-fixed": "#e2e2e2",
+                            "on-primary": "#ffffff",
+                            "tertiary-fixed-dim": "#c6c6c7",
+                            "on-background": "#151c27",
+                        },
+                        borderRadius: {
+                            DEFAULT: "0.25rem",
+                            lg: "0.5rem",
+                            xl: "0.75rem",
+                            full: "9999px",
+                        },
+                        spacing: {
+                            "container-margin": "1.25rem",
+                            "stack-lg": "2rem",
+                            gutter: "1rem",
+                            "stack-sm": "0.5rem",
+                            "stack-md": "1rem",
+                        },
+                        fontFamily: {
+                            "price-display": ["Lexend"],
+                            "headline-lg": ["Lexend"],
+                            "headline-xl": ["Lexend"],
+                            "label-md": ["Lexend"],
+                            "headline-lg-mobile": ["Lexend"],
+                            "body-sm": ["Lexend"],
+                            "body-md": ["Lexend"],
+                        },
+                        fontSize: {
+                            "price-display": [
+                                "18px",
+                                { lineHeight: "24px", fontWeight: "700" },
+                            ],
+                            "headline-lg": [
+                                "24px",
+                                {
+                                    lineHeight: "32px",
+                                    letterSpacing: "-0.01em",
+                                    fontWeight: "600",
+                                },
+                            ],
+                            "headline-xl": [
+                                "32px",
+                                {
+                                    lineHeight: "40px",
+                                    letterSpacing: "-0.02em",
+                                    fontWeight: "700",
+                                },
+                            ],
+                            "label-md": [
+                                "14px",
+                                {
+                                    lineHeight: "16px",
+                                    letterSpacing: "0.02em",
+                                    fontWeight: "600",
+                                },
+                            ],
+                            "headline-lg-mobile": [
+                                "20px",
+                                { lineHeight: "28px", fontWeight: "600" },
+                            ],
+                            "body-sm": [
+                                "14px",
+                                { lineHeight: "20px", fontWeight: "400" },
+                            ],
+                            "body-md": [
+                                "16px",
+                                { lineHeight: "24px", fontWeight: "400" },
+                            ],
+                        },
+                    },
+                },
+            };
+        </script>
+        <style>
+            body {
+                background-color: #f9f9ff;
+                -webkit-tap-highlight-color: transparent;
+            }
+            .hide-scrollbar::-webkit-scrollbar {
+                display: none;
+            }
+            .hide-scrollbar {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            .material-symbols-outlined {
+                font-variation-settings:
+                    "FILL" 0,
+                    "wght" 400,
+                    "GRAD" 0,
+                    "opsz" 24;
+                vertical-align: middle;
+            }
+            .custom-shadow-card {
+                shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            }
+            .active-tab-indicator {
+                position: relative;
+            }
+            .active-tab-indicator::after {
+                content: "";
+                position: absolute;
+                bottom: -4px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 4px;
+                height: 4px;
+                background-color: #ff5c00;
+                border-radius: 50%;
+            }
+        </style>
+        <style>
+            body {
+                min-height: max(884px, 100dvh);
+            }
+        </style>
+    </head>
+    <body class="font-body-md text-on-surface mb-32">
+        <!-- Top Navigation Anchor -->
+        <header
+            class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-container-margin py-stack-md bg-surface/80 backdrop-blur-md shadow-sm"
+        >
+            <div class="flex items-center gap-3">
+                <button
+                    class="flex items-center justify-center p-2 rounded-full hover:bg-surface-variant/50 transition-colors"
+                >
+                    <span class="material-symbols-outlined text-primary"
+                        >menu</span
+                    >
+                </button>
+                <h1
+                    class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary"
+                >
+                    Modern Gastronomy
+                </h1>
+            </div>
+            <div class="flex items-center gap-2">
+                <button
+                    class="flex items-center justify-center p-2 rounded-full hover:bg-surface-variant/50 transition-colors"
+                >
+                    <span class="material-symbols-outlined text-primary"
+                        >notifications</span
+                    >
+                </button>
+            </div>
+        </header>
+        <!-- Main Content Canvas -->
+        <main class="mt-20 px-container-margin space-y-stack-md">
+            <!-- Search Section -->
+            <section class="relative">
+                <div
+                    class="flex items-center bg-surface-container-low rounded-xl px-4 py-3 border border-outline-variant/20 focus-within:border-primary-container transition-all"
+                >
+                    <span class="material-symbols-outlined text-secondary mr-3"
+                        >search</span
+                    >
+                    <input
+                        class="bg-transparent border-none focus:ring-0 w-full text-body-md placeholder-secondary/60"
+                        placeholder="Cari hidangan favoritmu..."
+                        type="text"
+                    />
+                </div>
+            </section>
+            <!-- Category Tabs -->
+            <section
+                class="-mx-container-margin overflow-x-auto hide-scrollbar flex items-center px-container-margin py-2 gap-4"
+            >
+                <button
+                    class="flex-shrink-0 font-label-md text-label-md text-primary active-tab-indicator"
+                >
+                    Semua
+                </button>
+                <button
+                    class="flex-shrink-0 font-label-md text-label-md text-secondary hover:text-primary transition-colors"
+                >
+                    Populer
+                </button>
+                <button
+                    class="flex-shrink-0 font-label-md text-label-md text-secondary hover:text-primary transition-colors"
+                >
+                    Promo
+                </button>
+                <button
+                    class="flex-shrink-0 font-label-md text-label-md text-secondary hover:text-primary transition-colors"
+                >
+                    Makanan Utama
+                </button>
+                <button
+                    class="flex-shrink-0 font-label-md text-label-md text-secondary hover:text-primary transition-colors"
+                >
+                    Minuman
+                </button>
+                <button
+                    class="flex-shrink-0 font-label-md text-label-md text-secondary hover:text-primary transition-colors"
+                >
+                    Dessert
+                </button>
+            </section>
+            <!-- Filter Chips -->
+            <section class="flex flex-wrap gap-2 py-2">
+                <button
+                    class="flex items-center gap-1 px-3 py-1.5 rounded-full bg-surface-variant/40 border border-outline-variant/30 text-body-sm font-label-md hover:bg-primary-fixed transition-colors"
+                >
+                    Vegetarian
+                </button>
+                <button
+                    class="flex items-center gap-1 px-3 py-1.5 rounded-full bg-surface-variant/40 border border-outline-variant/30 text-body-sm font-label-md hover:bg-primary-fixed transition-colors"
+                >
+                    Bebas Gluten
+                </button>
+                <button
+                    class="flex items-center gap-1 px-3 py-1.5 rounded-full bg-surface-variant/40 border border-outline-variant/30 text-body-sm font-label-md hover:bg-primary-fixed transition-colors"
+                >
+                    <span
+                        class="material-symbols-outlined text-error text-[18px]"
+                        >local_fire_department</span
+                    >
+                    Pedas
+                </button>
+            </section>
+            <!-- Product Grid (Asymmetric Bento Style for High-End Feel) -->
+            <div class="grid grid-cols-2 gap-gutter">
+                <!-- Product Card 1 (Large Span) -->
+                <div
+                    class="col-span-2 bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-outline-variant/10 active:scale-[0.98] transition-transform duration-100"
+                >
+                    <div class="relative h-48 w-full">
+                        <img
+                            class="w-full h-full object-cover"
+                            data-alt="A top-down professional food photograph of a signature Wagyu Steak with truffle butter and charred asparagus, presented on a minimalist matte black ceramic plate. High-end fine dining lighting with soft shadows and warm golden accents. The color palette features rich browns, vibrant greens, and creamy whites against a clean light background."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlNVpabXqIdHMnTCAbXQ_Vxg9cfZaOOX35LKAGNWhA4IC0GrbcURmUVcQZOuLZSu4LEpzePMuk2SphGMrSz8DVCK5HEN70sPWg8adZ2_2FzEQY_78Ozewc_Wwb4hH_nlkNzM_PtxiAJWYElafppjM55-gSc9HnCWflB5oGVXY_Y2fIOn7gW_jlfX8lm6QQyZnUeB2PmOZKenlb3z4V1JVh4w2LqMsohOl8dPUE2y4NVCkdUabMUA8e4g4x4hUvYkIbhYBbP6KZQGOb"
+                        />
+                        <div
+                            class="absolute top-3 left-3 px-2 py-1 bg-primary-container text-on-primary-container rounded-lg font-label-md text-xs"
+                        >
+                            Best Seller
+                        </div>
+                    </div>
+                    <div class="p-4 flex flex-col justify-between h-32">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <h3
+                                    class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface"
+                                >
+                                    Signature Wagyu
+                                </h3>
+                                <span
+                                    class="font-price-display text-price-display text-primary"
+                                    >Rp 285k</span
+                                >
+                            </div>
+                            <p
+                                class="text-body-sm text-secondary line-clamp-2 mt-1"
+                            >
+                                Daging wagyu A5 panggang dengan mentega truffle
+                                premium dan asparagus bakar.
+                            </p>
+                        </div>
+                        <div class="flex justify-end mt-2">
+                            <button
+                                class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shadow-md active:scale-90 transition-transform"
+                            >
+                                <span class="material-symbols-outlined text-sm"
+                                    >add</span
+                                >
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product Card 2 -->
+                <div
+                    class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-outline-variant/10 active:scale-[0.98] transition-transform"
+                >
+                    <div class="relative aspect-square">
+                        <img
+                            class="w-full h-full object-cover"
+                            data-alt="A vibrant and fresh artisanal garden salad featuring heirloom tomatoes, thinly sliced radishes, micro-greens, and edible flowers. Light, bright studio photography with a crisp, airy mood. The aesthetic is healthy and organic with a soft focus background. Natural textures and vivid colors of red, orange, and purple are highlighted."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6-m4ORtKShKuCAHm9lYgwQYLJnQ1CD1tgyXLg6t28uzO-sFgkUpFppKnrIODdL4RyeGpq56TAk-_JsU03mJl0n6Sa5hK7_I-pKxXEGAaOkEPrrkN_X99_xqNL6KC6S3mxPd7na8DM-4gGoIBkGQgVAH9WXbebdYcL1QL1NII3DJ_eNm9M8ZLg66U4Ij0EjaOW2r_aOOf-W6tRMAx8Bygc14FCDf0-e5RsHYU3zJHJQREWz_F9tmAmP7_iW-V_EjEq0y4y01NmUA3C"
+                        />
+                    </div>
+                    <div class="p-3 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-label-md text-on-surface truncate">
+                                Artisan Garden Salad
+                            </h3>
+                            <p
+                                class="text-[12px] leading-tight text-secondary line-clamp-2 mt-1"
+                            >
+                                Sayuran organik segar dengan saus vinaigrette
+                                lemon.
+                            </p>
+                        </div>
+                        <div class="flex justify-between items-center mt-3">
+                            <span
+                                class="font-price-display text-price-display text-primary text-sm"
+                                >Rp 75k</span
+                            >
+                            <button
+                                class="w-7 h-7 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center active:scale-90 transition-transform"
+                            >
+                                <span class="material-symbols-outlined text-xs"
+                                    >add</span
+                                >
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product Card 3 -->
+                <div
+                    class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-outline-variant/10 active:scale-[0.98] transition-transform"
+                >
+                    <div class="relative aspect-square">
+                        <img
+                            class="w-full h-full object-cover"
+                            data-alt="A gourmet mushroom risotto served in a shallow white bowl, garnished with crispy sage leaves and shaved parmesan cheese. The lighting is intimate and warm, suggesting a cozy evening dining experience. Texture is key, showing the creaminess of the rice and the delicate curls of the cheese. Minimalist and elegant composition."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOWztmx97lCVfIMzO75oyp2ISLnOTNHSqRNugImHt3kosIliFl4XI2eYnGDbWPoQmpht5h4AIekyNtnkcJMWgefSFPHpJOuJlYjE5rWeA_T2XyP43QxfAT0UGlYb67qacRdt23lU6deCz4B_UmQqdXDtG54CNqiG_1TL6tGfJDPEtAqw4nh4yG88kBkP3JeZMMOSoTZvpMUIh1XpQWZl8ITHmqa6liZzmJdQXWWWTNyCWF9qK7rmYZcUXZbAVvfS4uMkanhoGKK-5F"
+                        />
+                    </div>
+                    <div class="p-3 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-label-md text-on-surface truncate">
+                                Wild Mushroom Risotto
+                            </h3>
+                            <p
+                                class="text-[12px] leading-tight text-secondary line-clamp-2 mt-1"
+                            >
+                                Risotto creamy dengan jamur hutan dan keju
+                                parmesan.
+                            </p>
+                        </div>
+                        <div class="flex justify-between items-center mt-3">
+                            <span
+                                class="font-price-display text-price-display text-primary text-sm"
+                                >Rp 120k</span
+                            >
+                            <button
+                                class="w-7 h-7 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center active:scale-90 transition-transform"
+                            >
+                                <span class="material-symbols-outlined text-xs"
+                                    >add</span
+                                >
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product Card 4 -->
+                <div
+                    class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-outline-variant/10 active:scale-[0.98] transition-transform"
+                >
+                    <div class="relative aspect-square">
+                        <img
+                            class="w-full h-full object-cover"
+                            data-alt="A close-up of a spicy Thai seafood noodle soup (Tom Yum style) with jumbo shrimp and fragrant lemongrass. Steam is rising from the bowl. Bold, high-saturation colors with red chili oils and green coriander. The shot captures a sense of heat and flavor intensity with shallow depth of field focusing on the shrimp."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBETYp12hMfd49Uhxo-GR_dMhURoBxXuHQsClwC8m76O7Np9sJiJ-lMKk50N8YEFFvfduKYsK7Kt2k6ds26Qzm_FSKYVVporCraR9ByvcKSO3gylLpw_1s6IzYqk4UclRU8dQyVZ7koDHcMyh4IPMBcgzxb9HGdEpnhhoQ4vfmpU6vDEe48on67Qmg1m7fAuWdqe-iHbCrcrTJZS2F5tzT4ih9v9bIC12vDP3coUeh7iH_xRN0e-g3LS8pVwmjuaejQxnUgN-yh64Km"
+                        />
+                        <div
+                            class="absolute top-2 right-2 p-1 bg-error-container text-on-error-container rounded-full leading-none"
+                        >
+                            <span class="material-symbols-outlined text-[14px]"
+                                >local_fire_department</span
+                            >
+                        </div>
+                    </div>
+                    <div class="p-3 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-label-md text-on-surface truncate">
+                                Spicy Seafood Tom Yum
+                            </h3>
+                            <p
+                                class="text-[12px] leading-tight text-secondary line-clamp-2 mt-1"
+                            >
+                                Sup asam pedas khas Thailand dengan udang galah.
+                            </p>
+                        </div>
+                        <div class="flex justify-between items-center mt-3">
+                            <span
+                                class="font-price-display text-price-display text-primary text-sm"
+                                >Rp 95k</span
+                            >
+                            <button
+                                class="w-7 h-7 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center active:scale-90 transition-transform"
+                            >
+                                <span class="material-symbols-outlined text-xs"
+                                    >add</span
+                                >
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product Card 5 -->
+                <div
+                    class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-outline-variant/10 active:scale-[0.98] transition-transform"
+                >
+                    <div class="relative aspect-square">
+                        <img
+                            class="w-full h-full object-cover"
+                            data-alt="A refreshing gourmet mocktail in a tall crystal glass, layered with grapefruit pink and hibiscus crimson, topped with a sprig of fresh mint and a dehydrated orange slice. Bright, tropical summer vibe with sparkling water bubbles and condensation on the glass. The background is a soft, sun-drenched outdoor patio setting."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6OIlp40M_2wtY3d15AezTRPsllntB9VbGWUeWvdvTHMRl7rfFP-VNTPFfyqiKgKuRsBvBau4LIkXiH6mt3h53Rul-fm0yknS7Gw7lo9KaysIMGfI5BZeuGb3RRHPC6s6EQdLQ7Dz5aW0884EAgaNqa3Ltm8BqaoMRf0cUkc3SkEQB6JTdIis2MoJfK9j70LtagegMWCfdq4oXzrAHfk2jINppEWYkV6i5jo3zvpmzFp2YI4hpe-naV5BnIBHvu78KiPlvu1pex1XH"
+                        />
+                    </div>
+                    <div class="p-3 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-label-md text-on-surface truncate">
+                                Hibiscus Pink Fizz
+                            </h3>
+                            <p
+                                class="text-[12px] leading-tight text-secondary line-clamp-2 mt-1"
+                            >
+                                Minuman segar kelopak bunga sepatu dan jeruk
+                                bali.
+                            </p>
+                        </div>
+                        <div class="flex justify-between items-center mt-3">
+                            <span
+                                class="font-price-display text-price-display text-primary text-sm"
+                                >Rp 45k</span
+                            >
+                            <button
+                                class="w-7 h-7 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center active:scale-90 transition-transform"
+                            >
+                                <span class="material-symbols-outlined text-xs"
+                                    >add</span
+                                >
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- Floating Action Button / Cart Summary Overlay -->
+        <div
+            class="fixed bottom-24 left-1/2 -translate-x-1/2 w-[calc(100%-2.5rem)] max-w-md z-40"
+        >
+            <button
+                class="w-full bg-primary-container text-on-primary-container px-6 py-4 rounded-2xl flex items-center justify-between shadow-2xl active:scale-95 transition-all duration-150"
+            >
+                <div class="flex items-center gap-3">
+                    <div class="bg-on-primary-container/20 p-2 rounded-lg">
+                        <span class="material-symbols-outlined"
+                            >shopping_basket</span
+                        >
+                    </div>
+                    <div class="text-left">
+                        <p
+                            class="font-label-md text-xs text-on-primary-container/80 uppercase tracking-wider"
+                        >
+                            2 Item terpilih
+                        </p>
+                        <p class="font-headline-lg-mobile text-lg">
+                            Rp 120.000
+                        </p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="font-label-md">Lihat Keranjang</span>
+                    <span class="material-symbols-outlined"
+                        >arrow_forward_ios</span
+                    >
+                </div>
+            </button>
+        </div>
+        <!-- Bottom Navigation Shell (Filter Logic: Primary App Destination) -->
+        <nav
+            class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container/95 backdrop-blur-lg border-t border-outline-variant/30 shadow-[0_-4px_12px_rgba(0,0,0,0.05)] rounded-t-xl"
+        >
+            <button
+                class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-90 transition-transform"
+            >
+                <span class="material-symbols-outlined">restaurant_menu</span>
+                <span class="font-label-md text-[10px] mt-0.5">Menu</span>
+            </button>
+            <button
+                class="flex flex-col items-center justify-center text-on-surface-variant active:scale-90 transition-transform"
+            >
+                <span class="material-symbols-outlined">receipt_long</span>
+                <span class="font-label-md text-[10px] mt-0.5">Pesanan</span>
+            </button>
+            <button
+                class="flex flex-col items-center justify-center text-on-surface-variant active:scale-90 transition-transform"
+            >
+                <span class="material-symbols-outlined"
+                    >person_raised_hand</span
+                >
+                <span class="font-label-md text-[10px] mt-0.5">Panggil</span>
+            </button>
+            <button
+                class="flex flex-col items-center justify-center text-on-surface-variant active:scale-90 transition-transform"
+            >
+                <span class="material-symbols-outlined">payments</span>
+                <span class="font-label-md text-[10px] mt-0.5">Billing</span>
+            </button>
+        </nav>
+        <script>
+            // Simple Interaction logic for Micro-interactions
+            document.querySelectorAll("button").forEach((btn) => {
+                btn.addEventListener("touchstart", function () {
+                    this.classList.add("scale-95");
+                });
+                btn.addEventListener("touchend", function () {
+                    this.classList.remove("scale-95");
+                });
+            });
+
+            // Category tab scrolling logic
+            const tabs = document.querySelectorAll("section > button");
+            tabs.forEach((tab) => {
+                tab.addEventListener("click", function () {
+                    tabs.forEach((t) => {
+                        t.classList.remove(
+                            "text-primary",
+                            "active-tab-indicator",
+                        );
+                        t.classList.add("text-secondary");
+                    });
+                    this.classList.remove("text-secondary");
+                    this.classList.add("text-primary", "active-tab-indicator");
+                });
+            });
+        </script>
+    </body>
+</html>

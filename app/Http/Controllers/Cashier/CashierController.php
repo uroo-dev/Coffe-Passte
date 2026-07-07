@@ -17,7 +17,11 @@ class CashierController extends Controller
             $q->where('order_status', '!=', 'completed');
         }])->get();
 
-        return response()->json($tables);
+        if (request()->expectsJson()) {
+            return response()->json($tables);
+        }
+
+        return view('staff.cashier', compact('tables'));
     }
 
     public function tableOrders(Table $table)
@@ -27,17 +31,22 @@ class CashierController extends Controller
             ->where('order_status', '!=', 'completed')
             ->get();
 
-        return response()->json([
-            'table' => $table,
-            'orders' => $orders,
-        ]);
+        if (request()->expectsJson()) {
+            return response()->json(['table' => $table, 'orders' => $orders]);
+        }
+
+        return view('staff.cashier-orders', compact('table', 'orders'));
     }
 
     public function menus()
     {
-        return response()->json(
-            Menu::with('category', 'modifiers')->where('is_available', true)->get()
-        );
+        if (request()->expectsJson()) {
+            return response()->json(
+                Menu::with('category', 'modifiers')->where('is_available', true)->get()
+            );
+        }
+
+        return redirect()->route('staff.pos');
     }
 
     public function createOrder(Request $request)
@@ -91,9 +100,10 @@ class CashierController extends Controller
     public function confirmCashPayment(Order $order)
     {
         if ($order->payment_status === 'paid') {
-            return response()->json([
-                'message' => 'Pesanan ini sudah dibayar',
-            ], 422);
+            if (request()->expectsJson()) {
+                return response()->json(['message' => 'Pesanan ini sudah dibayar'], 422);
+            }
+            return redirect()->back()->with('error', 'Pesanan ini sudah dibayar');
         }
 
         $order->update([
@@ -101,20 +111,51 @@ class CashierController extends Controller
             'payment_method' => 'cash',
         ]);
 
-        $order->table->update(['status' => 'empty']);
+        $order->table->update(['status' => 'waiting_payment']);
 
-        return response()->json([
-            'message' => 'Pembayaran tunai dikonfirmasi',
-            'order' => $order,
+        if (request()->expectsJson()) {
+            return response()->json(['message' => 'Pembayaran tunai dikonfirmasi', 'order' => $order]);
+        }
+
+        return redirect()->back()->with('success', 'Pembayaran tunai dikonfirmasi');
+    }
+
+    public function scanPaymentPage(Order $order)
+    {
+        $order->load('items.menu', 'table');
+        return view('staff.confirm-payment', compact('order'));
+    }
+
+    public function confirmPaymentFromScan(Request $request, Order $order)
+    {
+        if ($order->payment_status === 'paid') {
+            if ($request->expectsJson()) {
+                return response()->json(['message' => 'Sudah dibayar'], 422);
+            }
+            return redirect()->back()->with('error', 'Pesanan ini sudah dibayar');
+        }
+
+        $order->update([
+            'payment_status' => 'paid',
+            'payment_method' => 'cash',
         ]);
+
+        $order->table->update(['status' => 'waiting_payment']);
+
+        if ($request->expectsJson()) {
+            return response()->json(['message' => 'Pembayaran berhasil dikonfirmasi', 'order' => $order]);
+        }
+
+        return redirect()->route('staff.dashboard')->with('success', 'Pembayaran berhasil dikonfirmasi');
     }
 
     public function completeOrder(Order $order)
     {
         if ($order->order_status !== 'ready') {
-            return response()->json([
-                'message' => 'Pesanan belum siap',
-            ], 422);
+            if (request()->expectsJson()) {
+                return response()->json(['message' => 'Pesanan belum siap'], 422);
+            }
+            return redirect()->back()->with('error', 'Pesanan belum siap');
         }
 
         $order->update(['order_status' => 'completed']);
@@ -128,9 +169,10 @@ class CashierController extends Controller
             $order->table->update(['status' => 'empty']);
         }
 
-        return response()->json([
-            'message' => 'Pesanan selesai',
-            'order' => $order,
-        ]);
+        if (request()->expectsJson()) {
+            return response()->json(['message' => 'Pesanan selesai', 'order' => $order]);
+        }
+
+        return redirect()->back()->with('success', 'Pesanan selesai');
     }
 }

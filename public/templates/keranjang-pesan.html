@@ -1,0 +1,299 @@
+<!DOCTYPE html><html class="light" lang="id"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Keranjang - Modern Gastronomy</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container": "#e7eefe",
+                    "secondary": "#5f5e5e",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "error-container": "#ffdad6",
+                    "on-secondary-container": "#656464",
+                    "error": "#ba1a1a",
+                    "surface-tint": "#a73a00",
+                    "inverse-surface": "#2a313d",
+                    "primary-fixed-dim": "#ffb59a",
+                    "surface-variant": "#dce2f3",
+                    "on-error": "#ffffff",
+                    "inverse-primary": "#ffb59a",
+                    "primary-container": "#ff5c00",
+                    "on-surface": "#151c27",
+                    "surface": "#f9f9ff",
+                    "on-secondary-fixed-variant": "#474646",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#370e00",
+                    "on-tertiary-container": "#2a2c2c",
+                    "tertiary": "#5d5f5f",
+                    "on-secondary": "#ffffff",
+                    "background": "#f9f9ff",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-container": "#929393",
+                    "surface-container-high": "#e2e8f8",
+                    "surface-dim": "#d3daea",
+                    "outline-variant": "#e4beb1",
+                    "on-surface-variant": "#5b4137",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "outline": "#8f7065",
+                    "on-error-container": "#93000a",
+                    "on-primary-fixed-variant": "#802a00",
+                    "primary": "#a73a00",
+                    "inverse-on-surface": "#ebf1ff",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-primary-container": "#521800",
+                    "surface-container-highest": "#dce2f3",
+                    "surface-container-low": "#f0f3ff",
+                    "secondary-container": "#e5e2e1",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "primary-fixed": "#ffdbce",
+                    "surface-bright": "#f9f9ff",
+                    "tertiary-fixed": "#e2e2e2",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "on-background": "#151c27"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-margin": "1.25rem",
+                    "stack-lg": "2rem",
+                    "gutter": "1rem",
+                    "stack-sm": "0.5rem",
+                    "stack-md": "1rem"
+            },
+            "fontFamily": {
+                    "price-display": ["Lexend"],
+                    "headline-lg": ["Lexend"],
+                    "headline-xl": ["Lexend"],
+                    "label-md": ["Lexend"],
+                    "headline-lg-mobile": ["Lexend"],
+                    "body-sm": ["Lexend"],
+                    "body-md": ["Lexend"]
+            },
+            "fontSize": {
+                    "price-display": ["18px", {"lineHeight": "24px", "fontWeight": "700"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Lexend', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .cart-glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-40">
+<!-- Top AppBar (from JSON) -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-container-margin py-stack-md bg-surface/80 backdrop-blur-md shadow-sm">
+<div class="flex items-center gap-stack-sm">
+<button class="material-symbols-outlined text-primary p-2 hover:bg-surface-variant/50 rounded-full transition-colors active:scale-95 duration-100 ease-in-out">arrow_back</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">Modern Gastronomy</h1>
+</div>
+<div class="flex items-center">
+<button class="material-symbols-outlined text-primary p-2 hover:bg-surface-variant/50 rounded-full transition-colors active:scale-95">notifications</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="mt-20 px-container-margin flex flex-col gap-stack-lg max-w-2xl mx-auto">
+<!-- Welcome Header -->
+<section class="flex flex-col gap-1">
+<h2 class="font-headline-xl text-headline-xl text-on-surface">Keranjang Saya</h2>
+<p class="font-body-md text-secondary">Pastikan pesanan Anda sudah sesuai sebelum dikirim.</p>
+</section>
+<!-- Collaborative Table Status -->
+<section class="bg-surface-container rounded-xl p-4 flex items-center justify-between border border-primary/10">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">table_restaurant</span>
+</div>
+<div>
+<p class="font-label-md text-on-surface-variant">Pesanan Aktif</p>
+<p class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Meja 12</p>
+</div>
+</div>
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-gray-200 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A close-up high-resolution portrait of a smiling young diner in a high-end restaurant, soft warm ambient lighting reflecting off polished surfaces in the background, creating a professional and welcoming hospitality vibe with shallow depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLTdojWoPMBHsjyovv_MwgHrMOZDMji-NtEUQ3DXwyzBiktdbgwG7xrArhLrMhjMzpK3N-mXbKU1vdxApRrgAFAhaVJL4VSgE59s7Ga7iBvYZE8Zp9qjI4iqis5GHjdu3GJ0RzadW2TBxEGaUdu3ThYdLHlVoLkfS9hKoOh9rdDjCEKBWzi4rR_jBlW8tQ5WBQK8aM_rKi5r0K27zO9zWolnjH84DRI8l9WZ32RBNiYlpJmzEcK-EqSWOprhMcrhmWCXC9UD8Tk9vA">
+</div>
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-primary text-[10px] flex items-center justify-center text-white font-bold">
+                    +3
+                </div>
+</div>
+</section>
+<!-- Current Device Items -->
+<section class="flex flex-col gap-stack-md">
+<div class="flex justify-between items-center">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Pilihan Anda</h3>
+<span class="font-label-md text-primary bg-primary-fixed px-3 py-1 rounded-full">3 Item</span>
+</div>
+<div class="flex flex-col gap-stack-sm">
+<!-- Item 1 -->
+<div class="bg-surface-container-lowest p-3 rounded-xl shadow-sm flex gap-4 items-center">
+<div class="w-20 h-20 rounded-lg bg-surface-variant overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A gourmet presentation of a Wagyu Beef Sliders dish, two small burgers with melted artisanal cheese and truffle aioli, served on a dark slate plate with vibrant microgreens, captured in high-contrast professional food photography style with warm, appetizing lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGpPVqNOl4WveEECl8gNQ075LK2t-mFa931Agx4i18LclcwHps99tOUu4lXnJBKR8Rat7xWH80e1rfbLqmeXNk8C8gyCUuhOY2Bnd2nfkx7njJAISiesFxLstIdsU7p_zSTEtsYGfjzlpGpgaTbj6MfzveFEC-YpnwM8TIrtthE7PyEO1v2DSaJoO1w8A_gIyin8tGO8RLZtChsVQOpdBVC7nWntOpOBnnYir6W9KUW-bzWGCDRSqrjDu83tNA0sJ_fi3hZo6Ip1J9">
+</div>
+<div class="flex-grow flex flex-col justify-between h-full">
+<div>
+<h4 class="font-label-md text-on-surface">Wagyu Beef Sliders</h4>
+<p class="font-body-sm text-secondary">Extra Truffle Sauce</p>
+</div>
+<div class="flex justify-between items-end mt-2">
+<span class="font-price-display text-price-display text-primary">Rp 145.000</span>
+<div class="flex items-center bg-surface-container rounded-full px-2 py-1 gap-3">
+<button class="w-6 h-6 flex items-center justify-center text-primary material-symbols-outlined text-sm">remove</button>
+<span class="font-label-md text-on-surface">2</span>
+<button class="w-6 h-6 flex items-center justify-center bg-primary-container text-on-primary-container rounded-full material-symbols-outlined text-sm">add</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-container-lowest p-3 rounded-xl shadow-sm flex gap-4 items-center">
+<div class="w-20 h-20 rounded-lg bg-surface-variant overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A refreshing Yuzu Mint Fizz cocktail in a tall crystal glass, garnished with fresh mint leaves and a thin slice of citrus, bubbling carbonation visible, set against a blurred luxury lounge background with cool teal and warm orange lighting accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9hKBwBaLcF5e2MGg1VVi8cIKuiK2NaSduY-r8DuFE0CRKfEDN2IzjRSW-EpqSOsh4LcB-DkevQWL34kUeWfPUDQsrL2p_oHqLxkRlPd7alxXIltk3B1FTFYTOh4n98Pwq0tQV9qi3sH-LpU1s0o6I6sMX7RmaBD7sJIFm4nRMtD1zcetQlKZG2R4p2x2ZnXkOFUDCHbELaOs-aMKu5Zs4b1OZbEVq0bQmUdFGy_Ub2hoc72KO8hqEi4sViPwuemDzc1hhpOc-LCAS">
+</div>
+<div class="flex-grow flex flex-col justify-between h-full">
+<div>
+<h4 class="font-label-md text-on-surface">Yuzu Mint Fizz</h4>
+<p class="font-body-sm text-secondary">Less Sugar</p>
+</div>
+<div class="flex justify-between items-end mt-2">
+<span class="font-price-display text-price-display text-primary">Rp 65.000</span>
+<div class="flex items-center bg-surface-container rounded-full px-2 py-1 gap-3">
+<button class="w-6 h-6 flex items-center justify-center text-primary material-symbols-outlined text-sm">remove</button>
+<span class="font-label-md text-on-surface">1</span>
+<button class="w-6 h-6 flex items-center justify-center bg-primary-container text-on-primary-container rounded-full material-symbols-outlined text-sm">add</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Collaborative Items (Others) -->
+<section class="flex flex-col gap-stack-md mt-2">
+<div class="flex items-center gap-2">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Pesanan Teman</h3>
+<span class="text-xs text-secondary italic">(Ditambahkan oleh Meja 12)</span>
+</div>
+<div class="flex flex-col gap-2 border-l-2 border-primary-fixed-dim pl-4">
+<!-- Shared Item 1 -->
+<div class="flex justify-between items-center opacity-70">
+<div class="flex flex-col">
+<span class="font-body-md text-on-surface">1x Truffle Mushroom Pizza</span>
+<span class="text-xs text-secondary-fixed-dim font-body-sm">Oleh: iPhone 15 Pro</span>
+</div>
+<span class="font-label-md text-on-surface">Rp 185.000</span>
+</div>
+<!-- Shared Item 2 -->
+<div class="flex justify-between items-center opacity-70">
+<div class="flex flex-col">
+<span class="font-body-md text-on-surface">2x Sparkling Water</span>
+<span class="text-xs text-secondary-fixed-dim font-body-sm">Oleh: Samsung S24</span>
+</div>
+<span class="font-label-md text-on-surface">Rp 90.000</span>
+</div>
+</div>
+</section>
+<!-- Notes Section -->
+<section class="flex flex-col gap-stack-sm">
+<label class="font-label-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">edit_note</span>
+                Catatan Tambahan
+            </label>
+<textarea class="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl p-4 font-body-md text-on-surface placeholder:text-secondary-fixed-dim focus:ring-2 focus:ring-primary-container focus:border-transparent transition-all outline-none min-h-[100px]" placeholder="Contoh: Tanpa daun bawang, pisahkan saus..."></textarea>
+</section>
+<!-- Order Summary -->
+<section class="bg-surface-container-high rounded-2xl p-6 flex flex-col gap-3">
+<div class="flex justify-between font-body-md text-on-surface-variant">
+<span>Subtotal</span>
+<span>Rp 485.000</span>
+</div>
+<div class="flex justify-between font-body-md text-on-surface-variant">
+<span>Pajak &amp; Layanan (10%)</span>
+<span>Rp 48.500</span>
+</div>
+<div class="h-px bg-outline-variant/30 my-2"></div>
+<div class="flex justify-between font-headline-lg text-headline-lg text-primary">
+<span>Total</span>
+<span>Rp 533.500</span>
+</div>
+</section>
+</main>
+<!-- Sticky Footer Navigation & Action -->
+<div class="fixed bottom-0 left-0 w-full z-50">
+<!-- Floating Primary Action -->
+<div class="px-container-margin pb-24">
+<button class="w-full bg-primary-container text-white py-4 rounded-full font-headline-lg-mobile shadow-lg shadow-primary-container/20 flex items-center justify-center gap-3 hover:scale-[1.02] active:scale-95 transition-all duration-200 group">
+                Konfirmasi &amp; Kirim ke Dapur
+                <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">restaurant</span>
+</button>
+</div>
+<!-- Bottom Navigation Bar (from JSON) -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container/95 backdrop-blur-lg border-t border-outline-variant/30 shadow-[0_-4px_12px_rgba(0,0,0,0.05)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-primary/10 transition-all rounded-full px-4 py-1" href="#">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="font-label-md text-label-md">Menu</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-90 duration-150 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+<span class="font-label-md text-label-md">Pesanan</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-primary/10 transition-all rounded-full px-4 py-1" href="#">
+<span class="material-symbols-outlined">person_raised_hand</span>
+<span class="font-label-md text-label-md">Panggil</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-primary/10 transition-all rounded-full px-4 py-1" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-md text-label-md">Billing</span>
+</a>
+</nav>
+</div>
+<!-- Micro-interaction Script -->
+<script>
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                if(this.innerText.includes('add') || this.innerText.includes('remove')) {
+                    const span = this.parentElement.querySelector('span');
+                    let val = parseInt(span.innerText);
+                    if(this.innerText.includes('add')) val++;
+                    else if(val > 0) val--;
+                    span.innerText = val;
+
+                    // Simple tactile feedback
+                    this.style.transform = 'scale(0.85)';
+                    setTimeout(() => this.style.transform = '', 100);
+                }
+            });
+        });
+    </script>
+</body></html>

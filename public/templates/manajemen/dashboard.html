@@ -1,0 +1,461 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Savor Flow Admin - Executive Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface": "#151c27",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "outline-variant": "#e4beb1",
+                    "inverse-primary": "#ffb59a",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "secondary-fixed": "#e5e2e1",
+                    "secondary-container": "#e5e2e1",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "surface-variant": "#dce2f3",
+                    "on-surface-variant": "#5b4137",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#a73a00",
+                    "surface-dim": "#d3daea",
+                    "surface-bright": "#f9f9ff",
+                    "outline": "#8f7065",
+                    "background": "#f9f9ff",
+                    "on-tertiary": "#ffffff",
+                    "surface-container": "#e7eefe",
+                    "surface": "#f9f9ff",
+                    "error": "#ba1a1a",
+                    "tertiary": "#5d5f5f",
+                    "surface-container-highest": "#dce2f3",
+                    "primary-container": "#ff5c00",
+                    "on-secondary-fixed-variant": "#474646",
+                    "inverse-on-surface": "#ebf1ff",
+                    "on-tertiary-container": "#2a2c2c",
+                    "surface-container-high": "#e2e8f8",
+                    "on-primary-fixed": "#370e00",
+                    "on-error": "#ffffff",
+                    "primary-fixed": "#ffdbce",
+                    "tertiary-fixed": "#e2e2e2",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "primary-fixed-dim": "#ffb59a",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-container": "#521800",
+                    "tertiary-container": "#929393",
+                    "inverse-surface": "#2a313d",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#151c27",
+                    "primary": "#a73a00",
+                    "surface-container-low": "#f0f3ff",
+                    "on-secondary-container": "#656464",
+                    "secondary": "#5f5e5e",
+                    "on-primary-fixed-variant": "#802a00"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-sm": "0.5rem",
+                    "container-margin": "1.25rem",
+                    "gutter": "1rem",
+                    "stack-lg": "2rem",
+                    "stack-md": "1rem"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Lexend"],
+                    "body-md": ["Lexend"],
+                    "price-display": ["Lexend"],
+                    "label-md": ["Lexend"],
+                    "headline-xl": ["Lexend"],
+                    "headline-lg": ["Lexend"],
+                    "body-sm": ["Lexend"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "price-display": ["18px", {"lineHeight": "24px", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                    "headline-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Lexend', sans-serif; }
+        .chart-container { position: relative; height: 300px; width: 100%; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #e4beb1; border-radius: 10px; }
+        @keyframes subtle-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+        .animate-bounce-subtle { animation: subtle-bounce 3s infinite ease-in-out; }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Side Navigation Bar -->
+<aside class="fixed left-0 top-0 h-full border-r border-outline-variant bg-surface-container-lowest w-72 flex flex-col z-50">
+<div class="p-6">
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary">Savor Flow</h1>
+<p class="text-body-sm text-secondary">Restaurant Master Portal</p>
+</div>
+<nav class="flex-grow py-4">
+<ul class="space-y-1">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container rounded-lg mx-2 transition-opacity active:opacity-90" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-surface-container-low rounded-lg mx-2 transition-colors" href="#">
+<span class="material-symbols-outlined">table_restaurant</span>
+<span class="font-label-md text-label-md">Table Management</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-surface-container-low rounded-lg mx-2 transition-colors" href="#">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="font-label-md text-label-md">Menu Catalog</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-surface-container-low rounded-lg mx-2 transition-colors" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-md text-label-md">Inventory</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-surface-container-low rounded-lg mx-2 transition-colors" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-md text-label-md">Financial Reports</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:bg-surface-container-low rounded-lg mx-2 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</li>
+</ul>
+</nav>
+<div class="p-4 border-t border-outline-variant mt-auto">
+<div class="flex items-center gap-3 p-2 bg-surface-container-low rounded-xl">
+<div class="w-10 h-10 rounded-full bg-primary-fixed-dim flex items-center justify-center text-primary font-bold">SF</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Admin User</p>
+<p class="text-[10px] text-secondary uppercase tracking-wider">Super Admin</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-72 min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-40 bg-surface flex justify-between items-center px-container-margin h-20 w-full">
+<div class="flex items-center gap-6">
+<div class="relative group">
+<span class="absolute inset-y-0 left-3 flex items-center text-secondary group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined">search</span>
+</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full focus:ring-2 focus:ring-primary-container text-body-sm w-64 transition-all" placeholder="Search analytics..." type="text">
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-secondary hover:bg-surface-container-high transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-primary-container rounded-full"></span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-secondary hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="h-8 w-px bg-outline-variant mx-2"></div>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-md text-label-md hover:bg-primary-container hover:text-white transition-all active:scale-95">
+                    Admin Profile
+                </button>
+</div>
+</header>
+<!-- Dashboard Canvas -->
+<div class="p-8 space-y-8">
+<!-- Header Section -->
+<div class="flex justify-between items-end">
+<div>
+<h2 class="font-headline-xl text-headline-xl text-on-surface">Executive Overview</h2>
+<p class="text-body-md text-secondary">Real-time performance tracking for Savor Flow Branch #01</p>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 rounded-lg border border-outline-variant font-label-md text-label-md hover:bg-surface-container-low transition-colors">Export Data</button>
+<button class="px-4 py-2 rounded-lg bg-primary text-white font-label-md text-label-md shadow-sm hover:opacity-90 transition-opacity">Live Stream</button>
+</div>
+</div>
+<!-- Summary Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Today's Revenue -->
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-outline-variant group hover:border-primary transition-colors cursor-default">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 bg-primary-fixed rounded-xl flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<span class="text-on-error-container bg-error-container px-2 py-1 rounded-md text-[10px] font-bold">+12.5%</span>
+</div>
+<p class="text-body-sm text-secondary font-medium">Today's Revenue (Omzet)</p>
+<h3 class="font-price-display text-[28px] text-on-surface mt-1">Rp 24.520.000</h3>
+<p class="text-[12px] text-secondary mt-4 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">history</span>
+                        vs Rp 21.800.000 yesterday
+                    </p>
+</div>
+<!-- Total Orders -->
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-outline-variant group hover:border-primary transition-colors cursor-default">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 bg-secondary-container rounded-xl flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">shopping_bag</span>
+</div>
+<span class="text-primary font-bold text-[10px] bg-primary-fixed px-2 py-1 rounded-md">+4.2%</span>
+</div>
+<p class="text-body-sm text-secondary font-medium">Total Orders</p>
+<h3 class="font-headline-xl text-headline-xl text-on-surface mt-1">142 Orders</h3>
+<p class="text-[12px] text-secondary mt-4 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+                        Peak order rate: 18/hr
+                    </p>
+</div>
+<!-- Active Tables -->
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-outline-variant group hover:border-primary transition-colors cursor-default">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 bg-tertiary-fixed rounded-xl flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">table_bar</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
+<span class="text-[10px] font-bold text-on-surface">LIVE</span>
+</div>
+</div>
+<p class="text-body-sm text-secondary font-medium">Active Tables</p>
+<h3 class="font-headline-xl text-headline-xl text-on-surface mt-1">18 / 24</h3>
+<div class="w-full bg-surface-container-high h-2 rounded-full mt-6 overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 75%"></div>
+</div>
+</div>
+</div>
+<!-- Main Analytics Section (Bento Layout) -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Peak Hours Line Chart -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container-lowest p-8 rounded-3xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-outline-variant">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h4 class="font-headline-lg text-headline-lg text-on-surface">Peak Hours Analysis</h4>
+<p class="text-body-sm text-secondary">Hourly customer traffic distribution</p>
+</div>
+<select class="bg-surface-container-low border-none rounded-lg text-body-sm px-4 focus:ring-primary cursor-pointer">
+<option>Today, Oct 24</option>
+<option>Yesterday</option>
+</select>
+</div>
+<div class="chart-container flex items-end justify-between gap-2 pt-4">
+<!-- Custom Mock SVG Chart for performance/accuracy -->
+<svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 800 200">
+<defs>
+<linearGradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#ff5c00" stop-opacity="0.2"></stop>
+<stop offset="100%" stop-color="#ff5c00" stop-opacity="0"></stop>
+</linearGradient>
+</defs>
+<path d="M0,180 Q100,160 200,100 T400,60 T600,140 T800,20" fill="none" stroke="#ff5c00" stroke-linecap="round" stroke-width="3"></path>
+<path d="M0,180 Q100,160 200,100 T400,60 T600,140 T800,20 V200 H0 Z" fill="url(#chartGradient)"></path>
+<!-- Data Points -->
+<circle class="hover:r-7 transition-all cursor-pointer" cx="200" cy="100" fill="#ff5c00" r="5"></circle>
+<circle class="hover:r-7 transition-all cursor-pointer" cx="400" cy="60" fill="#ff5c00" r="5"></circle>
+<circle class="hover:r-7 transition-all cursor-pointer" cx="600" cy="140" fill="#ff5c00" r="5"></circle>
+</svg>
+</div>
+<div class="flex justify-between mt-4 text-[12px] text-secondary px-2">
+<span>08:00</span><span>10:00</span><span>12:00</span><span>14:00</span><span>16:00</span><span>18:00</span><span>20:00</span><span>22:00</span>
+</div>
+</div>
+<!-- Low Stock Alert List -->
+<div class="col-span-12 lg:col-span-4 bg-surface-container-lowest p-6 rounded-3xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-outline-variant flex flex-col">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-error">warning</span>
+<h4 class="font-headline-lg text-headline-lg text-on-surface">Low Stock</h4>
+</div>
+<div class="space-y-4 flex-grow overflow-y-auto custom-scrollbar pr-2">
+<!-- Stock Item -->
+<div class="flex items-center justify-between p-3 rounded-xl bg-error-container/30 border border-error/10">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">egg</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Premium Eggs</p>
+<p class="text-[12px] text-error font-bold">12 pcs left</p>
+</div>
+</div>
+<button class="p-2 text-primary hover:bg-primary/10 rounded-lg transition-colors">
+<span class="material-symbols-outlined">shopping_cart_checkout</span>
+</button>
+</div>
+<!-- Stock Item -->
+<div class="flex items-center justify-between p-3 rounded-xl bg-error-container/30 border border-error/10">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">water_drop</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Truffle Oil</p>
+<p class="text-[12px] text-error font-bold">500ml left</p>
+</div>
+</div>
+<button class="p-2 text-primary hover:bg-primary/10 rounded-lg transition-colors">
+<span class="material-symbols-outlined">shopping_cart_checkout</span>
+</button>
+</div>
+<!-- Stock Item -->
+<div class="flex items-center justify-between p-3 rounded-xl bg-surface-container-low border border-outline-variant/50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">bakery_dining</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Wagyu Beef A5</p>
+<p class="text-[12px] text-on-surface-variant">1.5kg left</p>
+</div>
+</div>
+<button class="p-2 text-secondary hover:bg-surface-container-high rounded-lg transition-colors">
+<span class="material-symbols-outlined">shopping_cart_checkout</span>
+</button>
+</div>
+</div>
+<button class="w-full mt-6 py-3 border-2 border-dashed border-outline-variant rounded-xl text-body-sm text-secondary hover:text-primary hover:border-primary transition-all font-medium">
+                        View Full Inventory
+                    </button>
+</div>
+</div>
+<!-- Top Selling Products Grid -->
+<section class="space-y-6">
+<div class="flex justify-between items-center">
+<h4 class="font-headline-lg text-headline-lg text-on-surface">Top Selling Products</h4>
+<button class="text-primary font-label-md text-label-md flex items-center gap-1 hover:underline">
+                        View Analytics <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Product Card -->
+<div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm border border-outline-variant group hover:shadow-md transition-shadow">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A high-resolution, professionally lit photograph of a gourmet Wagyu Beef Steak served on a minimalist black ceramic plate. The steak features perfect grill marks and a vibrant pink medium-rare center, drizzled with a glossy dark reduction sauce. Garnished with a sprig of fresh rosemary and sea salt crystals. The background is a soft-focus modern restaurant setting with warm ambient lighting and orange color accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVlpMSKdbzeoWiqnm8cVNfC-9tLUp7VOZxx1nkJKsnAg7nqsf6Hha75Z8ZKC1JBYGdGf1fxbhL24-BZS5tY91Mos2Ka3cNXeL7tzXRh8Osy-Xc_OVbay4WmMLBoN-JWmfWY8S-rOqDfwCzQIpzen1sNEB65rXMjJUaHUPIJi8A_0Ch0Dmmyhl6MzliHyi3u4CPebKZWbiyFKD486P41B0wdXAMGzcDdJSN-JkmNwGW64NMJE1ZlXvr0Jh72U40xdSCACNmtIf3uvJ0">
+<div class="absolute top-3 right-3 bg-white/90 backdrop-blur-md px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-primary text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-[12px] font-bold">4.9</span>
+</div>
+</div>
+<div class="p-4">
+<h5 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface truncate">Wagyu Signature Steak</h5>
+<div class="flex justify-between items-center mt-2">
+<p class="text-body-sm text-secondary">842 Sales</p>
+<p class="font-price-display text-price-display text-primary">Rp 420k</p>
+</div>
+</div>
+</div>
+<!-- Product Card -->
+<div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm border border-outline-variant group hover:shadow-md transition-shadow">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A delicious Truffle Mushroom Pasta in a wide white bowl, featuring creamy sauce, artisanal fettuccine, and generous shavings of fresh black truffle. Sprinkled with chopped parsley and parmesan. The lighting is bright and crisp, highlighting the creamy texture. The aesthetic is clean and modern gastronomy, fitting a high-end restaurant digital menu." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQrS4vylbU7MS5GQleW01KqrTz1o-rp4caLjkCTLz7M6X0aj7BIDujIjscIAMcvMY7hfUYicfV2i4F459fhwLj2Xg28QTjSkrwrzNUCJEMt6jsJqg3QqseRSeR3s3bm-jWbyHxGbk8n1QXq1s920megLvg5E30TN_IO2aHt-NDp-aAOJRb39Fvzg8rmRCLGa1dJBecdN0f6JlaI6hSx2X7nInaOw1t6HoAjlS77XZIZSYjQz0J-se_v1GcOQSe2wa7OMAud-YbEpw6">
+<div class="absolute top-3 right-3 bg-white/90 backdrop-blur-md px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-primary text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-[12px] font-bold">4.8</span>
+</div>
+</div>
+<div class="p-4">
+<h5 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface truncate">Truffle Cream Pasta</h5>
+<div class="flex justify-between items-center mt-2">
+<p class="text-body-sm text-secondary">712 Sales</p>
+<p class="font-price-display text-price-display text-primary">Rp 125k</p>
+</div>
+</div>
+</div>
+<!-- Product Card -->
+<div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm border border-outline-variant group hover:shadow-md transition-shadow">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A vibrant, colorful Salmon Poke Bowl with fresh cubed salmon, edamame, shredded carrots, avocado, and pickled ginger on a bed of sushi rice. Presented in a light wooden bowl. The lighting is natural and airy, creating a healthy and appetizing look. The background is a minimalist light-colored stone texture with soft shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3BLscO3M5gWFE-ABC98iLCXxnocDrA_ZjhLBD5_nYtM0qw4yPCNIxJYUo7SET0sD_AJ2PotMiv-_YPZ6P8l0SGTLCAh9o7mAtDcFLPJsBPFiK1kdSnI1rICV-Z7CswCJDwDsStp1-aJEYIcDDG1JTebKO4KZjkg1zgPI74ewLezyJRtGDqW1UKwP9_0ZkpCsDbBKxQU1UBu_rfrqgsx_Y5Wer1jDP5jqYoJiiPvqfZTupyvUNGmTWeLCqDkHg6T70O1SfN08ERcsz">
+<div class="absolute top-3 right-3 bg-white/90 backdrop-blur-md px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-primary text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-[12px] font-bold">4.7</span>
+</div>
+</div>
+<div class="p-4">
+<h5 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface truncate">Atlantic Salmon Bowl</h5>
+<div class="flex justify-between items-center mt-2">
+<p class="text-body-sm text-secondary">658 Sales</p>
+<p class="font-price-display text-price-display text-primary">Rp 98k</p>
+</div>
+</div>
+</div>
+<!-- Product Card -->
+<div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm border border-outline-variant group hover:shadow-md transition-shadow">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A stack of golden brown artisanal pancakes topped with a melting cube of honey butter and a drizzle of premium maple syrup. Fresh berries are scattered around the plate. The composition is a close-up shot with a shallow depth of field, emphasizing the soft texture of the pancakes. The color palette is warm and inviting with golden-orange tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpC-dTCUmUtF5omT7BhQh6-NJ2D1RT_VklZH961AgHI28zGIKPh5Jbq-XqHUVZFRO_O5Ps0riHImFxBMfBqgVPB3-qn8q0JJtf1VKOXOihb92wumwJ9jx4BIzxs1kJ8A_KRuQrg4vC4g31x6X7sT446RCfIUzsytQnLwYt2f5GfUCW6YppH8R2PgzYTbM9svZasY1KS2Sdzc9kMeWTzU8F3B0s7vthmZToC4DvrB5zndEfR1w-LC58I8MNJKvCvpSG8B5CWHuhUgqp">
+<div class="absolute top-3 right-3 bg-white/90 backdrop-blur-md px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-primary text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-[12px] font-bold">4.9</span>
+</div>
+</div>
+<div class="p-4">
+<h5 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface truncate">Honey Butter Pancakes</h5>
+<div class="flex justify-between items-center mt-2">
+<p class="text-body-sm text-secondary">590 Sales</p>
+<p class="font-price-display text-price-display text-primary">Rp 65k</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Sticky Footer Summary for Mobile/Tablet context (Simulated) -->
+<footer class="mt-auto p-6 bg-surface-container flex justify-between items-center border-t border-outline-variant">
+<p class="text-body-sm text-secondary">© 2024 Savor Flow Systems. All rights reserved.</p>
+<div class="flex gap-4">
+<a class="text-secondary hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">help</span></a>
+<a class="text-secondary hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">security</span></a>
+</div>
+</footer>
+</main>
+<!-- Floating Quick Action Button -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary-container text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50 animate-bounce-subtle">
+<span class="material-symbols-outlined text-[32px]">add</span>
+</button>
+<script>
+        // Simple Interaction: Mock Search Focus
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.classList.add('w-80');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.classList.remove('w-80');
+        });
+
+        // Micro-interaction for stock alerts
+        document.querySelectorAll('.material-symbols-outlined').forEach(icon => {
+            icon.addEventListener('mouseenter', function() {
+                this.style.fontVariationSettings = "'FILL' 1, 'wght' 500";
+            });
+            icon.addEventListener('mouseleave', function() {
+                this.style.fontVariationSettings = "'FILL' 0, 'wght' 400";
+            });
+        });
+    </script>
+</body></html>

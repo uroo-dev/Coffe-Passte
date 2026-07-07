@@ -1,0 +1,471 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>POS Transaction Management - GastroStaff Portal</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#e2e8f8",
+                    "error-container": "#ffdad6",
+                    "outline-variant": "#e4beb1",
+                    "error": "#ba1a1a",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "background": "#f9f9ff",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "on-primary-fixed": "#370e00",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "surface-container-highest": "#dce2f3",
+                    "surface": "#f9f9ff",
+                    "on-surface": "#151c27",
+                    "surface-variant": "#dce2f3",
+                    "primary": "#a73a00",
+                    "on-error-container": "#93000a",
+                    "surface-bright": "#f9f9ff",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "surface-container-low": "#f0f3ff",
+                    "primary-fixed-dim": "#ffb59a",
+                    "on-primary-container": "#521800",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "surface-dim": "#d3daea",
+                    "surface-container": "#e7eefe",
+                    "outline": "#8f7065",
+                    "on-surface-variant": "#5b4137",
+                    "inverse-primary": "#ffb59a",
+                    "tertiary-fixed": "#e2e2e2",
+                    "primary-container": "#ff5c00",
+                    "tertiary-container": "#929393",
+                    "tertiary": "#5d5f5f",
+                    "on-primary": "#ffffff",
+                    "secondary-container": "#e5e2e1",
+                    "inverse-on-surface": "#ebf1ff",
+                    "on-tertiary-container": "#2a2c2c",
+                    "secondary-fixed": "#e5e2e1",
+                    "primary-fixed": "#ffdbce",
+                    "on-secondary-container": "#656464",
+                    "secondary": "#5f5e5e",
+                    "on-primary-fixed-variant": "#802a00",
+                    "on-secondary-fixed-variant": "#474646",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "inverse-surface": "#2a313d",
+                    "on-error": "#ffffff",
+                    "surface-tint": "#a73a00",
+                    "on-background": "#151c27"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-sm": "0.5rem",
+                    "stack-md": "1rem",
+                    "stack-lg": "2rem",
+                    "container-margin": "1.25rem",
+                    "gutter": "1rem"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Lexend"],
+                    "body-md": ["Lexend"],
+                    "price-display": ["Lexend"],
+                    "label-md": ["Lexend"],
+                    "headline-lg": ["Lexend"],
+                    "body-sm": ["Lexend"],
+                    "headline-lg-mobile": ["Lexend"]
+            },
+            "fontSize": {
+                    "headline-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "price-display": ["18px", {"lineHeight": "24px", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e4beb1;
+            border-radius: 10px;
+        }
+        .active-ring {
+            box-shadow: 0 0 0 2px #ff5c00;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen">
+<!-- TopNavBar Shell -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-container-margin h-16 bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline shadow-sm">
+<div class="flex items-center gap-stack-md">
+<span class="font-headline-xl text-headline-xl text-primary dark:text-primary-container">GastroStaff Portal</span>
+<div class="hidden md:flex ml-stack-lg gap-stack-md">
+<nav class="flex gap-stack-md">
+<a class="text-on-surface-variant font-medium hover:bg-secondary-container dark:hover:bg-on-secondary-fixed-variant transition-colors px-3 py-1 rounded-lg" href="#">Dashboard</a>
+<a class="text-primary font-bold border-b-2 border-primary px-3 py-1" href="#">POS</a>
+<a class="text-on-surface-variant font-medium hover:bg-secondary-container dark:hover:bg-on-secondary-fixed-variant transition-colors px-3 py-1 rounded-lg" href="#">Reports</a>
+</nav>
+</div>
+</div>
+<div class="flex items-center gap-stack-md">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container rounded-full border-none focus:ring-2 focus:ring-primary text-body-sm w-64" placeholder="Search orders..." type="text">
+</div>
+<button class="material-symbols-outlined p-2 text-primary hover:bg-secondary-container rounded-full transition-colors active:scale-95 duration-150">notifications</button>
+<button class="material-symbols-outlined p-2 text-primary hover:bg-secondary-container rounded-full transition-colors active:scale-95 duration-150">settings</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional chef's portrait, wearing a clean white double-breasted jacket with black buttons. The background is a blurred high-end restaurant kitchen with copper pans and warm spotlighting. The lighting is crisp and sophisticated, capturing the competence and warmth of the modern gastronomy brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnrFv6elMH-sN0myGZGYmeCl7gEWeXfucb8Sc-5OcuLlnExsAgEZ3efUrTwGGjSJIlkODeBtba9SWaCMjEF9vXOEjn4rZmlZD0shUxzYtN4lVQNrMJIr6rso4EzBfh7eoGSpfGnQ799cqM9wbiSkplzm8Zr4NNfU5SKZNglwT0m8MnipdcveKQOkj72NJQyopUgTs9nKejYIbp222FscYzOcpOx320YbW0FeNohnnCs2bfzkBhA1jcIkyfMFT9w6tNdzLA65P5SuUt">
+</div>
+</div>
+</header>
+<!-- SideNavBar Shell -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-4rem)] flex flex-col p-stack-md z-40 bg-surface-container dark:bg-surface-container-low w-64 shadow-md hidden md:flex">
+<div class="flex items-center gap-3 mb-stack-lg p-2">
+<div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">restaurant</span>
+</div>
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface leading-none">Main Kitchen</h2>
+<p class="text-label-md text-on-surface-variant">Shift: Lunch Service</p>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all rounded-lg font-label-md active:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">grid_view</span> Floor Plan
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container rounded-lg font-bold shadow-sm active:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">point_of_sale</span> POS System
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all rounded-lg font-label-md active:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">restaurant</span> Kitchen (KDS)
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest dark:hover:bg-surface-container-high transition-all rounded-lg font-label-md active:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">receipt_long</span> Transactions
+            </a>
+</nav>
+<div class="mt-auto pt-stack-md border-t border-outline-variant/30">
+<button class="w-full bg-primary text-white py-3 rounded-xl font-bold mb-4 shadow-lg hover:brightness-110 active:scale-95 transition-all">
+                New Reservation
+            </button>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface transition-all font-label-md" href="#">
+<span class="material-symbols-outlined">logout</span> Logout
+            </a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:ml-64 mt-16 p-stack-md lg:p-stack-lg bg-background min-h-[calc(100vh-4rem)]">
+<div class="max-w-7xl mx-auto flex flex-col lg:grid lg:grid-cols-12 gap-stack-lg">
+<!-- Left Side: Order Summary (Table Bill View) -->
+<div class="lg:col-span-7 flex flex-col gap-stack-md">
+<div class="flex items-center justify-between">
+<div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface">Table 12</h1>
+<p class="text-body-sm text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">person</span> 4 Guests • Server: Marco P.
+                        </p>
+</div>
+<div class="flex gap-2">
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-3 py-1 rounded-full text-label-md">Dine-In</span>
+<span class="bg-secondary-fixed text-on-secondary-fixed px-3 py-1 rounded-full text-label-md">Active: 45m</span>
+</div>
+</div>
+<!-- Order List Bento Card -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden border border-outline-variant/20 flex-1 flex flex-col">
+<div class="p-stack-md bg-surface-container-low border-b border-outline-variant/20 flex justify-between items-center">
+<span class="font-bold text-on-surface">Current Order Items</span>
+<button class="text-primary font-bold text-label-md flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-[18px]">add_circle</span> Add Items
+                        </button>
+</div>
+<div class="flex-1 overflow-y-auto max-h-[500px] custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead class="sticky top-0 bg-surface-container-lowest z-10">
+<tr class="text-label-md text-on-surface-variant border-b border-outline-variant/10">
+<th class="p-4 font-semibold">Item</th>
+<th class="p-4 font-semibold text-center">Qty</th>
+<th class="p-4 font-semibold text-right">Price</th>
+<th class="p-4 font-semibold text-right">Action</th>
+</tr>
+</thead>
+<tbody>
+<!-- Item 1 -->
+<tr class="group border-b border-outline-variant/10 hover:bg-surface-container-low transition-colors">
+<td class="p-4">
+<div class="flex gap-3">
+<div class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A top-down shot of a gourmet wagyu beef burger with melted aged cheddar, caramelized onions, and artisan brioche bun on a dark ceramic plate. High-contrast lighting highlights the textures of the meat and the glossy bun. Minimalist modern gastronomy style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDK11ClsSPESo92Mlknvl6jM0fdqdu_aWDXcfB0KBZ0Mxxa1xbdCajvMFac6QYiIL5vPBIuvaE23Nw6LBDNGtrRoUXd9yY7E1zwPgNN5TAuVHs0A6Sj4AgQgaUx7dHqxvKjgPJvt96h1rT-bNJ9Czzm0niio5m8MhxQrJwdrX-5nMvkzBSeoLtTDEf8dmNy0r9zQEVFs5CtyObRygf0Rh28edOu5SL7Irj1eDMQyVqf8KDGXyV397UGyQrTK2MmrugVcgOjYLYPlgi2">
+</div>
+<div>
+<div class="font-bold text-on-surface">Signature Wagyu Burger</div>
+<div class="text-body-sm text-on-surface-variant">Medium-rare, No onions</div>
+</div>
+</div>
+</td>
+<td class="p-4 text-center">
+<div class="inline-flex items-center bg-surface-container-high rounded-full px-2 py-1">
+<button class="material-symbols-outlined text-[20px] text-primary">remove</button>
+<span class="px-3 font-bold">2</span>
+<button class="material-symbols-outlined text-[20px] text-primary">add</button>
+</div>
+</td>
+<td class="p-4 text-right font-price-display text-on-surface">Rp 340.000</td>
+<td class="p-4 text-right">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-error transition-colors p-1" title="Void Item">delete</button>
+</td>
+</tr>
+<!-- Item 2 -->
+<tr class="group border-b border-outline-variant/10 hover:bg-surface-container-low transition-colors">
+<td class="p-4">
+<div class="flex gap-3">
+<div class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Vibrant Truffle Mushroom Risotto served in a shallow white bowl. The rice is creamy and golden, garnished with thin shavings of black truffle and a sprig of fresh herbs. Soft, diffused daylight from a window creates a natural, appetizing glow. Modern high-end restaurant aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDj5sFqOikLFxK5_R-YCmBKqS0z4rErW9tbz9b1y63M6gy2n793R7C9k4Ekz7T5OqX5jPsfTSTCEwnW7tmFaSUrTvIyfMfyi1t45sRkZu8Bpr3-jrfUbM52AsAvMHja7Ln7AryLzT3WH_vA50dWpxOcgGxAWjwek9DG4s5y137_nIJ59GiuwkC_kiRN5LR6P9t4cq8y-SemXnqgbV6XGgIjY9vIYSEf6YooItTNOCCxhzsCBbI3yrB8k48AcGfGwn6G-wSkUlxp9eVJ">
+</div>
+<div>
+<div class="font-bold text-on-surface">Truffle Mushroom Risotto</div>
+<div class="text-body-sm text-on-surface-variant">Extra parmesan</div>
+</div>
+</div>
+</td>
+<td class="p-4 text-center">
+<div class="inline-flex items-center bg-surface-container-high rounded-full px-2 py-1">
+<button class="material-symbols-outlined text-[20px] text-primary">remove</button>
+<span class="px-3 font-bold">1</span>
+<button class="material-symbols-outlined text-[20px] text-primary">add</button>
+</div>
+</td>
+<td class="p-4 text-right font-price-display text-on-surface">Rp 185.000</td>
+<td class="p-4 text-right">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-error transition-colors p-1" title="Void Item">delete</button>
+</td>
+</tr>
+<!-- Item 3 -->
+<tr class="group border-b border-outline-variant/10 hover:bg-surface-container-low transition-colors">
+<td class="p-4">
+<div class="flex gap-3">
+<div class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Two tall glasses of fresh Yuzu Lychee Fizz mocktail. The drinks are translucent with visible ice cubes, mint leaves, and lychee fruit at the bottom. Tiny condensation droplets on the glass indicate crisp coldness. Bright, fresh, and energetic lighting style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDskRtuQT8rHtDJSgO2J2H59ir09Go3JqFTuU4ndQ5iGEjJQu_c6g7n1Xhz0LER2g3MX1pqSUq95DMmh-I-vEiwx_hqdzvDC2gGCSgx5kQFfWkSfWX0x6UBMLXPlUEgTNt0-tpj3hy0QXgEq9_zME657gCMwZEUezl9gKNpuzGCYrzl-TArOUuLFA5v5YUcQRWT4zPwKGHHkudIGdxYGANUL_S7K9MrdU61X5kj9SaU5t1zyyB20-jG84a2B5hTQhqvMmrjP20x4HXd">
+</div>
+<div>
+<div class="font-bold text-on-surface">Yuzu Lychee Fizz</div>
+<div class="text-body-sm text-on-surface-variant">Less ice</div>
+</div>
+</div>
+</td>
+<td class="p-4 text-center">
+<div class="inline-flex items-center bg-surface-container-high rounded-full px-2 py-1">
+<button class="material-symbols-outlined text-[20px] text-primary">remove</button>
+<span class="px-3 font-bold">2</span>
+<button class="material-symbols-outlined text-[20px] text-primary">add</button>
+</div>
+</td>
+<td class="p-4 text-right font-price-display text-on-surface">Rp 90.000</td>
+<td class="p-4 text-right">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-error transition-colors p-1" title="Void Item">delete</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Order Subtotals -->
+<div class="p-stack-md bg-surface-container-low mt-auto border-t border-outline-variant/20">
+<div class="flex justify-between mb-1">
+<span class="text-on-surface-variant">Subtotal</span>
+<span class="text-on-surface font-medium">Rp 615.000</span>
+</div>
+<div class="flex justify-between mb-1">
+<span class="text-on-surface-variant">Service (10%)</span>
+<span class="text-on-surface font-medium">Rp 61.500</span>
+</div>
+<div class="flex justify-between mb-3">
+<span class="text-on-surface-variant">PB1 (11%)</span>
+<span class="text-on-surface font-medium">Rp 67.650</span>
+</div>
+<div class="flex justify-between border-t border-outline-variant/20 pt-3">
+<span class="font-bold text-on-surface text-headline-lg-mobile">Total</span>
+<span class="font-extrabold text-primary text-headline-lg-mobile">Rp 744.150</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Side: Actions & Payment -->
+<div class="lg:col-span-5 flex flex-col gap-stack-md">
+<!-- Table Adjustment Actions -->
+<div class="grid grid-cols-2 gap-stack-sm">
+<button class="flex flex-col items-center justify-center gap-2 p-stack-md bg-surface-container-high rounded-xl border border-outline-variant/30 hover:bg-primary-container hover:text-white group transition-all">
+<span class="material-symbols-outlined text-headline-lg">call_split</span>
+<span class="font-bold text-label-md">Split Bill</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-2 p-stack-md bg-surface-container-high rounded-xl border border-outline-variant/30 hover:bg-primary-container hover:text-white group transition-all">
+<span class="material-symbols-outlined text-headline-lg">merge_type</span>
+<span class="font-bold text-label-md">Merge Tables</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-2 p-stack-md bg-surface-container-high rounded-xl border border-outline-variant/30 hover:bg-primary-container hover:text-white group transition-all">
+<span class="material-symbols-outlined text-headline-lg">move_down</span>
+<span class="font-bold text-label-md">Transfer Items</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-2 p-stack-md bg-surface-container-high rounded-xl border border-outline-variant/30 hover:bg-error-container hover:text-on-error-container group transition-all">
+<span class="material-symbols-outlined text-headline-lg">cancel</span>
+<span class="font-bold text-label-md">Void Bill</span>
+</button>
+</div>
+<!-- Payment Methods Bento Card -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/20 p-stack-md">
+<h3 class="font-bold text-on-surface mb-stack-md flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">payments</span> Payment Method
+                    </h3>
+<div class="space-y-stack-sm">
+<label class="relative flex items-center p-3 rounded-lg border-2 border-outline-variant/20 cursor-pointer hover:bg-surface-container transition-all active-ring">
+<input checked="" class="hidden" name="payment" type="radio">
+<span class="material-symbols-outlined mr-3 text-primary">wallet</span>
+<div class="flex-1">
+<p class="font-bold text-on-surface">Cash</p>
+<p class="text-body-sm text-on-surface-variant">Manual input required</p>
+</div>
+<span class="material-symbols-outlined text-primary">check_circle</span>
+</label>
+<label class="relative flex items-center p-3 rounded-lg border-2 border-outline-variant/20 cursor-pointer hover:bg-surface-container transition-all">
+<input class="hidden" name="payment" type="radio">
+<span class="material-symbols-outlined mr-3 text-primary">credit_card</span>
+<div class="flex-1">
+<p class="font-bold text-on-surface">Credit / Debit Card</p>
+<p class="text-body-sm text-on-surface-variant">EDC machine integration</p>
+</div>
+</label>
+<label class="relative flex items-center p-3 rounded-lg border-2 border-outline-variant/20 cursor-pointer hover:bg-surface-container transition-all">
+<input class="hidden" name="payment" type="radio">
+<span class="material-symbols-outlined mr-3 text-primary">qr_code_2</span>
+<div class="flex-1">
+<p class="font-bold text-on-surface">QRIS / Digital Wallet</p>
+<p class="text-body-sm text-on-surface-variant">Instant scan payment</p>
+</div>
+</label>
+</div>
+<!-- Discount / Promo Section -->
+<div class="mt-stack-md pt-stack-md border-t border-outline-variant/20">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">confirmation_number</span>
+<input class="w-full pl-10 pr-20 py-3 bg-surface-container rounded-lg border-none focus:ring-2 focus:ring-primary text-body-sm" placeholder="Add discount or promo code..." type="text">
+<button class="absolute right-2 top-1/2 -translate-y-1/2 bg-on-surface text-white px-4 py-1.5 rounded-md font-bold text-label-md hover:bg-primary transition-colors">Apply</button>
+</div>
+</div>
+</div>
+<!-- Final Action Section -->
+<div class="mt-auto space-y-stack-sm">
+<button class="w-full py-4 bg-primary text-white rounded-xl font-bold text-headline-lg-mobile shadow-lg shadow-primary/20 hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-3">
+<span class="material-symbols-outlined">point_of_sale</span>
+                        Pay Now
+                    </button>
+<button class="w-full py-3 bg-surface-container-highest text-on-surface rounded-xl font-bold hover:bg-surface-container-high transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">print</span>
+                        Print Bill / Pro-forma
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Interactive Overlay for Modals (Simulated) -->
+<div class="fixed inset-0 z-[60] bg-on-surface/40 backdrop-blur-sm hidden flex items-center justify-center p-4" id="split-modal">
+<div class="bg-surface-container-lowest rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden">
+<div class="p-stack-md border-b border-outline-variant/20 flex justify-between items-center">
+<h3 class="font-headline-lg text-on-surface">Split Bill</h3>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-on-surface" onclick="toggleModal('split-modal')">close</button>
+</div>
+<div class="p-stack-md space-y-stack-md">
+<div class="flex gap-4">
+<button class="flex-1 py-4 border-2 border-primary bg-primary-container/10 text-primary rounded-xl font-bold">Split by Item</button>
+<button class="flex-1 py-4 border-2 border-outline-variant/20 text-on-surface-variant rounded-xl font-bold">Split Equally</button>
+</div>
+<div class="p-stack-md bg-surface-container-low rounded-xl">
+<p class="text-label-md text-on-surface-variant mb-3">Select items for Person 1</p>
+<div class="space-y-2">
+<div class="flex justify-between items-center bg-white p-2 rounded-lg shadow-sm border border-outline-variant/10">
+<span>Signature Wagyu Burger (x1)</span>
+<span class="font-bold">Rp 170.000</span>
+</div>
+<div class="flex justify-between items-center bg-white p-2 rounded-lg shadow-sm border border-outline-variant/10">
+<span>Yuzu Lychee Fizz (x1)</span>
+<span class="font-bold">Rp 45.000</span>
+</div>
+</div>
+</div>
+</div>
+<div class="p-stack-md border-t border-outline-variant/20 flex justify-end gap-3">
+<button class="px-6 py-2 font-bold text-on-surface-variant hover:text-on-surface" onclick="toggleModal('split-modal')">Cancel</button>
+<button class="px-8 py-2 bg-primary text-white rounded-lg font-bold">Confirm Split</button>
+</div>
+</div>
+</div>
+<!-- Script for Micro-interactions -->
+<script>
+        function toggleModal(id) {
+            const modal = document.getElementById(id);
+            modal.classList.toggle('hidden');
+        }
+
+        // Add some interactivity to the radio buttons
+        document.querySelectorAll('input[name="payment"]').forEach(input => {
+            input.addEventListener('change', function() {
+                // Reset all containers
+                document.querySelectorAll('label').forEach(label => {
+                    label.classList.remove('active-ring', 'bg-surface-container');
+                    const checkIcon = label.querySelector('.material-symbols-outlined:last-child');
+                    if (checkIcon && checkIcon.innerText === 'check_circle') {
+                        checkIcon.style.display = 'none';
+                    }
+                });
+
+                // Set active for the checked one
+                if (this.checked) {
+                    const container = this.closest('label');
+                    container.classList.add('active-ring', 'bg-surface-container');
+                    let checkIcon = container.querySelector('.material-symbols-outlined:last-child');
+
+                    // If no check icon, create one
+                    if (!checkIcon || checkIcon.innerText !== 'check_circle') {
+                        checkIcon = document.createElement('span');
+                        checkIcon.className = 'material-symbols-outlined text-primary ml-auto';
+                        checkIcon.innerText = 'check_circle';
+                        container.appendChild(checkIcon);
+                    }
+                    checkIcon.style.display = 'block';
+                }
+            });
+        });
+
+        // Demo logic for Split Bill button
+        const splitBtn = document.querySelector('button:has(.material-symbols-outlined:contains("call_split"))');
+        // Custom search since :contains isn't standard in querySelector
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach(btn => {
+            if (btn.innerText.includes('Split Bill')) {
+                btn.onclick = () => toggleModal('split-modal');
+            }
+        });
+    </script>
+</body></html>
