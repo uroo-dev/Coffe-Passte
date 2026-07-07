@@ -34,15 +34,14 @@
                     <span class="material-symbols-outlined text-[40px] text-primary">
                         @if($order->order_status === 'pending') schedule
                         @elseif($order->order_status === 'cooking') cooking
-                        @elseif($order->order_status === 'ready') restaurant
+                        @elseif($order->order_status === 'completed') check_circle
                         @else check_circle @endif
                     </span>
                 </div>
                 <h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">
                     @if($order->order_status === 'pending') Pesanan Diterima
                     @elseif($order->order_status === 'cooking') Sedang Dimasak
-                    @elseif($order->order_status === 'ready') Siap Diantar
-                    @elseif($order->order_status === 'completed') Selesai
+                    @elseif($order->order_status === 'completed') Siap Diantar
                     @else Dibatalkan @endif
                 </h2>
                 <p class="text-body-sm text-secondary mt-1">{{ $order->created_at->format('d M Y H:i') }}</p>
@@ -50,34 +49,34 @@
 
             <div class="space-y-0">
                 <div class="step">
-                    <div class="step-dot {{ in_array($order->order_status, ['pending','cooking','ready','completed']) ? 'bg-primary-container text-white' : 'bg-surface-container-high text-secondary' }}">
+                    <div class="step-dot {{ in_array($order->order_status, ['pending','cooking','completed']) ? 'bg-primary-container text-white' : 'bg-surface-container-high text-secondary' }}">
                         <span class="material-symbols-outlined text-sm">receipt</span>
                     </div>
                     <div class="flex-1">
-                        <p class="font-label-md text-label-md {{ in_array($order->order_status, ['pending','cooking','ready','completed']) ? 'text-on-surface' : 'text-secondary' }}">Pesanan Dibuat</p>
+                        <p class="font-label-md text-label-md {{ in_array($order->order_status, ['pending','cooking','completed']) ? 'text-on-surface' : 'text-secondary' }}">Pesanan Dibuat</p>
                         <p class="text-body-sm text-secondary">{{ $order->created_at->format('H:i') }}</p>
                     </div>
                 </div>
                 <div class="ml-4 pl-8">
-                    <div class="step-line h-6 {{ in_array($order->order_status, ['cooking','ready','completed']) ? 'bg-primary-container' : 'bg-outline-variant' }}"></div>
+                    <div class="step-line h-6 {{ in_array($order->order_status, ['cooking','completed']) ? 'bg-primary-container' : 'bg-outline-variant' }}"></div>
                 </div>
                 <div class="step">
-                    <div class="step-dot {{ in_array($order->order_status, ['cooking','ready','completed']) ? 'bg-primary-container text-white' : 'bg-surface-container-high text-secondary' }}">
+                    <div class="step-dot {{ in_array($order->order_status, ['cooking','completed']) ? 'bg-primary-container text-white' : 'bg-surface-container-high text-secondary' }}">
                         <span class="material-symbols-outlined text-sm">cooking</span>
                     </div>
                     <div class="flex-1">
-                        <p class="font-label-md text-label-md {{ in_array($order->order_status, ['cooking','ready','completed']) ? 'text-on-surface' : 'text-secondary' }}">Sedang Dimasak</p>
+                        <p class="font-label-md text-label-md {{ in_array($order->order_status, ['cooking','completed']) ? 'text-on-surface' : 'text-secondary' }}">Sedang Dimasak</p>
                     </div>
                 </div>
                 <div class="ml-4 pl-8">
-                    <div class="step-line h-6 {{ in_array($order->order_status, ['ready','completed']) ? 'bg-primary-container' : 'bg-outline-variant' }}"></div>
+                    <div class="step-line h-6 {{ $order->order_status === 'completed' ? 'bg-primary-container' : 'bg-outline-variant' }}"></div>
                 </div>
                 <div class="step">
-                    <div class="step-dot {{ in_array($order->order_status, ['ready','completed']) ? 'bg-primary-container text-white' : 'bg-surface-container-high text-secondary' }}">
+                    <div class="step-dot {{ $order->order_status === 'completed' ? 'bg-primary-container text-white' : 'bg-surface-container-high text-secondary' }}">
                         <span class="material-symbols-outlined text-sm">delivery</span>
                     </div>
                     <div class="flex-1">
-                        <p class="font-label-md text-label-md {{ in_array($order->order_status, ['ready','completed']) ? 'text-on-surface' : 'text-secondary' }}">Siap Diantar</p>
+                        <p class="font-label-md text-label-md {{ $order->order_status === 'completed' ? 'text-on-surface' : 'text-secondary' }}">Siap Diantar</p>
                     </div>
                 </div>
                 <div class="ml-4 pl-8">

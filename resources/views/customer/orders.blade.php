@@ -105,4 +105,35 @@
         <span class="font-label-md text-label-md">Billing</span>
     </a>
 </nav>
+@push('scripts')
+<style>
+    .order-toast { position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%); z-index: 999; animation: slideUpToast 0.4s cubic-bezier(0.175,0.885,0.32,1.275) forwards; }
+    @keyframes slideUpToast { from { transform: translateX(-50%) translateY(100%); opacity: 0; } to { transform: translateX(-50%) translateY(0); opacity: 1; } }
+</style>
+<script>
+    let prevStatuses = JSON.parse(sessionStorage.getItem('orderStatuses') || '{}');
+    setInterval(() => {
+        fetch('{{ route("customer.orders", $table->qr_token) }}?json=1')
+            .then(r => r.json())
+            .then(orders => {
+                orders.filter(o => o.order_status === 'completed').forEach(o => {
+                    if (prevStatuses[o.id] !== 'completed') {
+                        const toast = document.createElement('div');
+                        toast.className = 'order-toast bg-green-600 text-white px-5 py-3 rounded-xl shadow-2xl flex items-center gap-3';
+                        toast.innerHTML = '<span class="material-symbols-outlined" style="font-variation-settings:\'FILL\' 1;">check_circle</span><div><p class="font-bold text-sm">Pesanan Siap!</p><p class="text-xs text-white/80">' + o.order_reference + '</p></div>';
+                        document.body.appendChild(toast);
+                        setTimeout(() => { toast.style.transform = 'translateX(-50%) translateY(100%)'; toast.style.opacity = '0'; setTimeout(() => toast.remove(), 400); }, 4000);
+                        if (Notification.permission === 'granted') {
+                            new Notification('Pesanan Siap!', { body: o.order_reference + ' siap diantar', icon: '/favicon.ico' });
+                        }
+                    }
+                    prevStatuses[o.id] = 'completed';
+                });
+                sessionStorage.setItem('orderStatuses', JSON.stringify(prevStatuses));
+            })
+            .catch(() => {});
+    }, 8000);
+    if (Notification.permission === 'default') Notification.requestPermission();
+</script>
+@endpush
 @endsection

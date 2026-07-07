@@ -116,15 +116,7 @@
                                         @else bg-yellow-100 text-yellow-800 @endif">
                                         {{ ucfirst($order->order_status) }}
                                     </span>
-                                    @if($order->order_status === 'ready')
-                                    <form method="POST" action="{{ route('staff.order-complete', $order) }}" class="inline">
-                                        @csrf
-                                        <button type="submit"
-                                                class="px-3 py-1 text-[11px] font-bold bg-primary text-white rounded-full hover:brightness-110 transition-all active:scale-95">
-                                            Selesai
-                                        </button>
-                                    </form>
-                                    @endif
+
                                 </div>
                             </td>
                         </tr>

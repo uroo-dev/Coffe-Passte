@@ -49,6 +49,9 @@ Route::prefix('customer')->group(function () {
             ->where('created_at', '>=', $visitTime)
             ->orderByDesc('created_at')
             ->get();
+        if (request('json')) {
+            return response()->json($orders);
+        }
         return view('customer.orders', compact('table', 'orders'));
     })->name('customer.orders');
 
@@ -143,14 +146,6 @@ Route::middleware(['auth'])->group(function () {
             ]);
         })->name('staff.transactions');
 
-        Route::post('order/{order}/complete', function (Order $order) {
-            $order->update([
-                'order_status' => 'completed',
-                'payment_status' => 'paid',
-            ]);
-            $order->table->update(['status' => 'available']);
-            return back()->with('success', 'Pesanan selesai');
-        })->name('staff.order-complete');
     });
 
     Route::middleware('role:staff_kitchen')->prefix('kitchen')->group(function () {

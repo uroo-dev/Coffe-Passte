@@ -33,8 +33,8 @@
                 </div>
                 <div class="flex items-center gap-3">
                     <span class="px-3 py-1 text-label-md font-label-md rounded-full
-                        @if($order->order_status === 'ready') bg-green-100 text-green-800
-                        @elseif($order->order_status === 'completed') bg-blue-100 text-blue-800
+                        @if($order->order_status === 'completed') bg-green-100 text-green-800
+                        @elseif($order->order_status === 'cancelled') bg-red-100 text-red-800
                         @else bg-gray-100 text-gray-800 @endif">
                         {{ $order->order_status }}
                     </span>

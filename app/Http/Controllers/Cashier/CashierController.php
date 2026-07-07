@@ -151,11 +151,11 @@ class CashierController extends Controller
 
     public function completeOrder(Order $order)
     {
-        if ($order->order_status !== 'ready') {
+        if (!in_array($order->order_status, ['cooking', 'ready', 'completed'])) {
             if (request()->expectsJson()) {
-                return response()->json(['message' => 'Pesanan belum siap'], 422);
+                return response()->json(['message' => 'Pesanan tidak dapat diselesaikan'], 422);
             }
-            return redirect()->back()->with('error', 'Pesanan belum siap');
+            return redirect()->back()->with('error', 'Pesanan tidak dapat diselesaikan');
         }
 
         $order->update(['order_status' => 'completed']);

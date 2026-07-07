@@ -46,7 +46,7 @@
                         <span class="ml-3 px-2 py-0.5 status-badge rounded-full
                             @if($order->order_status === 'pending') bg-blue-100 text-blue-800
                             @elseif($order->order_status === 'cooking') bg-orange-100 text-orange-800
-                            @elseif($order->order_status === 'ready') bg-green-100 text-green-800
+                            @elseif($order->order_status === 'completed') bg-green-100 text-green-800
                             @else bg-gray-100 text-gray-800 @endif">
                             {{ $order->order_status }}
                         </span>
